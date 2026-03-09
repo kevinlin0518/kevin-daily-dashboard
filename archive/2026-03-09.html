@@ -6,98 +6,125 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 :root{
-  --bg:#F6F3EE;--card:#FFFFFF;--text:#333;--muted:#8A8070;
-  --green:#5B7553;--green-light:#E8EFE6;
-  --teal:#4A6B7A;--teal-light:#E0EBF0;
-  --border:#E5E0D8;--sand:#C4B9A8;
+  --bg:#F4F5F0;--card:rgba(255,255,255,.82);--card-solid:#FFFFFF;
+  --text:#1d1d1f;--text-secondary:#6e6e73;--muted:#86868b;
+  --green:#2d6a4f;--green-light:#e8f0ec;
+  --teal:#3a7ca5;--teal-light:#e4eff5;
+  --border:rgba(0,0,0,.06);--sand:#b5ad9e;
+  --accent:#40916c;
 }
-body{background:var(--bg);color:var(--text);font-family:-apple-system,"PingFang TC","Helvetica Neue",sans-serif;line-height:1.6;min-height:100vh;}
-.nature-bg{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
-.leaf{position:absolute;opacity:.05;color:var(--green);}
-.leaf svg{width:100%;height:100%;}
-.l1{width:80px;top:6%;right:6%;animation:drift 25s ease-in-out infinite;}
-.l2{width:55px;top:40%;left:4%;animation:drift 30s ease-in-out infinite reverse;transform:rotate(45deg);}
-.l3{width:65px;bottom:10%;right:10%;animation:drift 22s ease-in-out infinite;transform:rotate(-25deg);}
-@keyframes drift{0%,100%{transform:translateY(0) rotate(var(--r,0deg));}50%{transform:translateY(-12px) rotate(calc(var(--r,0deg) + 8deg));}}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","PingFang TC","Helvetica Neue",sans-serif;
+  line-height:1.5;min-height:100vh;-webkit-font-smoothing:antialiased;
+}
+/* === Ocean Wave Background === */
+.wave-bg{position:fixed;bottom:0;left:0;width:100%;height:45%;pointer-events:none;z-index:0;overflow:hidden;opacity:.12;}
+.wave-bg svg{position:absolute;bottom:0;width:200%;min-width:1400px;height:100%;}
+.wave-bg .w1{animation:sway 8s ease-in-out infinite;fill:#2d6a4f;}
+.wave-bg .w2{animation:sway 10s ease-in-out infinite reverse;fill:#3a7ca5;opacity:.6;}
+.wave-bg .w3{animation:sway 12s ease-in-out infinite;fill:#40916c;opacity:.4;}
+@keyframes sway{0%,100%{transform:translateX(0);}50%{transform:translateX(-25%);}}
 
-.container{position:relative;z-index:1;max-width:920px;margin:0 auto;padding:48px 40px 60px;}
-header{text-align:center;margin-bottom:36px;}
-header h1{font-family:Georgia,"Noto Serif TC",serif;font-size:32px;font-weight:400;letter-spacing:2px;color:var(--text);}
-.leaf-accent{display:inline-block;width:20px;height:20px;vertical-align:middle;margin:0 8px;opacity:.35;}
+.container{position:relative;z-index:1;max-width:920px;margin:0 auto;padding:56px 44px 64px;}
+header{text-align:center;margin-bottom:40px;}
+header h1{
+  font-family:"SF Pro Display",-apple-system,"PingFang TC",sans-serif;
+  font-size:40px;font-weight:700;letter-spacing:-.5px;color:var(--text);
+  margin-bottom:4px;
+}
+header .subtitle{font-size:15px;color:var(--muted);font-weight:400;letter-spacing:.5px;}
 
 /* === Top 3 To-Do === */
 .todos-card{
-  margin-bottom:28px;background:linear-gradient(135deg,#3D4F38 0%,#4A6741 50%,#3D5A4E 100%);
-  border-radius:16px;padding:28px 30px;color:#fff;box-shadow:0 6px 24px rgba(74,103,65,.2);
+  margin-bottom:28px;
+  background:linear-gradient(135deg,#1b4332 0%,#2d6a4f 40%,#264653 100%);
+  border-radius:20px;padding:32px 34px;color:#fff;
+  box-shadow:0 8px 32px rgba(27,67,50,.25);
 }
 .todos-card h2{
-  font-family:Georgia,"Noto Serif TC",serif;font-size:13px;font-weight:400;
-  color:rgba(255,255,255,.6);letter-spacing:3px;text-transform:uppercase;
-  margin-bottom:18px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,.12);
+  font-size:12px;font-weight:600;
+  color:rgba(255,255,255,.5);letter-spacing:3px;text-transform:uppercase;
+  margin-bottom:20px;
 }
 .todos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
 .todo-item{
-  background:rgba(255,255,255,.1);border-radius:12px;padding:18px 16px;
-  backdrop-filter:blur(4px);transition:background .2s;
+  background:rgba(255,255,255,.08);border-radius:14px;padding:20px 18px;
+  border:1px solid rgba(255,255,255,.06);
+  backdrop-filter:blur(8px);transition:all .3s;
 }
-.todo-item:hover{background:rgba(255,255,255,.15);}
+.todo-item:hover{background:rgba(255,255,255,.14);transform:translateY(-2px);}
 .todo-num{
-  display:block;font-family:Georgia,serif;font-size:28px;font-weight:600;
-  color:rgba(255,255,255,.3);margin-bottom:8px;line-height:1;
+  display:block;font-size:32px;font-weight:700;
+  color:rgba(255,255,255,.18);margin-bottom:10px;line-height:1;
 }
-.todo-text{font-size:14.5px;color:#fff;line-height:1.5;font-weight:500;}
+.todo-text{font-size:15px;color:rgba(255,255,255,.92);line-height:1.55;font-weight:500;}
 
 /* === 3 Day Columns === */
-.three-days{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:16px;}
-.day-col{background:var(--card);border-radius:14px;padding:24px 22px;box-shadow:0 2px 16px rgba(0,0,0,.05);min-height:120px;}
-.day-col.today-col{border:2px solid var(--green);box-shadow:0 4px 20px rgba(91,117,83,.12);}
-.day-label{font-family:Georgia,serif;font-size:17px;color:var(--text);letter-spacing:1px;margin-bottom:2px;}
+.three-days{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:16px;}
+.day-col{
+  background:var(--card);border-radius:16px;padding:22px 20px;
+  box-shadow:0 1px 8px rgba(0,0,0,.04);backdrop-filter:blur(20px);
+  border:1px solid rgba(0,0,0,.04);min-height:120px;
+}
+.day-col.today-col{
+  background:rgba(45,106,79,.06);border:1.5px solid var(--accent);
+  box-shadow:0 4px 20px rgba(45,106,79,.1);
+}
+.day-label{font-size:17px;font-weight:600;color:var(--text);letter-spacing:-.2px;margin-bottom:2px;}
 .today-col .day-label{color:var(--green);}
-.day-date{font-size:13px;color:var(--muted);margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border);}
-.event-row{display:flex;gap:10px;padding:7px 0;border-bottom:1px solid #F0EBE5;font-size:13.5px;}
+.day-date{font-size:13px;color:var(--muted);margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--border);}
+.event-row{display:flex;gap:10px;padding:7px 0;border-bottom:1px solid rgba(0,0,0,.04);font-size:14px;}
 .event-row:last-child{border-bottom:none;}
-.ev-time{color:var(--green);font-weight:600;white-space:nowrap;min-width:44px;}
+.ev-time{color:var(--accent);font-weight:600;white-space:nowrap;min-width:44px;font-size:13px;}
 .ev-title{color:var(--text);}
 .no-events{color:var(--muted);font-size:13px;font-style:italic;}
 
 /* === Browse Button === */
-.browse-row{text-align:center;margin-bottom:32px;}
+.browse-row{text-align:center;margin-bottom:36px;}
 .browse-btn{
-  background:none;border:1px solid var(--border);color:var(--muted);
-  padding:9px 24px;border-radius:24px;font-size:13px;cursor:pointer;
-  transition:all .2s;letter-spacing:1px;font-family:-apple-system,"PingFang TC",sans-serif;
+  background:none;border:1.5px solid rgba(0,0,0,.1);color:var(--text-secondary);
+  padding:10px 28px;border-radius:980px;font-size:14px;cursor:pointer;
+  transition:all .3s;font-weight:500;
+  font-family:-apple-system,"SF Pro Text","PingFang TC",sans-serif;
 }
-.browse-btn:hover{border-color:var(--green);color:var(--green);}
+.browse-btn:hover{border-color:var(--green);color:var(--green);background:var(--green-light);}
 
 /* === Weather === */
-.weather-bar{
-  text-align:center;font-size:14px;color:var(--muted);margin-bottom:28px;
-  letter-spacing:1px;
-}
-.weather-bar span{color:var(--text);font-weight:500;}
+.weather-bar{text-align:center;font-size:15px;color:var(--muted);margin-bottom:32px;font-weight:400;}
+.weather-bar span{color:var(--text);font-weight:600;}
 
 /* === Stocks === */
-.stocks-section{margin-bottom:28px;}
-.stocks-section>h2{font-family:Georgia,"Noto Serif TC",serif;font-size:14px;font-weight:400;color:var(--green);letter-spacing:1px;margin-bottom:14px;}
+.stocks-section{margin-bottom:32px;}
+.stocks-section>h2{font-size:22px;font-weight:700;color:var(--text);letter-spacing:-.3px;margin-bottom:16px;}
 .stocks-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
-.stock-card{background:var(--card);border-radius:12px;padding:18px 16px;box-shadow:0 2px 12px rgba(0,0,0,.04);display:flex;flex-direction:column;gap:3px;}
-.stock-region{font-size:11px;color:var(--muted);letter-spacing:1px;}
-.stock-name{font-size:13px;color:var(--text);font-weight:500;}
-.stock-price{font-size:20px;font-weight:600;color:var(--text);margin:4px 0 2px;}
+.stock-card{
+  background:var(--card);border-radius:16px;padding:20px 18px;
+  box-shadow:0 1px 8px rgba(0,0,0,.04);backdrop-filter:blur(20px);
+  border:1px solid rgba(0,0,0,.04);
+  display:flex;flex-direction:column;gap:2px;
+}
+.stock-region{font-size:11px;color:var(--muted);font-weight:500;letter-spacing:.5px;}
+.stock-name{font-size:13px;color:var(--text-secondary);font-weight:500;}
+.stock-price{font-size:22px;font-weight:700;color:var(--text);margin:6px 0 2px;letter-spacing:-.3px;}
 .stock-chg{font-size:13px;font-weight:600;}
 
 /* === News === */
-.divider{text-align:center;margin:28px 0;color:var(--sand);font-size:13px;letter-spacing:4px;}
-.news-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:32px;}
-.section{background:var(--card);border-radius:14px;padding:22px 24px;box-shadow:0 2px 12px rgba(0,0,0,.04);}
-.section h2{font-family:Georgia,"Noto Serif TC",serif;font-size:13px;font-weight:400;color:var(--green);letter-spacing:1px;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--border);}
-.news-link{display:block;padding:8px 0;color:var(--text);text-decoration:none;font-size:13.5px;line-height:1.6;border-bottom:1px solid #F5F0EA;transition:color .2s;}
+.divider{text-align:center;margin:32px 0;color:var(--sand);font-size:11px;letter-spacing:6px;text-transform:uppercase;font-weight:500;}
+.news-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:36px;}
+.section{
+  background:var(--card);border-radius:16px;padding:22px 24px;
+  box-shadow:0 1px 8px rgba(0,0,0,.04);backdrop-filter:blur(20px);
+  border:1px solid rgba(0,0,0,.04);
+}
+.section h2{font-size:13px;font-weight:600;color:var(--accent);letter-spacing:.5px;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--border);}
+.news-link{display:block;padding:9px 0;color:var(--text);text-decoration:none;font-size:14px;line-height:1.6;border-bottom:1px solid rgba(0,0,0,.04);transition:color .2s;}
 .news-link:last-child{border-bottom:none;}
-.news-link:hover{color:var(--green);}
-.num{color:var(--green);font-weight:600;margin-right:6px;font-size:12px;}
+.news-link:hover{color:var(--accent);}
+.num{color:var(--accent);font-weight:600;margin-right:8px;font-size:13px;}
 
 /* === Footer === */
-footer{text-align:center;color:var(--muted);font-size:13px;padding-top:24px;border-top:1px solid var(--border);font-family:Georgia,"Noto Serif TC",serif;letter-spacing:1px;}
+footer{text-align:center;color:var(--muted);font-size:14px;padding-top:28px;border-top:1px solid var(--border);font-weight:400;letter-spacing:.3px;}
 
 /* === Modal === */
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.25);z-index:200;justify-content:center;align-items:center;backdrop-filter:blur(3px);}
@@ -146,10 +173,10 @@ footer{text-align:center;color:var(--muted);font-size:13px;padding-top:24px;bord
 </head>
 <body>
 
-<div class="nature-bg">
-  <div class="leaf l1" style="--r:0deg"><svg viewBox="0 0 40 60"><path d="M20 2C12 14 4 26 4 38c0 12 7 18 16 18s16-6 16-18C36 26 28 14 20 2z" fill="currentColor"/><line x1="20" y1="12" x2="20" y2="52" stroke="rgba(255,255,255,.25)" stroke-width=".6"/></svg></div>
-  <div class="leaf l2" style="--r:45deg"><svg viewBox="0 0 40 60"><path d="M20 2C12 14 4 26 4 38c0 12 7 18 16 18s16-6 16-18C36 26 28 14 20 2z" fill="currentColor"/></svg></div>
-  <div class="leaf l3" style="--r:-25deg"><svg viewBox="0 0 40 60"><path d="M20 2C12 14 4 26 4 38c0 12 7 18 16 18s16-6 16-18C36 26 28 14 20 2z" fill="currentColor"/></svg></div>
+<div class="wave-bg">
+  <svg class="w1" viewBox="0 0 1440 320" preserveAspectRatio="none"><path d="M0,160L48,170.7C96,181,192,203,288,192C384,181,480,139,576,138.7C672,139,768,181,864,197.3C960,213,1056,203,1152,181.3C1248,160,1344,128,1392,112L1440,96L1440,320L0,320Z"/></svg>
+  <svg class="w2" viewBox="0 0 1440 320" preserveAspectRatio="none"><path d="M0,224L48,213.3C96,203,192,181,288,186.7C384,192,480,224,576,234.7C672,245,768,235,864,213.3C960,192,1056,160,1152,165.3C1248,171,1344,213,1392,234.7L1440,256L1440,320L0,320Z"/></svg>
+  <svg class="w3" viewBox="0 0 1440 320" preserveAspectRatio="none"><path d="M0,288L48,272C96,256,192,224,288,218.7C384,213,480,235,576,245.3C672,256,768,256,864,240C960,224,1056,192,1152,186.7C1248,181,1344,203,1392,213.3L1440,224L1440,320L0,320Z"/></svg>
 </div>
 
 <div class="container">
@@ -159,13 +186,9 @@ footer{text-align:center;color:var(--muted);font-size:13px;padding-top:24px;bord
 </div>
 
 <header>
-  <h1>
-    <svg class="leaf-accent" viewBox="0 0 40 60"><path d="M20 2C12 14 4 26 4 38c0 12 7 18 16 18s16-6 16-18C36 26 28 14 20 2z" fill="#5B7553"/></svg>
-    Kevin's Daily
-  </h1>
+  <h1>Kevin's Daily</h1>
+  <p class="subtitle">2026 年 3 月 9 日 · 台北 +16°C Shower</p>
 </header>
-
-<div class="weather-bar">台北 · <span>+16°C Shower</span></div>
 
 <div class="todos-card">
   <h2>Top 3 To-Do</h2>
@@ -198,7 +221,7 @@ footer{text-align:center;color:var(--muted);font-size:13px;padding-top:24px;bord
 <div class="news-grid">
   <div class='section'><h2>地緣政治與國際局勢</h2><a href='https://www.foxnews.com/world/private-security-firm-evacuates-americans-iran-conflict' target='_blank' class='news-link'><span class='num'>1.</span>私人保全公司幫助美國人在與伊朗的戰爭中撤離中東</a><a href='https://www.foxnews.com/world/us-sanctioned-mojtaba-khamenei-named-irans-next-supreme-leader-after-fathers-death-reports' target='_blank' class='news-link'><span class='num'>2.</span>報道稱，美國制裁的莫吉塔巴·哈梅內伊在父親去世後任命伊朗下一任最高領導人</a><a href='https://www.foxnews.com/world/centcom-issues-safety-warning-iranian-civilians-regime-uses-heavily-populated-areas-launches' target='_blank' class='news-link'><span class='num'>3.</span>由於政權利用「人口稠密」地區進行發射，中央司令部向伊朗平民發出安全警告</a><a href='https://www.foxnews.com/world/cartels-fear-us-retaliation-trump-era-pressure-reshapes-strategy-they-fear-united-states' target='_blank' class='news-link'><span class='num'>4.</span>隨著川普時代的壓力重塑戰略，卡特爾擔心美國的報復：“他們害怕美國”</a><a href='https://www.foxnews.com/world/balkans-edge-kosovo-political-crisis-sparks-fears-renewed-instability' target='_blank' class='news-link'><span class='num'>5.</span>巴爾幹半島緊張局勢：科索沃政治危機引發人們對新一輪不穩定局勢的擔憂</a></div>
   <div class='section'><h2>財經與市場</h2><a href='https://www.foxbusiness.com/technology/ford-deep-water-after-sweeping-recalls-hit-every-model-since-2020-one-exception' target='_blank' class='news-link'><span class='num'>1.</span>自 2020 年以來，福特對所有車型都進行了全面召回，深陷困境——只有一款例外</a><a href='https://www.foxbusiness.com/energy/oil-prices-top-100-iran-war-supply-disruption' target='_blank' class='news-link'><span class='num'>2.</span>由於伊朗戰爭擾亂生產和運輸，原油價格突破每桶100美元</a><a href='https://www.foxbusiness.com/economy/oracle-expected-slash-thousands-jobs-massive-ai-spending-creates-financial-cash-crisis' target='_blank' class='news-link'><span class='num'>3.</span>由於大規模人工智慧支出造成財務現金危機，甲骨文預計將裁員數千人</a><a href='https://www.foxbusiness.com/lifestyle/southwest-flight-diverts-atlanta-airport-armed-tactical-units-detain-man-frightening-security-scare' target='_blank' class='news-link'><span class='num'>4.</span>西南航空航班轉向亞特蘭大機場，武裝戰術部隊在可怕的安全恐慌中拘留了一名男子</a><a href='https://www.foxbusiness.com/retail/philadelphia-food-stand-overwhelmed-when-600-tubs-onion-dip-mysteriously-appear-prompting-investigation' target='_blank' class='news-link'><span class='num'>5.</span>600桶洋蔥醬神秘出現，費城食品攤不堪重負，引發調查</a></div>
-  <div class='section'><h2>AI 與科技</h2><a href='https://news.google.com/rss/articles/CBMif0FVX3lxTE1FdGxQS3RQcFJxZThkQVloa0RJR0c4dFRrRzhFU3A0enNNMHJvZVY3TmNEVnNqTkMzZUtfbTJhVzZMNEpRVlRDRFNxNWRwbmp6eTBURkxnd09TQy12SjBJRlRlcTZTNFUtYklYeGdrWmE2SS04MTZUV2twNU5iNVk?oc=5' target='_blank' class='news-link'><span class='num'>1.</span>Netflix 收購 Ben Affleck 的人工智慧電影製作新創公司 InterPositive</a><a href='https://news.google.com/rss/articles/CBMiaEFVX3lxTE9pMVExZ1NwVmVVSkF1SFBlVlVtdFZmSU14MDVFSzM5RkJ1eVhKRUt4OE9XcENZSXBTYm5ySFhielhockZQSUQxanhZQ0tOSXJfTG8zLWszc3pLTUI5bm9vSXNyMUJ2U2Y2?oc=5' target='_blank' class='news-link'><span class='num'>2.</span>班艾佛列克正在盡一切努力將 Netflix 轉換為人工智慧內容</a><a href='https://news.google.com/rss/articles/CBMikwFBVV95cUxOS3pOcTBKMldPRlFpZVRveXdaOHk1bEJ3eGFZczBvSno5eHB4VURVaUlqOFZ3WlZHaVVUemZ2VG5oaDBWOUY1ZFVYU0R1X2FFbXVQandjRHFQdFZjemFmWE5TRkFORXVTbUhlcWVuZ1A5eEpqelhCQ1RBMnEtd3Q2aWpPb09ybDZ4NFlHVEs0SUp1VUE?oc=5' target='_blank' class='news-link'><span class='num'>3.</span>研究發現人工智慧允許駭客識別匿名社交媒體帳戶</a><a href='https://news.google.com/rss/articles/CBMihgFBVV95cUxNdFBMOFZGZDJfNjlHRGI4ZlN3TXVsbzBVM0pZR19fcWZtYTJ6eFlvQkFXODNteHY3WjI0SS1jNmF6Skh2UTVVeFNGVElPbzBZZGRZRVlEQUJpNzMyNHk4Y3g0cWU1UkIwVmdDN0RoNnVqZUFNaXRUZTZHUzNvZDdLb1p4TG54Zw?oc=5' target='_blank' class='news-link'><span class='num'>4.</span>Block 的現任和前任員工表示，在 Jack Dorsey 大規模裁員後，人工智慧無法完成他們的工作：「你不能真正用人工智慧來做這件事」——《衛報》</a><a href='https://news.google.com/rss/articles/CBMiswFBVV95cUxPd0ZPdWRyN1dGQUhZVk8xVFh3M2QzcUNGU05GMW9UTjMwVXpuZkpnUzA4UFRRdGJBZVk2cWVYX2dlQzhIX2Rva2RXR0xjZUhHeTNnbTBxMEM2REZnaUtDUERhUGpFOFZvcklLZ1pYNFZqajc0SzZfTHFCWV9wMzhmYkFyRUUtOGFMQU1TaWtHcEpHOHAxaUVicDFURVJOSWVvekpaSHA2Q3VzV1NuUzgyTkJCMA?oc=5' target='_blank' class='news-link'><span class='num'>5.</span>五角大廈的人擇爭議會嚇跑新創公司遠離國防工作嗎？</a></div>
+  <div class='section'><h2>AI 與科技</h2><a href='https://news.google.com/rss/articles/CBMif0FVX3lxTE1FdGxQS3RQcFJxZThkQVloa0RJR0c4dFRrRzhFU3A0enNNMHJvZVY3TmNEVnNqTkMzZUtfbTJhVzZMNEpRVlRDRFNxNWRwbmp6eTBURkxnd09TQy12SjBJRlRlcTZTNFUtYklYeGdrWmE2SS04MTZUV2twNU5iNVk?oc=5' target='_blank' class='news-link'><span class='num'>1.</span>Netflix 收購 Ben Affleck 的人工智慧電影製作新創公司 InterPositive</a><a href='https://news.google.com/rss/articles/CBMiaEFVX3lxTE9pMVExZ1NwVmVVSkF1SFBlVlVtdFZmSU14MDVFSzM5RkJ1eVhKRUt4OE9XcENZSXBTYm5ySFhielhockZQSUQxanhZQ0tOSXJfTG8zLWszc3pLTUI5bm9vSXNyMUJ2U2Y2?oc=5' target='_blank' class='news-link'><span class='num'>2.</span>班艾佛列克正在盡一切努力將 Netflix 轉換為人工智慧內容</a><a href='https://news.google.com/rss/articles/CBMikwFBVV95cUxOS3pOcTBKMldPRlFpZVRveXdaOHk1bEJ3eGFZczBvSno5eHB4VURVaUlqOFZ3WlZHaVVUemZ2VG5oaDBWOUY1ZFVYU0R1X2FFbXVQandjRHFQdFZjemFmWE5TRkFORXVTbUhlcWVuZ1A5eEpqelhCQ1RBMnEtd3Q2aWpPb09ybDZ4NFlHVEs0SUp1VUE?oc=5' target='_blank' class='news-link'><span class='num'>3.</span>研究發現人工智慧允許駭客識別匿名社交媒體帳戶</a><a href='https://news.google.com/rss/articles/CBMiswFBVV95cUxPd0ZPdWRyN1dGQUhZVk8xVFh3M2QzcUNGU05GMW9UTjMwVXpuZkpnUzA4UFRRdGJBZVk2cWVYX2dlQzhIX2Rva2RXR0xjZUhHeTNnbTBxMEM2REZnaUtDUERhUGpFOFZvcklLZ1pYNFZqajc0SzZfTHFCWV9wMzhmYkFyRUUtOGFMQU1TaWtHcEpHOHAxaUVicDFURVJOSWVvekpaSHA2Q3VzV1NuUzgyTkJCMA?oc=5' target='_blank' class='news-link'><span class='num'>4.</span>五角大廈的人擇爭議會嚇跑新創公司遠離國防工作嗎？</a><a href='https://news.google.com/rss/articles/CBMi2AFBVV95cUxQNHluenp6NE4teVg3bTJiWG9VZk81dDQwcDBJcmVJWlBHdWhIYWRSYTNWX052aHVZdjhfdmxXNk9mTENURGRzdURmMExpTm5VazdfTWZpcUxTV21TcThJbHc2cFluMmRjMXdVeE80ZDhBR0JUWUhJcHJiX2Rva1lGT2tfMDNEOHZzRkJwSUpoM3FwZjh1RU56aXcxclFqNnRyVkRBVkJIbUkyaloxWGpscjJTZ2hYVkNxX0g2d2liUm41MlhaZDQwcl9JTlFtcWVGd3d0Vzg5V3Y?oc=5' target='_blank' class='news-link'><span class='num'>5.</span>工作場所中的人工智慧：2025 年報告 |麥肯錫</a></div>
   <div class='section'><h2>AI 自動化實戰案例</h2><a href='https://news.google.com/rss/articles/CBMioAFBVV95cUxNdmo2aWU1eGxwYndzTHhxdnNmUklwN0NOMlU3dkZDcmtNcUlSOVhSSVVCaHEtdnc0ZkQ5b2YyVkJpSjNCc3pMbnpIVjl1OFdtWkVNckJZY3RJTndTN3VqYk5iazBOLUJSZVhSSVAtRGc1dmVPNnl2MC0zNEl0VVhKQ0hxZjYwdEdEXzhvTGNiWHdxRjkxZUtTcjR0RmQ4MU0w?oc=5' target='_blank' class='news-link'><span class='num'>1.</span>不受歡迎的觀點：大多數人工智慧代理用例都是生產力劇場</a><a href='https://news.google.com/rss/articles/CBMibkFVX3lxTE02UmpHTW42Vk9PbmJJc0xfNEFYNTdlN0d1R2FMd1pLRnNXN05DenRieVFlTkZJOXh2U1I1Szd5dy1hUHBpT0laSkFZQXV4OS03TXZhNVhTX1VBQ0VOQjJLcTlBQ0o4SjlkaGY2WU9n?oc=5' target='_blank' class='news-link'><span class='num'>2.</span>Anthropic 剛剛向我們展示了人工智慧實際上正在取代哪些工作</a><a href='https://news.google.com/rss/articles/CBMi2AFBVV95cUxQNHluenp6NE4teVg3bTJiWG9VZk81dDQwcDBJcmVJWlBHdWhIYWRSYTNWX052aHVZdjhfdmxXNk9mTENURGRzdURmMExpTm5VazdfTWZpcUxTV21TcThJbHc2cFluMmRjMXdVeE80ZDhBR0JUWUhJcHJiX2Rva1lGT2tfMDNEOHZzRkJwSUpoM3FwZjh1RU56aXcxclFqNnRyVkRBVkJIbUkyaloxWGpscjJTZ2hYVkNxX0g2d2liUm41MlhaZDQwcl9JTlFtcWVGd3d0Vzg5V3Y?oc=5' target='_blank' class='news-link'><span class='num'>3.</span>工作場所中的人工智慧：2025 年報告 |麥肯錫</a><a href='https://news.google.com/rss/articles/CBMiV0FVX3lxTE15eGNFUmtmaFM0TGNSdlV4TVRhbG1FTExJU1VZZVkwRDcteXZlUmxKVU1QZVU2bHZJS0U4TFB5YzZhTVpIdkp5dHVaa0RhUUloMDBzdFAycw?oc=5' target='_blank' class='news-link'><span class='num'>4.</span>microsoft/代理框架</a><a href='https://news.google.com/rss/articles/CBMixAFBVV95cUxNVW83U0FCSkdKNXJlTEkxWnBpbkZENUI0UE9DLVo2WWQyVzZ1Q2dOYU1RbG9tMFV1VDZ5bXF6cldZMHBsMFM2Rm9pMjlybmVfSzNObGdQNVJKaWNaV1pNODVudzZfM0E4SGVXNV9jMEZNX2V0dVpaNHI0cVpGMUllV1ZmRTNzZk1mU0tFUFprZUpkQm1RREpvSzl3bjVLNnF0OVFuSHdVX3o4bGdkRzdLLWJTem5NUVl6U0ZDRTlpdFFBTjJx0gHLAUFVX3lxTE9jcVFwbENDR2JOWmVPTEc4NUg2d3BPZzE4QlhUdVl6aEZLWDFQYm1UcWM5TXF5ZnVJeFpxS2J2ZjJRVDJxaDlGNFNvcHlvVjQ0YzRrYmNPbTRKN21pUTJheGU3N1Z2eFZlTWs2b1VEMVZzbWx2Q2wxMzJjMFFtWGVfMzlFV1M3cGxXWEJvVEp6ckh1cnNlZnRGY041d05MZjlwYXowOUJ2SUM3aFI3NDR0aFhsbXNzcHB4Mkg1V2dYZE9uT1ZJOGdGRDVZ?oc=5' target='_blank' class='news-link'><span class='num'>5.</span>解釋：根據一項人類學研究，人工智慧肯定可以取代的工作</a></div>
   <div class='section'><h2>製造業與供應鏈</h2><a href='https://news.google.com/rss/articles/CBMipwJBVV95cUxOeGhIMl9QUXZFUHhzV25jbDYwdXRBeWVPZXZLOWwtSDdXb3FDNTFYal81bjRrLVF0Sk1YWFhabldrQ2dfWFI0TXlOSnpFMzYzc1VaakxkRjJmYWdPM0hXeGtCY2pxS1MtSzlDYjRyQ2diZFBqMmxsbWUxQ3k2SHhJLUVNajRkZjJreEluZjNSZ1FMMXFMWlZENVZSVjhkSVlJUlJTVXdfVWY2OHV2RFhNRk1EeVNES1RQcXpnZWh4YzlkTjJ2MkNXT0k2NU5fZm4xWndHSk9uTlFURnB1amVxdUVjV1NlNTQ4UTVxZFRsbndlTFJOUFBfdnVHZ1duM01RV21tWnlRUEpBTFZLYVlrd2tmcDQ2WVczT1c4WmhMT0pSTDJVaGs0?oc=5' target='_blank' class='news-link'><span class='num'>1.</span>據報道，由於人工智慧資料中心賭注引發財務完美風暴，甲骨文將裁員數千人並凍結招聘——雲端部門的裁員將由人工智慧來填補</a><a href='https://news.google.com/rss/articles/CBMicEFVX3lxTE5na0E2Q1FjemY0OXh5RXJORDBqZDZ0aGhLcWROSlF1V2JJV2xaYk9ueUtvalREMTE4bFdlaGlwMXdrWHEzMVpoX0E4RlViR0R4bllqV1hlWGtsbWQ5S3V1aWVXb2szRlUtUHlTNmx5OGc?oc=5' target='_blank' class='news-link'><span class='num'>2.</span>油價四年來首次突破每桶 100 美元</a><a href='https://news.google.com/rss/articles/CBMicEFVX3lxTE83alowNnRfalFWcV8zN2xNbnBYdGozd1R1Y1hRMHRlT09DT3FBQU83TWxCSFBGa1pmYm1PMmJTdmJPeURRRER6SlRPWmk1NWdkUW55SzVkc1JNbGVmQnFjYlIzNU5iSC0xc0VzUHdUa3c?oc=5' target='_blank' class='news-link'><span class='num'>3.</span>全球能源的惡夢正在來臨嗎？</a><a href='https://news.google.com/rss/articles/CBMicEFVX3lxTE5ld2tGUFlubnc1ZUVhclgxdWZxQXhzUHZJam5ETTBWSHY2Q19WaC0wQjFPd2NoVlRjN0JaQkt4Vm55bGJrN0tQMmYtc1lNTmdpd3JSeUhhWGx3U1VDd2VheDBnakJwUzFQWVgzSk9pMUU?oc=5' target='_blank' class='news-link'><span class='num'>4.</span>伊朗戰爭引發歷史性飆升 油價創2023年以來最高水準</a><a href='https://news.google.com/rss/articles/CBMiuAJBVV95cUxNVUpDNkVZN194emJCQTVpSmtfdFhnSjhQT19zcTF4c0JNYTNxbEowSU5ldi1GUm1pZnJVZGJlOXNEaEVQRkU3LTVTWmlNSXp0MXZRcDQzRThhSVB1aTNTbWFRamFMRUU0Y2dYSjlkamJjb2xkWVh4c2gxLTlnVVpsV2ZBa0RmSWVvXzB2UEV4UVJYRW9Pa2hUSlJ0S0pNZm5KLW45cFptZzlHY0ZVbmgwaHJwLWQzNEkxQnZWOGNPVlZLaFY3REphSVEtdndmdks4NDFzVGlJcFJQOG9YR29BTzlfWlZvVFprNHdkQnZrS0FnUUJ3SHhjT1Vpak1TWUtfQW9PZHI1bWNhTXZ4ZFQwdHpudklZY2ZEMW5wbHV2ZDlUdjliMzZRWnpseVFqRlhIOVNNRjFVUnY?oc=5' target='_blank' class='news-link'><span class='num'>5.</span>Nvidia 執行長黃在組件持續短缺的情況下宣稱「我喜歡限制」——聲稱缺乏選擇迫使人工智慧客戶只能選擇最好的</a></div>
   <div class='section'><h2>美國市場動態</h2><a href='https://www.foxnews.com/us/pennsylvania-state-trooper-fatally-shot-during-traffic-stop' target='_blank' class='news-link'><span class='num'>1.</span>官員稱，賓州州警在交通堵塞期間被槍殺</a><a href='https://www.foxnews.com/us/police-recover-third-device-ongoing-manhattan-ied-investigation-two-arrests' target='_blank' class='news-link'><span class='num'>2.</span>警方在逮捕兩人後在曼哈頓簡易爆炸裝置調查中找到了第三個裝置</a><a href='https://www.foxnews.com/us/officials-confirm-devices-recovered-nyc-protest-near-gracie-mansion-were-both-ieds' target='_blank' class='news-link'><span class='num'>3.</span>官員證實，在紐約格雷西大廈附近的抗議活動中發現的裝置都是簡易爆炸裝置</a><a href='https://www.foxnews.com/us/air-force-veteran-warns-cartels-dont-collapse-fracture-after-notorious-drug-lord-killed' target='_blank' class='news-link'><span class='num'>4.</span>在臭名昭著的毒梟被殺後，空軍老兵警告“販毒集團不會崩潰，而是會破裂”</a><a href='https://www.foxnews.com/us/new-jersey-elementary-school-weighs-renaming-after-president-trump' target='_blank' class='news-link'><span class='num'>5.</span>新澤西小學考慮在川普總統後重新命名</a></div>
