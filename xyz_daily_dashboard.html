@@ -104,8 +104,12 @@ header .subtitle{font-size:14px;color:var(--muted);font-weight:400;letter-spacin
   min-height:280px;
 }
 .journal-text{
-  font-size:14.5px;color:var(--text-secondary);line-height:32px;
+  font-size:14.5px;color:var(--text);line-height:32px;
   white-space:pre-wrap;font-family:"PingFang TC",-apple-system,sans-serif;
+  outline:none;min-height:240px;cursor:text;
+}
+.journal-text:empty:before{
+  content:"寫下今天的想法...";color:var(--muted);font-style:italic;pointer-events:none;
 }
 
 /* === Weather === */
@@ -228,7 +232,7 @@ footer{text-align:center;color:var(--muted);font-size:14px;padding-top:28px;bord
       <div class="day-label">Journal</div>
       <div class="day-date">03/09 Monday</div>
       <div class="journal-lines">
-        <p class="journal-text">還沒寫 Journal</p>
+        <div class="journal-text" contenteditable="true" id="journal-editor"></div>
       </div>
     </div>
   </div>
@@ -356,4 +360,16 @@ function changeMonth(delta) {
 }
 
 if(location.pathname.indexOf('/archive/')!==-1){document.getElementById('back-banner').style.display='block';}
+
+// Journal — load from localStorage, auto-save on input
+(function(){
+  var el = document.getElementById('journal-editor');
+  if (!el) return;
+  var key = 'journal-' + TODAY;
+  var saved = localStorage.getItem(key);
+  if (saved) el.innerText = saved;
+  el.addEventListener('input', function(){
+    localStorage.setItem(key, el.innerText);
+  });
+})();
 </script></body></html>
