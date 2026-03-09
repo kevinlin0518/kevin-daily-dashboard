@@ -27,7 +27,7 @@ body{
 @keyframes sway{0%,100%{transform:translateX(0);}50%{transform:translateX(-25%);}}
 
 .container{position:relative;z-index:1;max-width:920px;margin:0 auto;padding:56px 44px 64px;}
-header{text-align:center;margin-bottom:40px;}
+header{text-align:center;margin-bottom:20px;}
 header h1{
   font-family:"SF Pro Display",-apple-system,"PingFang TC",sans-serif;
   font-size:40px;font-weight:700;letter-spacing:-.5px;color:var(--text);
@@ -35,11 +35,22 @@ header h1{
 }
 header .subtitle{font-size:15px;color:var(--muted);font-weight:400;letter-spacing:.5px;}
 
+/* === Daily Quote === */
+.daily-quote{text-align:center;margin-bottom:40px;padding:0 20px;}
+.daily-quote .quote-text{
+  font-size:16px;color:var(--text-secondary);line-height:1.8;
+  font-style:italic;font-weight:400;letter-spacing:.2px;
+}
+.daily-quote .quote-author{
+  font-size:13px;color:var(--muted);margin-top:8px;font-weight:500;
+  font-style:normal;letter-spacing:.5px;
+}
+
 /* === Top 3 To-Do === */
 .todos-card{
   background:var(--card);border-radius:16px;padding:26px 28px;
   box-shadow:0 1px 8px rgba(0,0,0,.04);backdrop-filter:blur(20px);
-  border:1px solid rgba(0,0,0,.04);margin-bottom:28px;
+  border:1px solid rgba(0,0,0,.04);margin-bottom:40px;
 }
 .todos-card h2{font-size:22px;font-weight:700;color:var(--text);letter-spacing:-.3px;margin-bottom:18px;}
 .todo-item{
@@ -58,7 +69,8 @@ header .subtitle{font-size:15px;color:var(--muted);font-weight:400;letter-spacin
 .section-heading{font-size:22px;font-weight:700;color:var(--text);letter-spacing:-.3px;margin-bottom:16px;}
 
 /* === 3 Day Columns === */
-.three-days{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:16px;}
+.calendar-section{margin-bottom:12px;}
+.three-days{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
 .day-col{
   background:var(--card);border-radius:16px;padding:22px 20px;
   box-shadow:0 1px 8px rgba(0,0,0,.04);backdrop-filter:blur(20px);
@@ -78,7 +90,7 @@ header .subtitle{font-size:15px;color:var(--muted);font-weight:400;letter-spacin
 .no-events{color:var(--muted);font-size:13px;font-style:italic;}
 
 /* === Browse Button === */
-.browse-row{text-align:center;margin-bottom:36px;}
+.browse-row{text-align:center;margin-bottom:44px;}
 .browse-btn{
   background:none;border:1.5px solid rgba(0,0,0,.1);color:var(--text-secondary);
   padding:10px 28px;border-radius:980px;font-size:14px;cursor:pointer;
@@ -92,7 +104,7 @@ header .subtitle{font-size:15px;color:var(--muted);font-weight:400;letter-spacin
 .weather-bar span{color:var(--text);font-weight:600;}
 
 /* === Stocks === */
-.stocks-section{margin-bottom:32px;}
+.stocks-section{margin-bottom:44px;}
 .stocks-section>h2{font-size:22px;font-weight:700;color:var(--text);letter-spacing:-.3px;margin-bottom:16px;}
 .stocks-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
 .stock-card{
@@ -107,7 +119,7 @@ header .subtitle{font-size:15px;color:var(--muted);font-weight:400;letter-spacin
 .stock-chg{font-size:13px;font-weight:600;}
 
 /* === News === */
-.news-section{margin-bottom:36px;}
+.news-section{margin-bottom:44px;}
 .news-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
 .section{
   background:var(--card);border-radius:16px;padding:22px 24px;
@@ -184,8 +196,13 @@ footer{text-align:center;color:var(--muted);font-size:14px;padding-top:28px;bord
 
 <header>
   <h1>Kevin's Daily</h1>
-  <p class="subtitle">2026 年 3 月 9 日 · 台北 無法取得</p>
+  <p class="subtitle">2026 年 3 月 9 日 · 台北 +16°C Shower</p>
 </header>
+
+<div class="daily-quote">
+  <p class="quote-text">「��</p>
+  <p class="quote-author">— Confucius</p>
+</div>
 
 <div class="todos-card">
   <h2>Top 3 To-Do</h2>
