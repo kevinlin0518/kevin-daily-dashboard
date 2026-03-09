@@ -36,29 +36,20 @@ header h1{
 header .subtitle{font-size:15px;color:var(--muted);font-weight:400;letter-spacing:.5px;}
 
 /* === Top 3 To-Do === */
-.todos-card{
-  margin-bottom:28px;
-  background:linear-gradient(135deg,#1b4332 0%,#2d6a4f 40%,#264653 100%);
-  border-radius:20px;padding:32px 34px;color:#fff;
-  box-shadow:0 8px 32px rgba(27,67,50,.25);
-}
-.todos-card h2{
-  font-size:12px;font-weight:600;
-  color:rgba(255,255,255,.5);letter-spacing:3px;text-transform:uppercase;
-  margin-bottom:20px;
-}
+.todos-card{margin-bottom:28px;}
+.todos-card h2{font-size:22px;font-weight:700;color:var(--text);letter-spacing:-.3px;margin-bottom:16px;}
 .todos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
 .todo-item{
-  background:rgba(255,255,255,.08);border-radius:14px;padding:20px 18px;
-  border:1px solid rgba(255,255,255,.06);
-  backdrop-filter:blur(8px);transition:all .3s;
+  background:var(--card);border-radius:16px;padding:22px 20px;
+  box-shadow:0 1px 8px rgba(0,0,0,.04);backdrop-filter:blur(20px);
+  border:1px solid rgba(0,0,0,.04);transition:all .3s;
 }
-.todo-item:hover{background:rgba(255,255,255,.14);transform:translateY(-2px);}
+.todo-item:hover{box-shadow:0 4px 16px rgba(0,0,0,.08);transform:translateY(-2px);}
 .todo-num{
-  display:block;font-size:32px;font-weight:700;
-  color:rgba(255,255,255,.18);margin-bottom:10px;line-height:1;
+  display:block;font-size:34px;font-weight:700;
+  color:var(--accent);opacity:.2;margin-bottom:10px;line-height:1;
 }
-.todo-text{font-size:15px;color:rgba(255,255,255,.92);line-height:1.55;font-weight:500;}
+.todo-text{font-size:15px;color:var(--text);line-height:1.55;font-weight:500;}
 
 /* === 3 Day Columns === */
 .three-days{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:16px;}
