@@ -26,17 +26,17 @@ body{
 .wave-bg .w3{animation:sway 12s ease-in-out infinite;fill:#40916c;opacity:.4;}
 @keyframes sway{0%,100%{transform:translateX(0);}50%{transform:translateX(-25%);}}
 
-.container{position:relative;z-index:1;max-width:920px;margin:0 auto;padding:56px 44px 64px;}
-header{text-align:center;margin-bottom:40px;}
+.container{position:relative;z-index:1;max-width:920px;margin:0 auto;padding:36px 44px 64px;}
+header{text-align:center;margin-bottom:28px;}
 header h1{
   font-family:"SF Pro Display",-apple-system,"PingFang TC",sans-serif;
-  font-size:40px;font-weight:700;letter-spacing:-.5px;color:var(--text);
-  margin-bottom:4px;
+  font-size:36px;font-weight:700;letter-spacing:-.5px;color:var(--text);
+  margin-bottom:2px;
 }
-header .subtitle{font-size:15px;color:var(--muted);font-weight:400;letter-spacing:.5px;}
+header .subtitle{font-size:14px;color:var(--muted);font-weight:400;letter-spacing:.5px;}
 
 /* === Top To-Do === */
-.todos-section{margin-bottom:44px;}
+.todos-section{margin-bottom:36px;}
 .todos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
 .todo-item{
   background:var(--card);border-radius:16px;padding:22px 20px;
@@ -55,18 +55,27 @@ header .subtitle{font-size:15px;color:var(--muted);font-weight:400;letter-spacin
 .section-heading{font-size:22px;font-weight:700;color:var(--text);letter-spacing:-.3px;margin-bottom:16px;}
 
 /* === Today + Journal === */
-.calendar-section{margin-bottom:12px;}
-.today-journal{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.calendar-section{margin-bottom:44px;}
+.cal-header{display:flex;align-items:baseline;gap:14px;margin-bottom:16px;}
+.cal-header .section-heading{margin-bottom:0;}
+.browse-btn{
+  background:none;border:none;color:var(--muted);
+  font-size:12px;cursor:pointer;transition:all .2s;font-weight:400;
+  font-family:-apple-system,"SF Pro Text","PingFang TC",sans-serif;
+  letter-spacing:.3px;padding:0;
+}
+.browse-btn:hover{color:var(--green);}
+.today-journal{display:grid;grid-template-columns:1fr 2fr;gap:16px;}
 .day-col{
-  background:var(--card);border-radius:16px;padding:26px 24px;
+  background:var(--card);border-radius:16px;padding:24px 22px;
   box-shadow:0 1px 8px rgba(0,0,0,.04);backdrop-filter:blur(20px);
-  border:1px solid rgba(0,0,0,.04);min-height:200px;
+  border:1px solid rgba(0,0,0,.04);min-height:360px;
 }
 .day-col.today-col{
   background:rgba(45,106,79,.06);border:1.5px solid var(--accent);
   box-shadow:0 4px 20px rgba(45,106,79,.1);
 }
-.day-label{font-size:18px;font-weight:600;color:var(--text);letter-spacing:-.2px;margin-bottom:2px;}
+.day-label{font-size:17px;font-weight:600;color:var(--text);letter-spacing:-.2px;margin-bottom:2px;}
 .today-col .day-label{color:var(--green);}
 .day-date{font-size:13px;color:var(--muted);margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--border);}
 .event-row{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid rgba(0,0,0,.04);font-size:14.5px;}
@@ -74,25 +83,30 @@ header .subtitle{font-size:15px;color:var(--muted);font-weight:400;letter-spacin
 .ev-time{color:var(--accent);font-weight:600;white-space:nowrap;min-width:48px;font-size:13.5px;}
 .ev-title{color:var(--text);}
 .no-events{color:var(--muted);font-size:13px;font-style:italic;}
-/* Journal */
+/* Journal — notebook style */
 .journal-col{
-  background:var(--card);border-radius:16px;padding:26px 24px;
+  background:var(--card);border-radius:16px;padding:24px 26px;
   box-shadow:0 1px 8px rgba(0,0,0,.04);backdrop-filter:blur(20px);
-  border:1px solid rgba(0,0,0,.04);min-height:200px;
+  border:1px solid rgba(0,0,0,.04);min-height:360px;
 }
-.journal-col .day-label{font-size:18px;font-weight:600;color:var(--text);letter-spacing:-.2px;margin-bottom:2px;}
-.journal-col .day-date{font-size:13px;color:var(--muted);margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--border);}
-.journal-text{font-size:14.5px;color:var(--text-secondary);line-height:1.75;white-space:pre-wrap;}
-
-/* === Browse Button === */
-.browse-row{text-align:center;margin-bottom:44px;}
-.browse-btn{
-  background:none;border:1.5px solid rgba(0,0,0,.1);color:var(--text-secondary);
-  padding:10px 28px;border-radius:980px;font-size:14px;cursor:pointer;
-  transition:all .3s;font-weight:500;
-  font-family:-apple-system,"SF Pro Text","PingFang TC",sans-serif;
+.journal-col .day-label{font-size:17px;font-weight:600;color:var(--text);letter-spacing:-.2px;margin-bottom:2px;}
+.journal-col .day-date{font-size:13px;color:var(--muted);margin-bottom:0;padding-bottom:12px;border-bottom:1px solid var(--border);}
+.journal-lines{
+  padding-top:6px;
+  background-image:repeating-linear-gradient(
+    to bottom,
+    transparent,
+    transparent 31px,
+    rgba(0,0,0,.06) 31px,
+    rgba(0,0,0,.06) 32px
+  );
+  background-position:0 0;
+  min-height:280px;
 }
-.browse-btn:hover{border-color:var(--green);color:var(--green);background:var(--green-light);}
+.journal-text{
+  font-size:14.5px;color:var(--text-secondary);line-height:32px;
+  white-space:pre-wrap;font-family:"PingFang TC",-apple-system,sans-serif;
+}
 
 /* === Weather === */
 .weather-bar{text-align:center;font-size:15px;color:var(--muted);margin-bottom:32px;font-weight:400;}
@@ -204,19 +218,20 @@ footer{text-align:center;color:var(--muted);font-size:14px;padding-top:28px;bord
 </div>
 
 <div class="calendar-section">
-  <h2 class="section-heading">Calendar 行事曆</h2>
+  <div class="cal-header">
+    <h2 class="section-heading">Calendar 行事曆</h2>
+    <button class="browse-btn" onclick="openModal()">瀏覽其他日期 ›</button>
+  </div>
   <div class="today-journal">
     <div class='day-col today-col'><div class='day-label'>Today</div><div class='day-date'>03/09 Monday</div><div class='event-row'><span class='ev-time'>08:00</span><span class='ev-title'>預約接送</span></div></div>
     <div class="journal-col">
       <div class="day-label">Journal</div>
       <div class="day-date">03/09 Monday</div>
-      <p class="journal-text">還沒寫 Journal</p>
+      <div class="journal-lines">
+        <p class="journal-text">還沒寫 Journal</p>
+      </div>
     </div>
   </div>
-</div>
-
-<div class="browse-row">
-  <button class="browse-btn" onclick="openModal()">瀏覽其他日期</button>
 </div>
 
 <div class="stocks-section">
@@ -232,7 +247,7 @@ footer{text-align:center;color:var(--muted);font-size:14px;padding-top:28px;bord
   <div class='section'><h2>地緣政治與國際局勢</h2><a href='https://www.foxnews.com/world/private-security-firm-evacuates-americans-iran-conflict' target='_blank' class='news-link'><span class='num'>1.</span>私人保全公司幫助美國人在與伊朗的戰爭中撤離中東</a><a href='https://www.foxnews.com/world/us-sanctioned-mojtaba-khamenei-named-irans-next-supreme-leader-after-fathers-death-reports' target='_blank' class='news-link'><span class='num'>2.</span>報道稱，美國制裁的莫吉塔巴·哈梅內伊在父親去世後任命伊朗下一任最高領導人</a><a href='https://www.foxnews.com/world/centcom-issues-safety-warning-iranian-civilians-regime-uses-heavily-populated-areas-launches' target='_blank' class='news-link'><span class='num'>3.</span>由於政權利用「人口稠密」地區進行發射，中央司令部向伊朗平民發出安全警告</a><a href='https://www.foxnews.com/world/cartels-fear-us-retaliation-trump-era-pressure-reshapes-strategy-they-fear-united-states' target='_blank' class='news-link'><span class='num'>4.</span>隨著川普時代的壓力重塑戰略，卡特爾擔心美國的報復：“他們害怕美國”</a><a href='https://www.foxnews.com/world/balkans-edge-kosovo-political-crisis-sparks-fears-renewed-instability' target='_blank' class='news-link'><span class='num'>5.</span>巴爾幹半島緊張局勢：科索沃政治危機引發人們對新一輪不穩定局勢的擔憂</a></div>
   <div class='section'><h2>財經與市場</h2><a href='https://www.foxbusiness.com/technology/ford-deep-water-after-sweeping-recalls-hit-every-model-since-2020-one-exception' target='_blank' class='news-link'><span class='num'>1.</span>自 2020 年以來，福特對所有車型都進行了全面召回，深陷困境——只有一款例外</a><a href='https://www.foxbusiness.com/energy/oil-prices-top-100-iran-war-supply-disruption' target='_blank' class='news-link'><span class='num'>2.</span>由於伊朗戰爭擾亂生產和運輸，原油價格突破每桶100美元</a><a href='https://www.foxbusiness.com/economy/oracle-expected-slash-thousands-jobs-massive-ai-spending-creates-financial-cash-crisis' target='_blank' class='news-link'><span class='num'>3.</span>由於大規模人工智慧支出造成財務現金危機，甲骨文預計將裁員數千人</a><a href='https://www.foxbusiness.com/lifestyle/southwest-flight-diverts-atlanta-airport-armed-tactical-units-detain-man-frightening-security-scare' target='_blank' class='news-link'><span class='num'>4.</span>西南航空航班轉向亞特蘭大機場，武裝戰術部隊在可怕的安全恐慌中拘留了一名男子</a><a href='https://www.foxbusiness.com/retail/philadelphia-food-stand-overwhelmed-when-600-tubs-onion-dip-mysteriously-appear-prompting-investigation' target='_blank' class='news-link'><span class='num'>5.</span>600桶洋蔥醬神秘出現，費城食品攤不堪重負，引發調查</a></div>
   <div class='section'><h2>AI 與科技</h2><a href='https://news.google.com/rss/articles/CBMif0FVX3lxTE1FdGxQS3RQcFJxZThkQVloa0RJR0c4dFRrRzhFU3A0enNNMHJvZVY3TmNEVnNqTkMzZUtfbTJhVzZMNEpRVlRDRFNxNWRwbmp6eTBURkxnd09TQy12SjBJRlRlcTZTNFUtYklYeGdrWmE2SS04MTZUV2twNU5iNVk?oc=5' target='_blank' class='news-link'><span class='num'>1.</span>Netflix 收購 Ben Affleck 的人工智慧電影製作新創公司 InterPositive</a><a href='https://news.google.com/rss/articles/CBMiaEFVX3lxTE9pMVExZ1NwVmVVSkF1SFBlVlVtdFZmSU14MDVFSzM5RkJ1eVhKRUt4OE9XcENZSXBTYm5ySFhielhockZQSUQxanhZQ0tOSXJfTG8zLWszc3pLTUI5bm9vSXNyMUJ2U2Y2?oc=5' target='_blank' class='news-link'><span class='num'>2.</span>班艾佛列克正在盡一切努力將 Netflix 轉換為人工智慧內容</a><a href='https://news.google.com/rss/articles/CBMikwFBVV95cUxOS3pOcTBKMldPRlFpZVRveXdaOHk1bEJ3eGFZczBvSno5eHB4VURVaUlqOFZ3WlZHaVVUemZ2VG5oaDBWOUY1ZFVYU0R1X2FFbXVQandjRHFQdFZjemFmWE5TRkFORXVTbUhlcWVuZ1A5eEpqelhCQ1RBMnEtd3Q2aWpPb09ybDZ4NFlHVEs0SUp1VUE?oc=5' target='_blank' class='news-link'><span class='num'>3.</span>研究發現人工智慧允許駭客識別匿名社交媒體帳戶</a><a href='https://news.google.com/rss/articles/CBMihgFBVV95cUxNdFBMOFZGZDJfNjlHRGI4ZlN3TXVsbzBVM0pZR19fcWZtYTJ6eFlvQkFXODNteHY3WjI0SS1jNmF6Skh2UTVVeFNGVElPbzBZZGRZRVlEQUJpNzMyNHk4Y3g0cWU1UkIwVmdDN0RoNnVqZUFNaXRUZTZHUzNvZDdLb1p4TG54Zw?oc=5' target='_blank' class='news-link'><span class='num'>4.</span>Block 的現任和前任員工表示，在 Jack Dorsey 大規模裁員後，人工智慧無法完成他們的工作：「你不能真正用人工智慧來做這件事」——《衛報》</a><a href='https://news.google.com/rss/articles/CBMiswFBVV95cUxPd0ZPdWRyN1dGQUhZVk8xVFh3M2QzcUNGU05GMW9UTjMwVXpuZkpnUzA4UFRRdGJBZVk2cWVYX2dlQzhIX2Rva2RXR0xjZUhHeTNnbTBxMEM2REZnaUtDUERhUGpFOFZvcklLZ1pYNFZqajc0SzZfTHFCWV9wMzhmYkFyRUUtOGFMQU1TaWtHcEpHOHAxaUVicDFURVJOSWVvekpaSHA2Q3VzV1NuUzgyTkJCMA?oc=5' target='_blank' class='news-link'><span class='num'>5.</span>五角大廈的人擇爭議會嚇跑新創公司遠離國防工作嗎？</a></div>
-  <div class='section'><h2>AI 自動化實戰案例</h2><a href='https://news.google.com/rss/articles/CBMioAFBVV95cUxNdmo2aWU1eGxwYndzTHhxdnNmUklwN0NOMlU3dkZDcmtNcUlSOVhSSVVCaHEtdnc0ZkQ5b2YyVkJpSjNCc3pMbnpIVjl1OFdtWkVNckJZY3RJTndTN3VqYk5iazBOLUJSZVhSSVAtRGc1dmVPNnl2MC0zNEl0VVhKQ0hxZjYwdEdEXzhvTGNiWHdxRjkxZUtTcjR0RmQ4MU0w?oc=5' target='_blank' class='news-link'><span class='num'>1.</span>不受歡迎的觀點：大多數人工智慧代理用例都是生產力劇場</a><a href='https://news.google.com/rss/articles/CBMibkFVX3lxTE02UmpHTW42Vk9PbmJJc0xfNEFYNTdlN0d1R2FMd1pLRnNXN05DenRieVFlTkZJOXh2U1I1Szd5dy1hUHBpT0laSkFZQXV4OS03TXZhNVhTX1VBQ0VOQjJLcTlBQ0o4SjlkaGY2WU9n?oc=5' target='_blank' class='news-link'><span class='num'>2.</span>Anthropic 剛剛向我們展示了人工智慧實際上正在取代哪些工作</a><a href='https://news.google.com/rss/articles/CBMi2AFBVV95cUxQNHluenp6NE4teVg3bTJiWG9VZk81dDQwcDBJcmVJWlBHdWhIYWRSYTNWX052aHVZdjhfdmxXNk9mTENURGRzdURmMExpTm5VazdfTWZpcUxTV21TcThJbHc2cFluMmRjMXdVeE80ZDhBR0JUWUhJcHJiX2Rva1lGT2tfMDNEOHZzRkJwSUpoM3FwZjh1RU56aXcxclFqNnRyVkRBVkJIbUkyaloxWGpscjJTZ2hYVkNxX0g2d2liUm41MlhaZDQwcl9JTlFtcWVGd3d0Vzg5V3Y?oc=5' target='_blank' class='news-link'><span class='num'>3.</span>工作場所中的人工智慧：2025 年報告 |麥肯錫</a><a href='https://news.google.com/rss/articles/CBMiV0FVX3lxTE15eGNFUmtmaFM0TGNSdlV4TVRhbG1FTExJU1VZZVkwRDcteXZlUmxKVU1QZVU2bHZJS0U4TFB5YzZhTVpIdkp5dHVaa0RhUUloMDBzdFAycw?oc=5' target='_blank' class='news-link'><span class='num'>4.</span>microsoft/代理框架</a><a href='https://news.google.com/rss/articles/CBMixAFBVV95cUxNVW83U0FCSkdKNXJlTEkxWnBpbkZENUI0UE9DLVo2WWQyVzZ1Q2dOYU1RbG9tMFV1VDZ5bXF6cldZMHBsMFM2Rm9pMjlybmVfSzNObGdQNVJKaWNaV1pNODVudzZfM0E4SGVXNV9jMEZNX2V0dVpaNHI0cVpGMUllV1ZmRTNzZk1mU0tFUFprZUpkQm1RREpvSzl3bjVLNnF0OVFuSHdVX3o4bGdkRzdLLWJTem5NUVl6U0ZDRTlpdFFBTjJx0gHLAUFVX3lxTE9jcVFwbENDR2JOWmVPTEc4NUg2d3BPZzE4QlhUdVl6aEZLWDFQYm1UcWM5TXF5ZnVJeFpxS2J2ZjJRVDJxaDlGNFNvcHlvVjQ0YzRrYmNPbTRKN21pUTJheGU3N1Z2eFZlTWs2b1VEMVZzbWx2Q2wxMzJjMFFtWGVfMzlFV1M3cGxXWEJvVEp6ckh1cnNlZnRGY041d05MZjlwYXowOUJ2SUM3aFI3NDR0aFhsbXNzcHB4Mkg1V2dYZE9uT1ZJOGdGRDVZ?oc=5' target='_blank' class='news-link'><span class='num'>5.</span>解釋：根據一項人類學研究，人工智慧肯定可以取代的工作</a></div>
+  <div class='section'><h2>AI 自動化實戰案例</h2><a href='https://news.google.com/rss/articles/CBMioAFBVV95cUxNdmo2aWU1eGxwYndzTHhxdnNmUklwN0NOMlU3dkZDcmtNcUlSOVhSSVVCaHEtdnc0ZkQ5b2YyVkJpSjNCc3pMbnpIVjl1OFdtWkVNckJZY3RJTndTN3VqYk5iazBOLUJSZVhSSVAtRGc1dmVPNnl2MC0zNEl0VVhKQ0hxZjYwdEdEXzhvTGNiWHdxRjkxZUtTcjR0RmQ4MU0w?oc=5' target='_blank' class='news-link'><span class='num'>1.</span>不受歡迎的觀點：大多數人工智慧代理用例都是生產力劇場</a><a href='https://news.google.com/rss/articles/CBMibkFVX3lxTE02UmpHTW42Vk9PbmJJc0xfNEFYNTdlN0d1R2FMd1pLRnNXN05DenRieVFlTkZJOXh2U1I1Szd5dy1hUHBpT0laSkFZQXV4OS03TXZhNVhTX1VBQ0VOQjJLcTlBQ0o4SjlkaGY2WU9n?oc=5' target='_blank' class='news-link'><span class='num'>2.</span>Anthropic 剛剛向我們展示了人工智慧實際上正在取代哪些工作</a><a href='https://news.google.com/rss/articles/CBMi2AFBVV95cUxQNHluenp6NE4teVg3bTJiWG9VZk81dDQwcDBJcmVJWlBHdWhIYWRSYTNWX052aHVZdjhfdmxXNk9mTENURGRzdURmMExpTm5VazdfTWZpcUxTV21TcThJbHc2cFluMmRjMXdVeE80ZDhBR0JUWUhJcHJiX2Rva1lGT2tfMDNEOHZzRkJwSUpoM3FwZjh1RU56aXcxclFqNnRyVkRBVkJIbUkyaloxWGpscjJTZ2hYVkNxX0g2d2liUm41MlhaZDQwcl9JTlFtcWVGd3d0Vzg5V3Y?oc=5' target='_blank' class='news-link'><span class='num'>3.</span>工作場所中的人工智慧：2025 年報告 |麥肯錫</a><a href='https://news.google.com/rss/articles/CBMixAFBVV95cUxNVW83U0FCSkdKNXJlTEkxWnBpbkZENUI0UE9DLVo2WWQyVzZ1Q2dOYU1RbG9tMFV1VDZ5bXF6cldZMHBsMFM2Rm9pMjlybmVfSzNObGdQNVJKaWNaV1pNODVudzZfM0E4SGVXNV9jMEZNX2V0dVpaNHI0cVpGMUllV1ZmRTNzZk1mU0tFUFprZUpkQm1RREpvSzl3bjVLNnF0OVFuSHdVX3o4bGdkRzdLLWJTem5NUVl6U0ZDRTlpdFFBTjJx0gHLAUFVX3lxTE9jcVFwbENDR2JOWmVPTEc4NUg2d3BPZzE4QlhUdVl6aEZLWDFQYm1UcWM5TXF5ZnVJeFpxS2J2ZjJRVDJxaDlGNFNvcHlvVjQ0YzRrYmNPbTRKN21pUTJheGU3N1Z2eFZlTWs2b1VEMVZzbWx2Q2wxMzJjMFFtWGVfMzlFV1M3cGxXWEJvVEp6ckh1cnNlZnRGY041d05MZjlwYXowOUJ2SUM3aFI3NDR0aFhsbXNzcHB4Mkg1V2dYZE9uT1ZJOGdGRDVZ?oc=5' target='_blank' class='news-link'><span class='num'>4.</span>解釋：根據一項人類學研究，人工智慧肯定可以取代的工作</a><a href='https://news.google.com/rss/articles/CBMiV0FVX3lxTE15eGNFUmtmaFM0TGNSdlV4TVRhbG1FTExJU1VZZVkwRDcteXZlUmxKVU1QZVU2bHZJS0U4TFB5YzZhTVpIdkp5dHVaa0RhUUloMDBzdFAycw?oc=5' target='_blank' class='news-link'><span class='num'>5.</span>microsoft/代理框架</a></div>
   <div class='section'><h2>製造業與供應鏈</h2><a href='https://news.google.com/rss/articles/CBMipwJBVV95cUxOeGhIMl9QUXZFUHhzV25jbDYwdXRBeWVPZXZLOWwtSDdXb3FDNTFYal81bjRrLVF0Sk1YWFhabldrQ2dfWFI0TXlOSnpFMzYzc1VaakxkRjJmYWdPM0hXeGtCY2pxS1MtSzlDYjRyQ2diZFBqMmxsbWUxQ3k2SHhJLUVNajRkZjJreEluZjNSZ1FMMXFMWlZENVZSVjhkSVlJUlJTVXdfVWY2OHV2RFhNRk1EeVNES1RQcXpnZWh4YzlkTjJ2MkNXT0k2NU5fZm4xWndHSk9uTlFURnB1amVxdUVjV1NlNTQ4UTVxZFRsbndlTFJOUFBfdnVHZ1duM01RV21tWnlRUEpBTFZLYVlrd2tmcDQ2WVczT1c4WmhMT0pSTDJVaGs0?oc=5' target='_blank' class='news-link'><span class='num'>1.</span>據報道，由於人工智慧資料中心賭注引發財務完美風暴，甲骨文將裁員數千人並凍結招聘——雲端部門的裁員將由人工智慧來填補</a><a href='https://news.google.com/rss/articles/CBMicEFVX3lxTE5na0E2Q1FjemY0OXh5RXJORDBqZDZ0aGhLcWROSlF1V2JJV2xaYk9ueUtvalREMTE4bFdlaGlwMXdrWHEzMVpoX0E4RlViR0R4bllqV1hlWGtsbWQ5S3V1aWVXb2szRlUtUHlTNmx5OGc?oc=5' target='_blank' class='news-link'><span class='num'>2.</span>油價四年來首次突破每桶 100 美元</a><a href='https://news.google.com/rss/articles/CBMicEFVX3lxTE83alowNnRfalFWcV8zN2xNbnBYdGozd1R1Y1hRMHRlT09DT3FBQU83TWxCSFBGa1pmYm1PMmJTdmJPeURRRER6SlRPWmk1NWdkUW55SzVkc1JNbGVmQnFjYlIzNU5iSC0xc0VzUHdUa3c?oc=5' target='_blank' class='news-link'><span class='num'>3.</span>全球能源的惡夢正在來臨嗎？</a><a href='https://news.google.com/rss/articles/CBMicEFVX3lxTE5ld2tGUFlubnc1ZUVhclgxdWZxQXhzUHZJam5ETTBWSHY2Q19WaC0wQjFPd2NoVlRjN0JaQkt4Vm55bGJrN0tQMmYtc1lNTmdpd3JSeUhhWGx3U1VDd2VheDBnakJwUzFQWVgzSk9pMUU?oc=5' target='_blank' class='news-link'><span class='num'>4.</span>伊朗戰爭引發歷史性飆升 油價創2023年以來最高水準</a><a href='https://news.google.com/rss/articles/CBMiuAJBVV95cUxNVUpDNkVZN194emJCQTVpSmtfdFhnSjhQT19zcTF4c0JNYTNxbEowSU5ldi1GUm1pZnJVZGJlOXNEaEVQRkU3LTVTWmlNSXp0MXZRcDQzRThhSVB1aTNTbWFRamFMRUU0Y2dYSjlkamJjb2xkWVh4c2gxLTlnVVpsV2ZBa0RmSWVvXzB2UEV4UVJYRW9Pa2hUSlJ0S0pNZm5KLW45cFptZzlHY0ZVbmgwaHJwLWQzNEkxQnZWOGNPVlZLaFY3REphSVEtdndmdks4NDFzVGlJcFJQOG9YR29BTzlfWlZvVFprNHdkQnZrS0FnUUJ3SHhjT1Vpak1TWUtfQW9PZHI1bWNhTXZ4ZFQwdHpudklZY2ZEMW5wbHV2ZDlUdjliMzZRWnpseVFqRlhIOVNNRjFVUnY?oc=5' target='_blank' class='news-link'><span class='num'>5.</span>Nvidia 執行長黃在組件持續短缺的情況下宣稱「我喜歡限制」——聲稱缺乏選擇迫使人工智慧客戶只能選擇最好的</a></div>
   <div class='section'><h2>美國市場動態</h2><a href='https://www.foxnews.com/us/pennsylvania-state-trooper-fatally-shot-during-traffic-stop' target='_blank' class='news-link'><span class='num'>1.</span>官員稱，賓州州警在交通堵塞期間被槍殺</a><a href='https://www.foxnews.com/us/police-recover-third-device-ongoing-manhattan-ied-investigation-two-arrests' target='_blank' class='news-link'><span class='num'>2.</span>警方在逮捕兩人後在曼哈頓簡易爆炸裝置調查中找到了第三個裝置</a><a href='https://www.foxnews.com/us/officials-confirm-devices-recovered-nyc-protest-near-gracie-mansion-were-both-ieds' target='_blank' class='news-link'><span class='num'>3.</span>官員證實，在紐約格雷西大廈附近的抗議活動中發現的裝置都是簡易爆炸裝置</a><a href='https://www.foxnews.com/us/air-force-veteran-warns-cartels-dont-collapse-fracture-after-notorious-drug-lord-killed' target='_blank' class='news-link'><span class='num'>4.</span>在臭名昭著的毒梟被殺後，空軍老兵警告“販毒集團不會崩潰，而是會破裂”</a><a href='https://www.foxnews.com/us/new-jersey-elementary-school-weighs-renaming-after-president-trump' target='_blank' class='news-link'><span class='num'>5.</span>新澤西小學考慮在川普總統後重新命名</a></div>
 </div>
