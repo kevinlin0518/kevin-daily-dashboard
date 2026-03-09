@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<title>Kevin's Daily</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#F6F3EE;--card:#FFFFFF;--text:#333;--muted:#8A8070;
+  --green:#5B7553;--green-light:#E8EFE6;
+  --teal:#4A6B7A;--teal-light:#E0EBF0;
+  --border:#E5E0D8;--sand:#C4B9A8;
+}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,"PingFang TC","Helvetica Neue",sans-serif;line-height:1.6;min-height:100vh;}
+.nature-bg{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
+.leaf{position:absolute;opacity:.05;color:var(--green);}
+.leaf svg{width:100%;height:100%;}
+.l1{width:80px;top:6%;right:6%;animation:drift 25s ease-in-out infinite;}
+.l2{width:55px;top:40%;left:4%;animation:drift 30s ease-in-out infinite reverse;transform:rotate(45deg);}
+.l3{width:65px;bottom:10%;right:10%;animation:drift 22s ease-in-out infinite;transform:rotate(-25deg);}
+@keyframes drift{0%,100%{transform:translateY(0) rotate(var(--r,0deg));}50%{transform:translateY(-12px) rotate(calc(var(--r,0deg) + 8deg));}}
+
+.container{position:relative;z-index:1;max-width:920px;margin:0 auto;padding:48px 40px 60px;}
+header{text-align:center;margin-bottom:36px;}
+header h1{font-family:Georgia,"Noto Serif TC",serif;font-size:32px;font-weight:400;letter-spacing:2px;color:var(--text);}
+.leaf-accent{display:inline-block;width:20px;height:20px;vertical-align:middle;margin:0 8px;opacity:.35;}
+
+/* === 3 Day Columns === */
+.three-days{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:16px;}
+.day-col{background:var(--card);border-radius:14px;padding:24px 22px;box-shadow:0 2px 16px rgba(0,0,0,.05);min-height:120px;}
+.day-col.today-col{border:2px solid var(--green);box-shadow:0 4px 20px rgba(91,117,83,.12);}
+.day-label{font-family:Georgia,serif;font-size:17px;color:var(--text);letter-spacing:1px;margin-bottom:2px;}
+.today-col .day-label{color:var(--green);}
+.day-date{font-size:13px;color:var(--muted);margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border);}
+.event-row{display:flex;gap:10px;padding:7px 0;border-bottom:1px solid #F0EBE5;font-size:13.5px;}
+.event-row:last-child{border-bottom:none;}
+.ev-time{color:var(--green);font-weight:600;white-space:nowrap;min-width:44px;}
+.ev-title{color:var(--text);}
+.no-events{color:var(--muted);font-size:13px;font-style:italic;}
+
+/* === Browse Button === */
+.browse-row{text-align:center;margin-bottom:32px;}
+.browse-btn{
+  background:none;border:1px solid var(--border);color:var(--muted);
+  padding:9px 24px;border-radius:24px;font-size:13px;cursor:pointer;
+  transition:all .2s;letter-spacing:1px;font-family:-apple-system,"PingFang TC",sans-serif;
+}
+.browse-btn:hover{border-color:var(--green);color:var(--green);}
+
+/* === Weather === */
+.weather-bar{
+  text-align:center;font-size:14px;color:var(--muted);margin-bottom:28px;
+  letter-spacing:1px;
+}
+.weather-bar span{color:var(--text);font-weight:500;}
+
+/* === Stocks === */
+.stocks-section{margin-bottom:28px;}
+.stocks-section>h2{font-family:Georgia,"Noto Serif TC",serif;font-size:14px;font-weight:400;color:var(--green);letter-spacing:1px;margin-bottom:14px;}
+.stocks-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+.stock-card{background:var(--card);border-radius:12px;padding:18px 16px;box-shadow:0 2px 12px rgba(0,0,0,.04);display:flex;flex-direction:column;gap:3px;}
+.stock-region{font-size:11px;color:var(--muted);letter-spacing:1px;}
+.stock-name{font-size:13px;color:var(--text);font-weight:500;}
+.stock-price{font-size:20px;font-weight:600;color:var(--text);margin:4px 0 2px;}
+.stock-chg{font-size:13px;font-weight:600;}
+
+/* === News === */
+.divider{text-align:center;margin:28px 0;color:var(--sand);font-size:13px;letter-spacing:4px;}
+.news-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:32px;}
+.section{background:var(--card);border-radius:14px;padding:22px 24px;box-shadow:0 2px 12px rgba(0,0,0,.04);}
+.section h2{font-family:Georgia,"Noto Serif TC",serif;font-size:13px;font-weight:400;color:var(--green);letter-spacing:1px;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--border);}
+.news-link{display:block;padding:8px 0;color:var(--text);text-decoration:none;font-size:13.5px;line-height:1.6;border-bottom:1px solid #F5F0EA;transition:color .2s;}
+.news-link:last-child{border-bottom:none;}
+.news-link:hover{color:var(--green);}
+.num{color:var(--green);font-weight:600;margin-right:6px;font-size:12px;}
+
+/* === Footer === */
+footer{text-align:center;color:var(--muted);font-size:13px;padding-top:24px;border-top:1px solid var(--border);font-family:Georgia,"Noto Serif TC",serif;letter-spacing:1px;}
+
+/* === Modal === */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.25);z-index:200;justify-content:center;align-items:center;backdrop-filter:blur(3px);}
+.modal-overlay.active{display:flex;}
+.modal-box{background:var(--card);border-radius:18px;padding:32px;max-width:500px;width:92%;max-height:85vh;overflow-y:auto;box-shadow:0 12px 48px rgba(0,0,0,.15);position:relative;animation:modalIn .25s ease;}
+@keyframes modalIn{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+.modal-close{position:absolute;top:16px;right:18px;background:none;border:none;font-size:22px;color:var(--muted);cursor:pointer;padding:4px 8px;border-radius:6px;transition:all .2s;}
+.modal-close:hover{background:var(--green-light);color:var(--green);}
+.modal-title{font-family:Georgia,serif;font-size:16px;color:var(--text);margin-bottom:20px;letter-spacing:1px;}
+
+/* Calendar widget inside modal */
+.cal-nav{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;}
+.cal-nav span{font-family:Georgia,serif;font-size:15px;color:var(--text);letter-spacing:1px;}
+.cal-nav button{background:none;border:none;font-size:22px;color:var(--muted);cursor:pointer;padding:4px 12px;border-radius:6px;transition:all .2s;}
+.cal-nav button:hover{background:var(--green-light);color:var(--green);}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;text-align:center;margin-bottom:20px;}
+.cal-weekday{font-size:11px;color:var(--muted);padding:6px 0;font-weight:500;}
+.cal-date{font-size:13px;padding:9px 4px;border-radius:8px;cursor:pointer;transition:all .2s;position:relative;}
+.cal-date:hover{background:var(--green-light);}
+.cal-date.empty{cursor:default;}
+.cal-date.empty:hover{background:none;}
+.cal-date.is-today{background:var(--green);color:#fff;font-weight:600;}
+.cal-date.is-today:hover{background:#4A6545;}
+.cal-date.is-selected:not(.is-today){background:var(--teal-light);color:var(--teal);font-weight:600;}
+.cal-date .dot{position:absolute;bottom:3px;left:50%;transform:translateX(-50%);width:4px;height:4px;border-radius:50%;background:var(--sand);}
+.cal-date.is-today .dot{background:rgba(255,255,255,.6);}
+.modal-events-title{font-size:13px;color:var(--teal);font-weight:500;margin-bottom:10px;padding-bottom:8px;border-top:1px solid var(--border);padding-top:14px;}
+.modal-event-row{display:flex;gap:10px;padding:7px 0;border-bottom:1px solid #F0EBE5;font-size:13.5px;}
+.modal-event-row:last-child{border-bottom:none;}
+.back-banner{display:none;text-align:center;padding:14px;background:var(--green-light);border-radius:10px;margin-bottom:24px;}
+.back-banner a{color:var(--green);text-decoration:none;font-size:13px;letter-spacing:1px;font-weight:500;}
+.back-banner a:hover{text-decoration:underline;}
+.cal-date.has-archive{background:rgba(91,117,83,.1);}
+.cal-date.has-archive.is-today{background:var(--green);}
+.cal-date.has-archive.is-selected:not(.is-today){background:var(--teal-light);}
+.archive-link{margin-top:14px;padding-top:12px;border-top:1px solid var(--border);text-align:center;}
+.archive-link a{color:var(--green);text-decoration:none;font-size:13px;font-weight:500;letter-spacing:1px;}
+.archive-link a:hover{text-decoration:underline;}
+
+@media(max-width:768px){
+  .container{padding:24px 16px 40px;}
+  .three-days,.news-grid{grid-template-columns:1fr;}
+  .stocks-grid{grid-template-columns:1fr 1fr;}
+}
+</style>
+</head>
+<body>
+
+<div class="nature-bg">
+  <div class="leaf l1" style="--r:0deg"><svg viewBox="0 0 40 60"><path d="M20 2C12 14 4 26 4 38c0 12 7 18 16 18s16-6 16-18C36 26 28 14 20 2z" fill="currentColor"/><line x1="20" y1="12" x2="20" y2="52" stroke="rgba(255,255,255,.25)" stroke-width=".6"/></svg></div>
+  <div class="leaf l2" style="--r:45deg"><svg viewBox="0 0 40 60"><path d="M20 2C12 14 4 26 4 38c0 12 7 18 16 18s16-6 16-18C36 26 28 14 20 2z" fill="currentColor"/></svg></div>
+  <div class="leaf l3" style="--r:-25deg"><svg viewBox="0 0 40 60"><path d="M20 2C12 14 4 26 4 38c0 12 7 18 16 18s16-6 16-18C36 26 28 14 20 2z" fill="currentColor"/></svg></div>
+</div>
+
+<div class="container">
+
+<div id="back-banner" class="back-banner">
+  <a href="../xyz_daily_dashboard.html">← 返回今天的報告</a>
+</div>
+
+<header>
+  <h1>
+    <svg class="leaf-accent" viewBox="0 0 40 60"><path d="M20 2C12 14 4 26 4 38c0 12 7 18 16 18s16-6 16-18C36 26 28 14 20 2z" fill="#5B7553"/></svg>
+    Kevin's Daily
+  </h1>
+</header>
+
+<div class="weather-bar">台北 · <span>+16°C Shower in vicinity</span></div>
+
+<div class="three-days">
+  <div class='day-col'><div class='day-label'>Yesterday</div><div class='day-date'>03/08 Sunday</div><div class='event-row'><span class='ev-time'>08:00</span><span class='ev-title'>婦女節</span></div></div>
+  <div class='day-col today-col'><div class='day-label'>Today</div><div class='day-date'>03/09 Monday</div><div class='event-row'><span class='ev-time'>08:00</span><span class='ev-title'>預約接送</span></div></div>
+  <div class='day-col'><div class='day-label'>Tomorrow</div><div class='day-date'>03/10 Tuesday</div><p class='no-events'>沒有行程</p></div>
+</div>
+
+<div class="browse-row">
+  <button class="browse-btn" onclick="openModal()">瀏覽其他日期</button>
+</div>
+
+<div class="stocks-section">
+  <h2>全球市場</h2>
+  <div class="stocks-grid">
+    <div class='stock-card'><span class='stock-region'>美國</span><span class='stock-name'>S&P 500</span><span class='stock-price'>6,740.02</span><span class='stock-chg' style='color:#9B6B6B'>▼ -1.33%</span></div><div class='stock-card'><span class='stock-region'>日本</span><span class='stock-name'>Nikkei 225</span><span class='stock-price'>52,728.72</span><span class='stock-chg' style='color:#9B6B6B'>▼ -5.20%</span></div><div class='stock-card'><span class='stock-region'>中國</span><span class='stock-name'>上證指數</span><span class='stock-price'>4,096.96</span><span class='stock-chg' style='color:#9B6B6B'>▼ -0.66%</span></div><div class='stock-card'><span class='stock-region'>台灣</span><span class='stock-name'>加權指數</span><span class='stock-price'>32,110.42</span><span class='stock-chg' style='color:#9B6B6B'>▼ -4.43%</span></div>
+  </div>
+</div>
+
+<div class="divider">- - -</div>
+
+<div class="news-grid">
+  <div class='section'><h2>地緣政治與國際局勢</h2><a href='https://www.foxnews.com/world/private-security-firm-evacuates-americans-iran-conflict' target='_blank' class='news-link'><span class='num'>1.</span>私人保全公司幫助美國人在與伊朗的戰爭中撤離中東</a><a href='https://www.foxnews.com/world/us-sanctioned-mojtaba-khamenei-named-irans-next-supreme-leader-after-fathers-death-reports' target='_blank' class='news-link'><span class='num'>2.</span>報道稱，美國制裁的莫吉塔巴·哈梅內伊在父親去世後任命伊朗下一任最高領導人</a><a href='https://www.foxnews.com/world/centcom-issues-safety-warning-iranian-civilians-regime-uses-heavily-populated-areas-launches' target='_blank' class='news-link'><span class='num'>3.</span>由於政權利用「人口稠密」地區進行發射，中央司令部向伊朗平民發出安全警告</a><a href='https://www.foxnews.com/world/cartels-fear-us-retaliation-trump-era-pressure-reshapes-strategy-they-fear-united-states' target='_blank' class='news-link'><span class='num'>4.</span>隨著川普時代的壓力重塑戰略，卡特爾擔心美國的報復：“他們害怕美國”</a><a href='https://www.foxnews.com/world/balkans-edge-kosovo-political-crisis-sparks-fears-renewed-instability' target='_blank' class='news-link'><span class='num'>5.</span>巴爾幹半島緊張局勢：科索沃政治危機引發人們對新一輪不穩定局勢的擔憂</a></div>
+  <div class='section'><h2>財經與市場</h2><a href='https://www.foxbusiness.com/technology/ford-deep-water-after-sweeping-recalls-hit-every-model-since-2020-one-exception' target='_blank' class='news-link'><span class='num'>1.</span>自 2020 年以來，福特對所有車型都進行了全面召回，深陷困境——只有一款例外</a><a href='https://www.foxbusiness.com/energy/oil-prices-top-100-iran-war-supply-disruption' target='_blank' class='news-link'><span class='num'>2.</span>由於伊朗戰爭擾亂生產和運輸，原油價格突破每桶100美元</a><a href='https://www.foxbusiness.com/economy/oracle-expected-slash-thousands-jobs-massive-ai-spending-creates-financial-cash-crisis' target='_blank' class='news-link'><span class='num'>3.</span>由於大規模人工智慧支出造成財務現金危機，甲骨文預計將裁員數千人</a><a href='https://www.foxbusiness.com/lifestyle/southwest-flight-diverts-atlanta-airport-armed-tactical-units-detain-man-frightening-security-scare' target='_blank' class='news-link'><span class='num'>4.</span>西南航空航班轉向亞特蘭大機場，武裝戰術部隊在可怕的安全恐慌中拘留了一名男子</a><a href='https://www.foxbusiness.com/retail/philadelphia-food-stand-overwhelmed-when-600-tubs-onion-dip-mysteriously-appear-prompting-investigation' target='_blank' class='news-link'><span class='num'>5.</span>600桶洋蔥醬神秘出現，費城食品攤不堪重負，引發調查</a></div>
+  <div class='section'><h2>AI 與科技</h2><a href='https://news.google.com/rss/articles/CBMif0FVX3lxTE1FdGxQS3RQcFJxZThkQVloa0RJR0c4dFRrRzhFU3A0enNNMHJvZVY3TmNEVnNqTkMzZUtfbTJhVzZMNEpRVlRDRFNxNWRwbmp6eTBURkxnd09TQy12SjBJRlRlcTZTNFUtYklYeGdrWmE2SS04MTZUV2twNU5iNVk?oc=5' target='_blank' class='news-link'><span class='num'>1.</span>Netflix 收購 Ben Affleck 的人工智慧電影製作新創公司 InterPositive</a><a href='https://news.google.com/rss/articles/CBMiaEFVX3lxTE9pMVExZ1NwVmVVSkF1SFBlVlVtdFZmSU14MDVFSzM5RkJ1eVhKRUt4OE9XcENZSXBTYm5ySFhielhockZQSUQxanhZQ0tOSXJfTG8zLWszc3pLTUI5bm9vSXNyMUJ2U2Y2?oc=5' target='_blank' class='news-link'><span class='num'>2.</span>班艾佛列克正在盡一切努力將 Netflix 轉換為人工智慧內容</a><a href='https://news.google.com/rss/articles/CBMiswFBVV95cUxPd0ZPdWRyN1dGQUhZVk8xVFh3M2QzcUNGU05GMW9UTjMwVXpuZkpnUzA4UFRRdGJBZVk2cWVYX2dlQzhIX2Rva2RXR0xjZUhHeTNnbTBxMEM2REZnaUtDUERhUGpFOFZvcklLZ1pYNFZqajc0SzZfTHFCWV9wMzhmYkFyRUUtOGFMQU1TaWtHcEpHOHAxaUVicDFURVJOSWVvekpaSHA2Q3VzV1NuUzgyTkJCMA?oc=5' target='_blank' class='news-link'><span class='num'>3.</span>五角大廈的人擇爭議會嚇跑新創公司遠離國防工作嗎？</a><a href='https://news.google.com/rss/articles/CBMihAFBVV95cUxOYlctMHNHOTZGYUVlenpva3FaUmdJZWhQZUdHU2pvS3g2dGExS2JmRGV6WGF0SjhCb3kycmVHcUtROUd1bHpINzJEcmFRclNsanJpb0RkOHhVYWtPY2Y5ek9UeTFDcDMwV0xlNjJDakVXaFlvMHBLVzdnU1hlQkFTWFg4alc?oc=5' target='_blank' class='news-link'><span class='num'>4.</span>科技寡頭重塑人類，而舊時代的億萬富翁卻顯得古怪</a><a href='https://news.google.com/rss/articles/CBMi2AFBVV95cUxQNHluenp6NE4teVg3bTJiWG9VZk81dDQwcDBJcmVJWlBHdWhIYWRSYTNWX052aHVZdjhfdmxXNk9mTENURGRzdURmMExpTm5VazdfTWZpcUxTV21TcThJbHc2cFluMmRjMXdVeE80ZDhBR0JUWUhJcHJiX2Rva1lGT2tfMDNEOHZzRkJwSUpoM3FwZjh1RU56aXcxclFqNnRyVkRBVkJIbUkyaloxWGpscjJTZ2hYVkNxX0g2d2liUm41MlhaZDQwcl9JTlFtcWVGd3d0Vzg5V3Y?oc=5' target='_blank' class='news-link'><span class='num'>5.</span>工作場所中的人工智慧：2025 年報告 |麥肯錫</a></div>
+  <div class='section'><h2>AI 自動化實戰案例</h2><a href='https://news.google.com/rss/articles/CBMioAFBVV95cUxNdmo2aWU1eGxwYndzTHhxdnNmUklwN0NOMlU3dkZDcmtNcUlSOVhSSVVCaHEtdnc0ZkQ5b2YyVkJpSjNCc3pMbnpIVjl1OFdtWkVNckJZY3RJTndTN3VqYk5iazBOLUJSZVhSSVAtRGc1dmVPNnl2MC0zNEl0VVhKQ0hxZjYwdEdEXzhvTGNiWHdxRjkxZUtTcjR0RmQ4MU0w?oc=5' target='_blank' class='news-link'><span class='num'>1.</span>不受歡迎的觀點：大多數人工智慧代理用例都是生產力劇場</a><a href='https://news.google.com/rss/articles/CBMibkFVX3lxTE02UmpHTW42Vk9PbmJJc0xfNEFYNTdlN0d1R2FMd1pLRnNXN05DenRieVFlTkZJOXh2U1I1Szd5dy1hUHBpT0laSkFZQXV4OS03TXZhNVhTX1VBQ0VOQjJLcTlBQ0o4SjlkaGY2WU9n?oc=5' target='_blank' class='news-link'><span class='num'>2.</span>Anthropic 剛剛向我們展示了人工智慧實際上正在取代哪些工作</a><a href='https://news.google.com/rss/articles/CBMi2AFBVV95cUxQNHluenp6NE4teVg3bTJiWG9VZk81dDQwcDBJcmVJWlBHdWhIYWRSYTNWX052aHVZdjhfdmxXNk9mTENURGRzdURmMExpTm5VazdfTWZpcUxTV21TcThJbHc2cFluMmRjMXdVeE80ZDhBR0JUWUhJcHJiX2Rva1lGT2tfMDNEOHZzRkJwSUpoM3FwZjh1RU56aXcxclFqNnRyVkRBVkJIbUkyaloxWGpscjJTZ2hYVkNxX0g2d2liUm41MlhaZDQwcl9JTlFtcWVGd3d0Vzg5V3Y?oc=5' target='_blank' class='news-link'><span class='num'>3.</span>工作場所中的人工智慧：2025 年報告 |麥肯錫</a><a href='https://news.google.com/rss/articles/CBMixAFBVV95cUxNVW83U0FCSkdKNXJlTEkxWnBpbkZENUI0UE9DLVo2WWQyVzZ1Q2dOYU1RbG9tMFV1VDZ5bXF6cldZMHBsMFM2Rm9pMjlybmVfSzNObGdQNVJKaWNaV1pNODVudzZfM0E4SGVXNV9jMEZNX2V0dVpaNHI0cVpGMUllV1ZmRTNzZk1mU0tFUFprZUpkQm1RREpvSzl3bjVLNnF0OVFuSHdVX3o4bGdkRzdLLWJTem5NUVl6U0ZDRTlpdFFBTjJx0gHLAUFVX3lxTE9jcVFwbENDR2JOWmVPTEc4NUg2d3BPZzE4QlhUdVl6aEZLWDFQYm1UcWM5TXF5ZnVJeFpxS2J2ZjJRVDJxaDlGNFNvcHlvVjQ0YzRrYmNPbTRKN21pUTJheGU3N1Z2eFZlTWs2b1VEMVZzbWx2Q2wxMzJjMFFtWGVfMzlFV1M3cGxXWEJvVEp6ckh1cnNlZnRGY041d05MZjlwYXowOUJ2SUM3aFI3NDR0aFhsbXNzcHB4Mkg1V2dYZE9uT1ZJOGdGRDVZ?oc=5' target='_blank' class='news-link'><span class='num'>4.</span>解釋：根據一項人類學研究，人工智慧肯定可以取代的工作</a><a href='https://news.google.com/rss/articles/CBMiV0FVX3lxTE15eGNFUmtmaFM0TGNSdlV4TVRhbG1FTExJU1VZZVkwRDcteXZlUmxKVU1QZVU2bHZJS0U4TFB5YzZhTVpIdkp5dHVaa0RhUUloMDBzdFAycw?oc=5' target='_blank' class='news-link'><span class='num'>5.</span>microsoft/代理框架</a></div>
+  <div class='section'><h2>製造業與供應鏈</h2><a href='https://news.google.com/rss/articles/CBMipwJBVV95cUxOeGhIMl9QUXZFUHhzV25jbDYwdXRBeWVPZXZLOWwtSDdXb3FDNTFYal81bjRrLVF0Sk1YWFhabldrQ2dfWFI0TXlOSnpFMzYzc1VaakxkRjJmYWdPM0hXeGtCY2pxS1MtSzlDYjRyQ2diZFBqMmxsbWUxQ3k2SHhJLUVNajRkZjJreEluZjNSZ1FMMXFMWlZENVZSVjhkSVlJUlJTVXdfVWY2OHV2RFhNRk1EeVNES1RQcXpnZWh4YzlkTjJ2MkNXT0k2NU5fZm4xWndHSk9uTlFURnB1amVxdUVjV1NlNTQ4UTVxZFRsbndlTFJOUFBfdnVHZ1duM01RV21tWnlRUEpBTFZLYVlrd2tmcDQ2WVczT1c4WmhMT0pSTDJVaGs0?oc=5' target='_blank' class='news-link'><span class='num'>1.</span>據報道，由於人工智慧資料中心賭注引發財務完美風暴，甲骨文將裁員數千人並凍結招聘——雲端部門的裁員將由人工智慧來填補</a><a href='https://news.google.com/rss/articles/CBMicEFVX3lxTE5na0E2Q1FjemY0OXh5RXJORDBqZDZ0aGhLcWROSlF1V2JJV2xaYk9ueUtvalREMTE4bFdlaGlwMXdrWHEzMVpoX0E4RlViR0R4bllqV1hlWGtsbWQ5S3V1aWVXb2szRlUtUHlTNmx5OGc?oc=5' target='_blank' class='news-link'><span class='num'>2.</span>油價四年來首次突破每桶 100 美元</a><a href='https://news.google.com/rss/articles/CBMicEFVX3lxTE83alowNnRfalFWcV8zN2xNbnBYdGozd1R1Y1hRMHRlT09DT3FBQU83TWxCSFBGa1pmYm1PMmJTdmJPeURRRER6SlRPWmk1NWdkUW55SzVkc1JNbGVmQnFjYlIzNU5iSC0xc0VzUHdUa3c?oc=5' target='_blank' class='news-link'><span class='num'>3.</span>全球能源的惡夢正在來臨嗎？</a><a href='https://news.google.com/rss/articles/CBMicEFVX3lxTE5ld2tGUFlubnc1ZUVhclgxdWZxQXhzUHZJam5ETTBWSHY2Q19WaC0wQjFPd2NoVlRjN0JaQkt4Vm55bGJrN0tQMmYtc1lNTmdpd3JSeUhhWGx3U1VDd2VheDBnakJwUzFQWVgzSk9pMUU?oc=5' target='_blank' class='news-link'><span class='num'>4.</span>伊朗戰爭引發歷史性飆升 油價創2023年以來最高水準</a><a href='https://news.google.com/rss/articles/CBMiuAJBVV95cUxNVUpDNkVZN194emJCQTVpSmtfdFhnSjhQT19zcTF4c0JNYTNxbEowSU5ldi1GUm1pZnJVZGJlOXNEaEVQRkU3LTVTWmlNSXp0MXZRcDQzRThhSVB1aTNTbWFRamFMRUU0Y2dYSjlkamJjb2xkWVh4c2gxLTlnVVpsV2ZBa0RmSWVvXzB2UEV4UVJYRW9Pa2hUSlJ0S0pNZm5KLW45cFptZzlHY0ZVbmgwaHJwLWQzNEkxQnZWOGNPVlZLaFY3REphSVEtdndmdks4NDFzVGlJcFJQOG9YR29BTzlfWlZvVFprNHdkQnZrS0FnUUJ3SHhjT1Vpak1TWUtfQW9PZHI1bWNhTXZ4ZFQwdHpudklZY2ZEMW5wbHV2ZDlUdjliMzZRWnpseVFqRlhIOVNNRjFVUnY?oc=5' target='_blank' class='news-link'><span class='num'>5.</span>Nvidia 執行長黃在組件持續短缺的情況下宣稱「我喜歡限制」——聲稱缺乏選擇迫使人工智慧客戶只能選擇最好的</a></div>
+  <div class='section'><h2>美國市場動態</h2><a href='https://www.foxnews.com/us/pennsylvania-state-trooper-fatally-shot-during-traffic-stop' target='_blank' class='news-link'><span class='num'>1.</span>官員稱，賓州州警在交通堵塞期間被槍殺</a><a href='https://www.foxnews.com/us/police-recover-third-device-ongoing-manhattan-ied-investigation-two-arrests' target='_blank' class='news-link'><span class='num'>2.</span>警方在逮捕兩人後在曼哈頓簡易爆炸裝置調查中找到了第三個裝置</a><a href='https://www.foxnews.com/us/officials-confirm-devices-recovered-nyc-protest-near-gracie-mansion-were-both-ieds' target='_blank' class='news-link'><span class='num'>3.</span>官員證實，在紐約格雷西大廈附近的抗議活動中發現的裝置都是簡易爆炸裝置</a><a href='https://www.foxnews.com/us/air-force-veteran-warns-cartels-dont-collapse-fracture-after-notorious-drug-lord-killed' target='_blank' class='news-link'><span class='num'>4.</span>在臭名昭著的毒梟被殺後，空軍老兵警告“販毒集團不會崩潰，而是會破裂”</a><a href='https://www.foxnews.com/us/new-jersey-elementary-school-weighs-renaming-after-president-trump' target='_blank' class='news-link'><span class='num'>5.</span>新澤西小學考慮在川普總統後重新命名</a></div>
+</div>
+
+<footer><p>祝你有美好的一天</p></footer>
+
+</div>
+
+<!-- Modal -->
+<div id="modal" class="modal-overlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-title">瀏覽行事曆</div>
+    <div id="cal-widget"></div>
+    <div id="modal-events"></div>
+  </div>
+</div>
+
+<script>
+const calData =
+{"2026-02-01": [{"time": "16:00", "title": "May 27-28 construction show Austin Texas"}, {"time": "19:00", "title": "5:00 點週日澳網"}], "2026-02-02": [{"time": "12:00", "title": "Reply sandal - Albion Uk"}, {"time": "13:00", "title": "冷氣的報價、與爸爸朋友+Chad比價格"}, {"time": "14:00", "title": "Text Kyle and see how it goes"}], "2026-02-03": [{"time": "15:00", "title": "冷氣的報價、與爸爸朋友+Chad比價格"}], "2026-02-04": [{"time": "08:00", "title": "農民節"}, {"time": "08:00", "title": "立春"}], "2026-02-05": [{"time": "17:00", "title": "Watts reply email"}], "2026-02-06": [{"time": "14:15", "title": "2/6 Friday 2:40 spa"}], "2026-02-07": [{"time": "14:00", "title": "02/07 Demi 早上到、公司尾牙"}, {"time": "14:00", "title": "週六面試2-3"}, {"time": "15:00", "title": "週六3:00bryce meeting"}], "2026-02-10": [{"time": "17:30", "title": "02/10 號5:00 點跟設計師開會"}], "2026-02-13": [{"time": "14:30", "title": "週五下午2:00點牙醫"}, {"time": "16:00", "title": "2/13 號4:30 下午剪頭髮"}, {"time": "18:00", "title": "2/13 karen birthday dinner Vince restaurant 7pm"}], "2026-02-14": [{"time": "08:00", "title": "農曆春節假日"}, {"time": "10:00", "title": "週六早上10:00瑜珈"}, {"time": "11:00", "title": "02/14-21前Demi 過年第一天去澳洲"}, {"time": "12:00", "title": "2/14 號、中午吃門將"}, {"time": "18:00", "title": "2/14 號、中午吃門將"}, {"time": "18:00", "title": "02/14 號、情人節晚餐義大利餐廳"}], "2026-02-15": [{"time": "08:00", "title": "農曆春節假日"}, {"time": "13:00", "title": "買過年伴手禮給Demi parents"}, {"time": "14:00", "title": "2/15 號午餐Vince 餐廳、跟爸媽一起"}, {"time": "17:00", "title": "2/15 晚上吃晚餐Kelsey Chris"}], "2026-02-16": [{"time": "08:00", "title": "農曆除夕"}, {"time": "08:00", "title": "農曆除夕"}, {"time": "13:00", "title": "Order rubie cookie 給Bruce"}, {"time": "15:00", "title": "包紅包爸媽+$10000+$2000小噗"}, {"time": "18:00", "title": "包紅包（小噗+母親）"}], "2026-02-17": [{"time": "08:00", "title": "農曆正月初一"}, {"time": "08:00", "title": "農曆春節"}], "2026-02-18": [{"time": "08:00", "title": "農曆正月初二"}, {"time": "08:00", "title": "農曆春節假日"}, {"time": "08:00", "title": "雨水"}, {"time": "11:00", "title": "Lins"}, {"time": "18:00", "title": "02/18 號晚餐初二跟家人10人 晚餐"}], "2026-02-19": [{"time": "08:00", "title": "農曆正月初三"}, {"time": "08:00", "title": "農曆春節假日"}, {"time": "17:40", "title": "記得帶烏魚子兩分"}, {"time": "18:00", "title": "初三晚餐跟Demi family dinner"}], "2026-02-20": [{"time": "08:00", "title": "農曆春節假日"}, {"time": "11:00", "title": "行李（紅包+婚紗）"}, {"time": "15:00", "title": "約一下籃球02/20號下午"}, {"time": "17:00", "title": "2/20 週五打球3-5 點"}], "2026-02-21": [{"time": "08:00", "title": "農曆春節假日"}, {"time": "13:00", "title": "2/21 號可以去拿西裝、記得要帶婚紗"}, {"time": "18:00", "title": "能否去游壽司"}], "2026-02-22": [{"time": "08:00", "title": "農曆春節假日"}, {"time": "08:00", "title": "02/22 Robbin婚禮當天"}], "2026-02-23": [{"time": "11:00", "title": "2/23 冷氣廠商會來11:00、提醒媽媽"}, {"time": "13:00", "title": "不銹鋼球閥推銷給Nibco heather indiana, 直接打給heather ?"}], "2026-02-24": [{"time": "07:00", "title": "2/24 號週二早上7:30 瑜珈課"}], "2026-02-26": [{"time": "11:00", "title": "明天早上10:00 點去家裡後面開會"}], "2026-02-27": [{"time": "08:00", "title": "和平紀念日補假"}, {"time": "08:00", "title": "和平紀念日 補假"}, {"time": "10:00", "title": "10:00 週五2/27 spa"}, {"time": "13:00", "title": "2/27號-1-3 點氣功師父三樓要預約"}, {"time": "14:30", "title": "2/27 號3:30跟Bruce討論菜單"}, {"time": "14:30", "title": "2/27 號今天下午2:30 面試"}, {"time": "17:30", "title": "未來有甜點計畫、如果你可以加入是最好。雖然還在磨合但是我覺得慢慢來可以更好。"}], "2026-02-28": [{"time": "08:00", "title": "和平紀念日"}, {"time": "11:30", "title": "02/28 早上4去高鐵"}, {"time": "13:00", "title": "Call Bruce : 昨天想法我覺得其實如果你可以讓店裡的感覺不那麼餐廳（茶咖喱的米飯跟餅也不錯）那麼多餅系列好像主題性過強。你想一下。他們其實就是太閒、你應該陸續丟東西給他們（類似軟餅乾/什麼什麼）"}], "2026-03-03": [{"time": "08:00", "title": "元宵節"}, {"time": "08:00", "title": "元宵節"}, {"time": "15:00", "title": "3:00 pm 週二、手心設計開會"}], "2026-03-04": [{"time": "13:00", "title": "看一下要不要續約digital ocean + clawboat"}, {"time": "20:30", "title": "ATC上週還是這週的來工作"}], "2026-03-05": [{"time": "08:00", "title": "驚蟄"}, {"time": "13:00", "title": "處理PTFE Wras"}], "2026-03-06": [{"time": "13:00", "title": "1點面試一位週五"}, {"time": "14:00", "title": "Call Bruce"}], "2026-03-07": [{"time": "12:00", "title": "3/7 週六跟demi中午吃初魚跟爸媽"}, {"time": "14:00", "title": "每週六瑜珈課程10:00"}], "2026-03-08": [{"time": "08:00", "title": "婦女節"}], "2026-03-09": [{"time": "08:00", "title": "預約接送"}], "2026-03-13": [{"time": "10:00", "title": "週五10:00 到灰色大門討論油漆版本"}, {"time": "20:00", "title": "每週五8:00晚上跟哥哥開會網站架設"}], "2026-03-14": [{"time": "10:00", "title": "週六9-11點跟哥哥開會討論公司網站會議"}, {"time": "13:00", "title": "03/14 號情人節"}], "2026-03-15": [{"time": "13:00", "title": "Allen Tsai 婚禮"}], "2026-03-19": [{"time": "07:30", "title": "3/19號、研華拜訪、跟媽媽早上7:50 出發"}], "2026-03-20": [{"time": "08:00", "title": "春分"}, {"time": "18:30", "title": "3/20 晚上吃門將"}], "2026-03-22": [{"time": "11:00", "title": "3/22 號跟樓上的dad去拜訪Nividian一起吃飯"}], "2026-03-26": [{"time": "14:00", "title": "3/26-4/6挪威"}], "2026-03-29": [{"time": "08:00", "title": "青年節"}], "2026-03-30": [{"time": "11:00", "title": "與NaN Sandra 討論一下buy back inventory TMv before my trip to visit Marc"}], "2026-04-03": [{"time": "08:00", "title": "兒童節補假"}, {"time": "08:00", "title": "兒童節 補假"}], "2026-04-04": [{"time": "08:00", "title": "兒童節"}], "2026-04-05": [{"time": "08:00", "title": "民族掃墓節"}, {"time": "08:00", "title": "清明節"}], "2026-04-06": [{"time": "08:00", "title": "清明節"}, {"time": "08:00", "title": "民族掃墓節補假"}], "2026-04-20": [{"time": "08:00", "title": "穀雨"}]};
+const TODAY = '2026-03-09';
+let viewYear = 2026;
+let viewMonth = 2;
+let selectedDate = TODAY;
+var archiveDates = [];
+
+function openModal() {
+  document.getElementById('modal').classList.add('active');
+  renderCalendar();
+  renderModalEvents();
+}
+function closeModal() {
+  document.getElementById('modal').classList.remove('active');
+}
+
+function renderCalendar() {
+  var first = new Date(viewYear, viewMonth, 1).getDay();
+  var days = new Date(viewYear, viewMonth + 1, 0).getDate();
+  var offset = (first + 6) % 7;
+  var mNames = ['1 月','2 月','3 月','4 月','5 月','6 月','7 月','8 月','9 月','10 月','11 月','12 月'];
+
+  var h = '<div class="cal-nav">';
+  h += '<button onclick="changeMonth(-1)">\u2039</button>';
+  h += '<span>' + viewYear + ' 年 ' + mNames[viewMonth] + '</span>';
+  h += '<button onclick="changeMonth(1)">\u203A</button>';
+  h += '</div><div class="cal-grid">';
+
+  var wd = ['一','二','三','四','五','六','日'];
+  for (var w = 0; w < 7; w++) h += '<div class="cal-weekday">' + wd[w] + '</div>';
+  for (var e = 0; e < offset; e++) h += '<div class="cal-date empty"></div>';
+
+  for (var d = 1; d <= days; d++) {
+    var mm = String(viewMonth + 1).padStart(2, '0');
+    var dd = String(d).padStart(2, '0');
+    var ds = viewYear + '-' + mm + '-' + dd;
+    var cls = 'cal-date';
+    if (ds === TODAY) cls += ' is-today';
+    if (ds === selectedDate) cls += ' is-selected';
+    var hasEv = calData[ds] && calData[ds].length > 0;
+    if (hasEv) cls += ' has-events';
+    if (archiveDates.indexOf(ds) !== -1) cls += ' has-archive';
+    h += '<div class="' + cls + '" onclick="pickDate(\'' + ds + '\')">' + d;
+    if (hasEv) h += '<span class="dot"></span>';
+    h += '</div>';
+  }
+  h += '</div>';
+  document.getElementById('cal-widget').innerHTML = h;
+}
+
+function pickDate(ds) {
+  selectedDate = ds;
+  renderCalendar();
+  renderModalEvents();
+}
+
+function renderModalEvents() {
+  var events = calData[selectedDate] || [];
+  var p = selectedDate.split('-');
+  var dt = new Date(parseInt(p[0]), parseInt(p[1]) - 1, parseInt(p[2]));
+  var wk = ['日','一','二','三','四','五','六'];
+  var label = p[0] + '/' + p[1] + '/' + p[2] + ' 星期' + wk[dt.getDay()];
+  if (selectedDate === TODAY) label += '（今天）';
+
+  var h = '<div class="modal-events-title">' + label + '</div>';
+  if (events.length === 0) {
+    h += '<p class="no-events">沒有行程</p>';
+  } else {
+    for (var i = 0; i < events.length; i++) {
+      h += '<div class="modal-event-row"><span class="ev-time">' + events[i].time + '</span><span class="ev-title">' + events[i].title + '</span></div>';
+    }
+  }
+  if (archiveDates.indexOf(selectedDate) !== -1) {
+    var prefix = location.pathname.indexOf('/archive/') !== -1 ? '' : 'archive/';
+    h += '<div class="archive-link"><a href="' + prefix + selectedDate + '.html">查看當日完整報告 \u2192</a></div>';
+  }
+  document.getElementById('modal-events').innerHTML = h;
+}
+
+function changeMonth(delta) {
+  viewMonth += delta;
+  if (viewMonth > 11) { viewMonth = 0; viewYear++; }
+  if (viewMonth < 0) { viewMonth = 11; viewYear--; }
+  renderCalendar();
+}
+
+if(location.pathname.indexOf('/archive/')!==-1){document.getElementById('back-banner').style.display='block';}
+</script></body></html>
