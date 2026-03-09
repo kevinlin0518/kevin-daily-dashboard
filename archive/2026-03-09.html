@@ -27,24 +27,13 @@ body{
 @keyframes sway{0%,100%{transform:translateX(0);}50%{transform:translateX(-25%);}}
 
 .container{position:relative;z-index:1;max-width:920px;margin:0 auto;padding:56px 44px 64px;}
-header{text-align:center;margin-bottom:20px;}
+header{text-align:center;margin-bottom:40px;}
 header h1{
   font-family:"SF Pro Display",-apple-system,"PingFang TC",sans-serif;
   font-size:40px;font-weight:700;letter-spacing:-.5px;color:var(--text);
   margin-bottom:4px;
 }
 header .subtitle{font-size:15px;color:var(--muted);font-weight:400;letter-spacing:.5px;}
-
-/* === Daily Quote === */
-.daily-quote{text-align:center;margin-bottom:40px;padding:0 20px;}
-.daily-quote .quote-text{
-  font-size:16px;color:var(--text-secondary);line-height:1.8;
-  font-style:italic;font-weight:400;letter-spacing:.2px;
-}
-.daily-quote .quote-author{
-  font-size:13px;color:var(--muted);margin-top:8px;font-weight:500;
-  font-style:normal;letter-spacing:.5px;
-}
 
 /* === Top To-Do === */
 .todos-section{margin-bottom:44px;}
@@ -65,26 +54,35 @@ header .subtitle{font-size:15px;color:var(--muted);font-weight:400;letter-spacin
 /* === Section Headings === */
 .section-heading{font-size:22px;font-weight:700;color:var(--text);letter-spacing:-.3px;margin-bottom:16px;}
 
-/* === 3 Day Columns === */
+/* === Today + Journal === */
 .calendar-section{margin-bottom:12px;}
-.three-days{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+.today-journal{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
 .day-col{
-  background:var(--card);border-radius:16px;padding:22px 20px;
+  background:var(--card);border-radius:16px;padding:26px 24px;
   box-shadow:0 1px 8px rgba(0,0,0,.04);backdrop-filter:blur(20px);
-  border:1px solid rgba(0,0,0,.04);min-height:120px;
+  border:1px solid rgba(0,0,0,.04);min-height:200px;
 }
 .day-col.today-col{
   background:rgba(45,106,79,.06);border:1.5px solid var(--accent);
   box-shadow:0 4px 20px rgba(45,106,79,.1);
 }
-.day-label{font-size:17px;font-weight:600;color:var(--text);letter-spacing:-.2px;margin-bottom:2px;}
+.day-label{font-size:18px;font-weight:600;color:var(--text);letter-spacing:-.2px;margin-bottom:2px;}
 .today-col .day-label{color:var(--green);}
-.day-date{font-size:13px;color:var(--muted);margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--border);}
-.event-row{display:flex;gap:10px;padding:7px 0;border-bottom:1px solid rgba(0,0,0,.04);font-size:14px;}
+.day-date{font-size:13px;color:var(--muted);margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--border);}
+.event-row{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid rgba(0,0,0,.04);font-size:14.5px;}
 .event-row:last-child{border-bottom:none;}
-.ev-time{color:var(--accent);font-weight:600;white-space:nowrap;min-width:44px;font-size:13px;}
+.ev-time{color:var(--accent);font-weight:600;white-space:nowrap;min-width:48px;font-size:13.5px;}
 .ev-title{color:var(--text);}
 .no-events{color:var(--muted);font-size:13px;font-style:italic;}
+/* Journal */
+.journal-col{
+  background:var(--card);border-radius:16px;padding:26px 24px;
+  box-shadow:0 1px 8px rgba(0,0,0,.04);backdrop-filter:blur(20px);
+  border:1px solid rgba(0,0,0,.04);min-height:200px;
+}
+.journal-col .day-label{font-size:18px;font-weight:600;color:var(--text);letter-spacing:-.2px;margin-bottom:2px;}
+.journal-col .day-date{font-size:13px;color:var(--muted);margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--border);}
+.journal-text{font-size:14.5px;color:var(--text-secondary);line-height:1.75;white-space:pre-wrap;}
 
 /* === Browse Button === */
 .browse-row{text-align:center;margin-bottom:44px;}
@@ -172,7 +170,7 @@ footer{text-align:center;color:var(--muted);font-size:14px;padding-top:28px;bord
 
 @media(max-width:768px){
   .container{padding:24px 16px 40px;}
-  .todos-grid,.three-days,.news-grid{grid-template-columns:1fr;}
+  .todos-grid,.today-journal,.news-grid{grid-template-columns:1fr;}
   .stocks-grid{grid-template-columns:1fr 1fr;}
 }
 </style>
@@ -196,11 +194,6 @@ footer{text-align:center;color:var(--muted);font-size:14px;padding-top:28px;bord
   <p class="subtitle">2026 年 3 月 9 日 · 台北 +16°C 毛毛細雨</p>
 </header>
 
-<div class="daily-quote">
-  <p class="quote-text">「��</p>
-  <p class="quote-author">— Elon Musk</p>
-</div>
-
 <div class="todos-section">
   <h2 class="section-heading">Top to-do 今天要完成</h2>
   <div class="todos-grid">
@@ -212,10 +205,13 @@ footer{text-align:center;color:var(--muted);font-size:14px;padding-top:28px;bord
 
 <div class="calendar-section">
   <h2 class="section-heading">Calendar 行事曆</h2>
-  <div class="three-days">
-    <div class='day-col'><div class='day-label'>Yesterday</div><div class='day-date'>03/08 Sunday</div><div class='event-row'><span class='ev-time'>08:00</span><span class='ev-title'>婦女節</span></div></div>
+  <div class="today-journal">
     <div class='day-col today-col'><div class='day-label'>Today</div><div class='day-date'>03/09 Monday</div><div class='event-row'><span class='ev-time'>08:00</span><span class='ev-title'>預約接送</span></div></div>
-    <div class='day-col'><div class='day-label'>Tomorrow</div><div class='day-date'>03/10 Tuesday</div><p class='no-events'>沒有行程</p></div>
+    <div class="journal-col">
+      <div class="day-label">Journal</div>
+      <div class="day-date">03/09 Monday</div>
+      <p class="journal-text">還沒寫 Journal</p>
+    </div>
   </div>
 </div>
 
