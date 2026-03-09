@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>名片夾 — Kevin's Cards</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#F4F5F0;--card:rgba(255,255,255,.82);--card-solid:#FFFFFF;
+  --text:#1d1d1f;--text-secondary:#6e6e73;--muted:#86868b;
+  --green:#2d6a4f;--green-light:#e8f0ec;
+  --teal:#3a7ca5;--teal-light:#e4eff5;
+  --border:rgba(0,0,0,.06);--sand:#b5ad9e;
+  --accent:#40916c;
+}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","PingFang TC","Helvetica Neue",sans-serif;
+  line-height:1.5;min-height:100vh;-webkit-font-smoothing:antialiased;
+}
+.wave-bg{position:fixed;bottom:0;left:0;width:100%;height:45%;pointer-events:none;z-index:0;overflow:hidden;opacity:.12;}
+.wave-bg svg{position:absolute;bottom:0;width:200%;min-width:1400px;height:100%;}
+.wave-bg .w1{animation:sway 8s ease-in-out infinite;fill:#2d6a4f;}
+.wave-bg .w2{animation:sway 10s ease-in-out infinite reverse;fill:#3a7ca5;opacity:.6;}
+.wave-bg .w3{animation:sway 12s ease-in-out infinite;fill:#40916c;opacity:.4;}
+@keyframes sway{0%,100%{transform:translateX(0);}50%{transform:translateX(-25%);}}
+
+.container{position:relative;z-index:1;max-width:920px;margin:0 auto;padding:36px 44px 64px;}
+header{text-align:center;margin-bottom:28px;}
+header h1{
+  font-family:"SF Pro Display",-apple-system,"PingFang TC",sans-serif;
+  font-size:36px;font-weight:700;letter-spacing:-.5px;color:var(--text);
+  margin-bottom:2px;
+}
+header .subtitle{font-size:14px;color:var(--muted);font-weight:400;letter-spacing:.5px;}
+.back-link{
+  display:inline-block;margin-bottom:20px;
+  color:var(--accent);text-decoration:none;font-size:13px;
+  font-weight:500;letter-spacing:.3px;transition:color .2s;
+}
+.back-link:hover{color:var(--green);}
+
+/* === Category Tabs === */
+.cat-tabs{display:flex;justify-content:center;gap:6px;margin-bottom:28px;flex-wrap:wrap;}
+.cat-tab{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:20px;padding:7px 18px;font-size:13px;
+  color:var(--text-secondary);cursor:pointer;transition:all .2s;
+  font-weight:500;letter-spacing:.3px;
+  font-family:-apple-system,"SF Pro Text","PingFang TC",sans-serif;
+}
+.cat-tab:hover{border-color:var(--accent);color:var(--accent);}
+.cat-tab.active{background:var(--accent);color:#fff;border-color:var(--accent);}
+.cards-count{font-size:13px;color:var(--muted);text-align:center;margin-bottom:20px;}
+
+/* === Cards Grid === */
+.cards-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
+
+.card-item{
+  background:var(--card);border-radius:16px;
+  box-shadow:0 1px 8px rgba(0,0,0,.04);backdrop-filter:blur(20px);
+  border:1px solid rgba(0,0,0,.04);overflow:hidden;
+  transition:all .3s;position:relative;
+}
+.card-item:hover{box-shadow:0 6px 24px rgba(0,0,0,.1);transform:translateY(-3px);}
+
+.card-badges{position:absolute;top:12px;left:12px;display:flex;gap:6px;z-index:2;}
+.card-number{
+  background:var(--accent);color:#fff;
+  font-size:11px;font-weight:600;
+  padding:3px 10px;border-radius:20px;letter-spacing:.5px;
+}
+.card-cat-badge{
+  background:rgba(58,124,165,.85);color:#fff;
+  font-size:10px;font-weight:500;
+  padding:3px 9px;border-radius:20px;letter-spacing:.3px;
+}
+.card-cat-badge.cat-supplier{background:rgba(45,106,79,.85);}
+.card-cat-badge.cat-cooling{background:rgba(58,124,165,.85);}
+.card-cat-badge.cat-export{background:rgba(181,173,158,.9);color:#333;}
+
+.card-edit-btn{
+  position:absolute;top:12px;right:12px;z-index:2;
+  background:rgba(255,255,255,.85);border:none;
+  width:28px;height:28px;border-radius:50%;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:all .2s;font-size:13px;color:var(--muted);
+  backdrop-filter:blur(8px);
+}
+.card-edit-btn:hover{background:#fff;color:var(--accent);box-shadow:0 2px 8px rgba(0,0,0,.12);}
+
+.card-image-wrap{
+  width:100%;aspect-ratio:1.75/1;overflow:hidden;
+  background:#f0ede8;
+}
+.card-image{width:100%;height:100%;object-fit:cover;display:block;}
+
+.card-info{padding:18px 20px 20px;}
+.card-company{font-size:13px;color:var(--accent);font-weight:600;letter-spacing:.3px;margin-bottom:4px;}
+.card-name{font-size:18px;font-weight:700;color:var(--text);letter-spacing:-.2px;margin-bottom:2px;}
+.card-title{font-size:13px;color:var(--text-secondary);margin-bottom:10px;}
+.card-contact{display:flex;flex-direction:column;gap:4px;}
+.card-email,.card-phone{
+  font-size:12.5px;color:var(--teal);text-decoration:none;transition:color .2s;
+}
+.card-email:hover,.card-phone:hover{color:var(--green);}
+.card-empty-field{font-size:12px;color:var(--muted);font-style:italic;}
+
+.empty-state{text-align:center;padding:80px 20px;color:var(--muted);font-size:15px;grid-column:1/-1;}
+
+/* === Edit Modal === */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.25);z-index:200;justify-content:center;align-items:center;backdrop-filter:blur(3px);}
+.modal-overlay.active{display:flex;}
+.modal-box{
+  background:var(--card-solid);border-radius:18px;padding:32px;
+  max-width:440px;width:92%;max-height:85vh;overflow-y:auto;
+  box-shadow:0 12px 48px rgba(0,0,0,.15);position:relative;
+  animation:modalIn .25s ease;
+}
+@keyframes modalIn{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+.modal-close{
+  position:absolute;top:16px;right:18px;background:none;border:none;
+  font-size:22px;color:var(--muted);cursor:pointer;padding:4px 8px;
+  border-radius:6px;transition:all .2s;
+}
+.modal-close:hover{background:var(--green-light);color:var(--green);}
+.modal-title{font-size:16px;font-weight:700;color:var(--text);margin-bottom:20px;letter-spacing:-.2px;}
+
+.edit-form{display:flex;flex-direction:column;gap:14px;}
+.edit-field label{display:block;font-size:11px;color:var(--muted);font-weight:600;letter-spacing:.5px;margin-bottom:4px;}
+.edit-field input,.edit-field select{
+  width:100%;padding:10px 14px;border:1px solid var(--border);
+  border-radius:10px;font-size:14px;color:var(--text);
+  font-family:-apple-system,"PingFang TC",sans-serif;
+  background:var(--bg);transition:border-color .2s;
+}
+.edit-field input:focus,.edit-field select:focus{outline:none;border-color:var(--accent);}
+.edit-actions{display:flex;gap:10px;margin-top:6px;}
+.btn-save{
+  flex:1;padding:11px;border:none;border-radius:10px;
+  background:var(--accent);color:#fff;font-size:14px;font-weight:600;
+  cursor:pointer;transition:all .2s;letter-spacing:.3px;
+}
+.btn-save:hover{background:var(--green);}
+.btn-cancel{
+  padding:11px 20px;border:1px solid var(--border);border-radius:10px;
+  background:var(--card-solid);color:var(--text-secondary);font-size:14px;
+  cursor:pointer;transition:all .2s;
+}
+.btn-cancel:hover{border-color:var(--muted);}
+
+footer{text-align:center;color:var(--muted);font-size:14px;padding-top:28px;border-top:1px solid var(--border);font-weight:400;letter-spacing:.3px;margin-top:40px;}
+
+@media(max-width:768px){
+  .container{padding:24px 16px 40px;}
+  .cards-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<div class="wave-bg">
+  <svg class="w1" viewBox="0 0 1440 320" preserveAspectRatio="none"><path d="M0,160L48,170.7C96,181,192,203,288,192C384,181,480,139,576,138.7C672,139,768,181,864,197.3C960,213,1056,203,1152,181.3C1248,160,1344,128,1392,112L1440,96L1440,320L0,320Z"/></svg>
+  <svg class="w2" viewBox="0 0 1440 320" preserveAspectRatio="none"><path d="M0,224L48,213.3C96,203,192,181,288,186.7C384,192,480,224,576,234.7C672,245,768,235,864,213.3C960,192,1056,160,1152,165.3C1248,171,1344,213,1392,234.7L1440,256L1440,320L0,320Z"/></svg>
+  <svg class="w3" viewBox="0 0 1440 320" preserveAspectRatio="none"><path d="M0,288L48,272C96,256,192,224,288,218.7C384,213,480,235,576,245.3C672,256,768,256,864,240C960,224,1056,192,1152,186.7C1248,181,1344,203,1392,213.3L1440,224L1440,320L0,320Z"/></svg>
+</div>
+
+<div class="container">
+
+<a href="xyz_daily_dashboard.html" class="back-link">&larr; 返回 Dashboard</a>
+
+<header>
+  <h1>名片夾</h1>
+  <p class="subtitle">Business Card Collection</p>
+</header>
+
+<div class="cat-tabs" id="cat-tabs">
+  <button class="cat-tab active" data-cat="all">全部</button>
+  <button class="cat-tab" data-cat="supplier">供應商</button>
+  <button class="cat-tab" data-cat="cooling">液冷系統</button>
+  <button class="cat-tab" data-cat="export">外銷客戶</button>
+</div>
+
+<p class="cards-count" id="cards-count"></p>
+
+<div class="cards-grid" id="cards-grid"></div>
+
+<footer><p>Kevin's Daily — 名片管理</p></footer>
+
+</div>
+
+<!-- Edit Modal -->
+<div id="edit-modal" class="modal-overlay" onclick="if(event.target===this)closeEdit()">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeEdit()">&times;</button>
+    <div class="modal-title" id="edit-title">編輯名片</div>
+    <div class="edit-form">
+      <input type="hidden" id="edit-id">
+      <div class="edit-field">
+        <label>分類 CATEGORY</label>
+        <select id="edit-category">
+          <option value="">未分類</option>
+          <option value="supplier">供應商</option>
+          <option value="cooling">液冷系統</option>
+          <option value="export">外銷客戶</option>
+        </select>
+      </div>
+      <div class="edit-field"><label>公司 COMPANY</label><input type="text" id="edit-company"></div>
+      <div class="edit-field"><label>姓名 NAME</label><input type="text" id="edit-name"></div>
+      <div class="edit-field"><label>職稱 TITLE</label><input type="text" id="edit-jobtitle"></div>
+      <div class="edit-field"><label>EMAIL</label><input type="email" id="edit-email"></div>
+      <div class="edit-field"><label>電話 PHONE</label><input type="tel" id="edit-phone"></div>
+      <div class="edit-actions">
+        <button class="btn-cancel" onclick="closeEdit()">取消</button>
+        <button class="btn-save" onclick="saveEdit()">儲存</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+var cardsData = [
+  {
+    "id": "01",
+    "company": "毅勳凡而工業股份有限公司",
+    "title": "",
+    "name": "林官翰",
+    "email": "linsvalve08@gmail.com",
+    "phone": "05796576",
+    "category": "supplier",
+    "image": "cards/images/01.jpg"
+  }
+];
+
+var catLabels = { supplier: '供應商', cooling: '液冷系統', export: '外銷客戶' };
+var currentCat = 'all';
+
+// Merge localStorage edits on top of embedded data
+function getCards() {
+  var edits = {};
+  try { edits = JSON.parse(localStorage.getItem('cards-edits') || '{}'); } catch(e) {}
+  return cardsData.map(function(c) {
+    var e = edits[c.id];
+    if (e) {
+      var merged = {};
+      for (var k in c) merged[k] = c[k];
+      for (var k in e) merged[k] = e[k];
+      return merged;
+    }
+    return c;
+  });
+}
+
+function renderCards() {
+  var cards = getCards();
+  var filtered = currentCat === 'all' ? cards : cards.filter(function(c) { return c.category === currentCat; });
+
+  var countEl = document.getElementById('cards-count');
+  if (currentCat === 'all') {
+    countEl.textContent = cards.length + ' 張名片';
+  } else {
+    countEl.textContent = (catLabels[currentCat] || '') + ' — ' + filtered.length + ' 張';
+  }
+
+  var grid = document.getElementById('cards-grid');
+  if (filtered.length === 0) {
+    grid.innerHTML = '<div class="empty-state">' + (cards.length === 0 ? '還沒有名片' : '此分類沒有名片') + '</div>';
+    return;
+  }
+
+  var h = '';
+  for (var i = 0; i < filtered.length; i++) {
+    var c = filtered[i];
+    var catBadge = '';
+    if (c.category && catLabels[c.category]) {
+      catBadge = '<span class="card-cat-badge cat-' + c.category + '">' + catLabels[c.category] + '</span>';
+    }
+
+    h += '<div class="card-item">';
+    h += '<div class="card-badges"><span class="card-number">#' + c.id + '</span>' + catBadge + '</div>';
+    h += '<button class="card-edit-btn" onclick="openEdit(\'' + c.id + '\')" title="編輯">&#9998;</button>';
+    h += '<div class="card-image-wrap"><img src="' + c.image + '" alt="' + (c.name || c.company || 'Card') + '" class="card-image" loading="lazy"></div>';
+    h += '<div class="card-info">';
+    h += '<div class="card-company">' + (c.company || '<span class=card-empty-field>公司未填</span>') + '</div>';
+    h += '<div class="card-name">' + (c.name || '<span class=card-empty-field>姓名未填</span>') + '</div>';
+    h += '<div class="card-title">' + (c.title || '') + '</div>';
+    h += '<div class="card-contact">';
+    if (c.email) h += '<a href="mailto:' + c.email + '" class="card-email">' + c.email + '</a>';
+    if (c.phone) h += '<a href="tel:' + c.phone + '" class="card-phone">' + c.phone + '</a>';
+    h += '</div></div></div>';
+  }
+  grid.innerHTML = h;
+}
+
+// Category tabs
+document.getElementById('cat-tabs').addEventListener('click', function(e) {
+  var tab = e.target.closest('.cat-tab');
+  if (!tab) return;
+  currentCat = tab.dataset.cat;
+  document.querySelectorAll('.cat-tab').forEach(function(t) { t.classList.remove('active'); });
+  tab.classList.add('active');
+  renderCards();
+});
+
+// Edit modal
+function openEdit(id) {
+  var cards = getCards();
+  var card = cards.find(function(c) { return c.id === id; });
+  if (!card) return;
+
+  document.getElementById('edit-id').value = card.id;
+  document.getElementById('edit-category').value = card.category || '';
+  document.getElementById('edit-company').value = card.company || '';
+  document.getElementById('edit-name').value = card.name || '';
+  document.getElementById('edit-jobtitle').value = card.title || '';
+  document.getElementById('edit-email').value = card.email || '';
+  document.getElementById('edit-phone').value = card.phone || '';
+  document.getElementById('edit-title').textContent = '編輯名片 #' + card.id;
+  document.getElementById('edit-modal').classList.add('active');
+}
+
+function closeEdit() {
+  document.getElementById('edit-modal').classList.remove('active');
+}
+
+function saveEdit() {
+  var id = document.getElementById('edit-id').value;
+  var edits = {};
+  try { edits = JSON.parse(localStorage.getItem('cards-edits') || '{}'); } catch(e) {}
+
+  edits[id] = {
+    category: document.getElementById('edit-category').value,
+    company: document.getElementById('edit-company').value,
+    name: document.getElementById('edit-name').value,
+    title: document.getElementById('edit-jobtitle').value,
+    email: document.getElementById('edit-email').value,
+    phone: document.getElementById('edit-phone').value
+  };
+
+  localStorage.setItem('cards-edits', JSON.stringify(edits));
+  closeEdit();
+  renderCards();
+}
+
+// Keyboard: Escape closes modal
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeEdit();
+});
+
+// Initial render
+renderCards();
+</script>
+</body>
+</html>
