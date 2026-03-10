@@ -149,23 +149,36 @@ header .subtitle{font-size:14px;color:var(--muted);font-weight:400;letter-spacin
 .x-section{margin-bottom:44px;}
 .x-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
 .x-card{
-  background:var(--card);border-radius:16px;padding:22px 24px;
+  background:var(--card);border-radius:16px;padding:0;
   box-shadow:0 1px 8px rgba(0,0,0,.04);backdrop-filter:blur(20px);
   border:1px solid rgba(0,0,0,.04);overflow:hidden;
 }
-.x-card h3{
-  font-size:13px;font-weight:600;color:var(--accent);letter-spacing:.5px;
-  margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--border);
-  display:flex;align-items:center;gap:8px;
+.x-card-header{
+  display:flex;align-items:center;gap:12px;
+  padding:18px 20px 14px;border-bottom:1px solid var(--border);
 }
-.x-card h3 .x-handle{color:var(--muted);font-weight:400;font-size:12px;}
+.x-avatar{
+  width:44px;height:44px;border-radius:50%;object-fit:cover;
+  flex-shrink:0;
+}
+.x-user-info{display:flex;flex-direction:column;flex:1;min-width:0;}
+.x-name{font-size:15px;font-weight:700;color:var(--text);line-height:1.3;}
+.x-handle{font-size:13px;color:var(--muted);font-weight:400;}
+.x-logo{
+  font-size:20px;color:var(--text);text-decoration:none;
+  flex-shrink:0;opacity:.5;transition:opacity .2s;
+}
+.x-logo:hover{opacity:1;}
 .tweet-item{
-  display:block;padding:12px 0;color:var(--text);text-decoration:none;
-  font-size:13.5px;line-height:1.7;border-bottom:1px solid rgba(0,0,0,.04);
-  transition:color .2s;
+  display:block;padding:14px 20px;color:var(--text);text-decoration:none;
+  border-bottom:1px solid rgba(0,0,0,.04);transition:background .2s;
 }
 .tweet-item:last-child{border-bottom:none;}
-.tweet-item:hover{color:var(--accent);}
+.tweet-item:hover{background:rgba(0,0,0,.02);}
+.tweet-text{font-size:14px;line-height:1.65;color:var(--text);word-break:break-word;}
+.tweet-time{
+  font-size:12px;color:var(--muted);margin-top:8px;font-weight:400;
+}
 
 /* === Footer === */
 footer{text-align:center;color:var(--muted);font-size:14px;padding-top:28px;border-top:1px solid var(--border);font-weight:400;letter-spacing:.3px;}
@@ -231,7 +244,7 @@ footer{text-align:center;color:var(--muted);font-size:14px;padding-top:28px;bord
 
 <header>
   <h1>Kevin's Daily</h1>
-  <p class="subtitle">2026 年 3 月 10 日 · 台北 +13°C Light rain</p>
+  <p class="subtitle">2026 年 3 月 10 日 · 台北 無法取得</p>
   <a href="cards.html" style="display:inline-block;margin-top:8px;color:var(--teal);text-decoration:none;font-size:12px;font-weight:500;letter-spacing:.5px;transition:color .2s;">名片夾 Cards ›</a>
 </header>
 
@@ -284,28 +297,68 @@ footer{text-align:center;color:var(--muted);font-size:14px;padding-top:28px;bord
   <h2 class="section-heading">𝕏 Twitter</h2>
   <div class="x-grid">
     <div class='x-card'>
-<h3>Elon Musk <span class='x-handle'>@elonmusk</span></h3>
-<a href='https://x.com/elonmusk/status/2030159267689632121' target='_blank' class='tweet-item'>Only Grok speaks the truth. <br><br>Only truthful AI is safe. <br><br>Only truth understands the universe.</a>
-<a href='https://x.com/elonmusk/status/2030151922968318104' target='_blank' class='tweet-item'>Next I’m buying Coca-Cola to put the cocaine back in</a>
-<a href='https://x.com/elonmusk/status/1519480761749016577' target='_blank' class='tweet-item'>I hope that even my worst critics remain on Twitter, because that is what free speech means</a>
+<div class='x-card-header'>
+<img class='x-avatar' src='https://pbs.twimg.com/profile_images/2008546467615580160/57KcqsTA_200x200.jpg' alt='Elon Musk'>
+<div class='x-user-info'><span class='x-name'>Elon Musk</span><span class='x-handle'>@elonmusk</span></div>
+<a href='https://x.com/elonmusk' target='_blank' class='x-logo'>𝕏</a>
+</div>
+<a href='https://x.com/elonmusk/status/2030159267689632121' target='_blank' class='tweet-item'>
+<div class='tweet-text'>Only Grok speaks the truth. <br><br>Only truthful AI is safe. <br><br>Only truth understands the universe.</div>
+<div class='tweet-time'>03/07 05:51</div>
+</a>
+<a href='https://x.com/elonmusk/status/2030151922968318104' target='_blank' class='tweet-item'>
+<div class='tweet-text'>Next I’m buying Coca-Cola to put the cocaine back in</div>
+<div class='tweet-time'>06/02 20:12</div>
+</a>
+<a href='https://x.com/elonmusk/status/1519480761749016577' target='_blank' class='tweet-item'>
+<div class='tweet-text'>I hope that even my worst critics remain on Twitter, because that is what free speech means</div>
+<div class='tweet-time'>03/07 05:21</div>
+</a>
 </div>
 <div class='x-card'>
-<h3>Donald Trump <span class='x-handle'>@realDonaldTrump</span></h3>
-<a href='https://x.com/realDonaldTrump/status/2028505632123326484' target='_blank' class='tweet-item'>RT @DanScavino: On behalf of Erin and me, thank you to everyone for the love and support we&#39;ve received. We both had an unforgettable weddi…</a>
-<a href='https://x.com/realDonaldTrump/status/2027651077865157033' target='_blank' class='tweet-item'>On behalf of Erin and me, thank you to everyone for the love and support we&#39;ve received. We both had an unforgettable wedding day, and we&#39;ll never forget it. We&#39;re humbled and grateful to all.<br><br>THANK YOU! 🙏🏻🇺🇸🦅🚀</a>
-<a href='https://x.com/realDonaldTrump/status/2018512054379004088' target='_blank' class='tweet-item'>RT @THR: Box Office: ‘Melania’ Heads for $8 Million Opening, the Best Showing in a Decade for a Doc</a>
+<div class='x-card-header'>
+<img class='x-avatar' src='https://pbs.twimg.com/profile_images/874276197357596672/kUuht00m_200x200.jpg' alt='Donald Trump'>
+<div class='x-user-info'><span class='x-name'>Donald Trump</span><span class='x-handle'>@realDonaldTrump</span></div>
+<a href='https://x.com/realDonaldTrump' target='_blank' class='x-logo'>𝕏</a>
+</div>
+<a href='https://x.com/realDonaldTrump/status/2028505632123326484' target='_blank' class='tweet-item'>
+<div class='tweet-text'>RT @DanScavino: On behalf of Erin and me, thank you to everyone for the love and support we&#39;ve received. We both had an unforgettable weddi…</div>
+<div class='tweet-time'>03/02 16:20</div>
+</a>
+<a href='https://x.com/realDonaldTrump/status/2027651077865157033' target='_blank' class='tweet-item'>
+<div class='tweet-text'>On behalf of Erin and me, thank you to everyone for the love and support we&#39;ve received. We both had an unforgettable wedding day, and we&#39;ll never forget it. We&#39;re humbled and grateful to all.<br><br>THANK YOU! 🙏🏻🇺🇸🦅🚀</div>
+<div class='tweet-time'>03/18 13:46</div>
+</a>
+<a href='https://x.com/realDonaldTrump/status/2018512054379004088' target='_blank' class='tweet-item'>
+<div class='tweet-text'>RT @THR: Box Office: ‘Melania’ Heads for $8 Million Opening, the Best Showing in a Decade for a Doc</div>
+<div class='tweet-time'>02/28 07:44</div>
+</a>
 </div>
 <div class='x-card'>
-<h3>Gavin Newsom <span class='x-handle'>@GavinNewsom</span></h3>
-<a href='https://x.com/GavinNewsom/status/1540440016605679616' target='_blank' class='tweet-item'>Abortion is legal in California.<br><br>It will remain that way.<br><br>I just signed a bill that makes our state a safe haven for women across the nation.<br><br>We will not cooperate with any states that attempt to prosecute women or doctors for receiving or providing reproductive care.</a>
-<a href='https://x.com/GavinNewsom/status/1933235335166898346' target='_blank' class='tweet-item'>If they can handcuff a U.S. Senator for asking a question, imagine what they will do to you.</a>
-<a href='https://x.com/GavinNewsom/status/1932486104583975413' target='_blank' class='tweet-item'>There was no call. Not even a voicemail.<br><br>Americans should be alarmed that a President deploying Marines onto our streets doesn’t even know who he’s talking to.</a>
+<div class='x-card-header'>
+<img class='x-avatar' src='https://pbs.twimg.com/profile_images/1405191782984413184/AJ3ar-ad_200x200.jpg' alt='Gavin Newsom'>
+<div class='x-user-info'><span class='x-name'>Gavin Newsom</span><span class='x-handle'>@GavinNewsom</span></div>
+<a href='https://x.com/GavinNewsom' target='_blank' class='x-logo'>𝕏</a>
+</div>
+<a href='https://x.com/GavinNewsom/status/1540440016605679616' target='_blank' class='tweet-item'>
+<div class='tweet-text'>Abortion is legal in California.<br><br>It will remain that way.<br><br>I just signed a bill that makes our state a safe haven for women across the nation.<br><br>We will not cooperate with any states that attempt to prosecute women or doctors for receiving or providing reproductive care.</div>
+<div class='tweet-time'>06/24 21:01</div>
+</a>
+<a href='https://x.com/GavinNewsom/status/1933235335166898346' target='_blank' class='tweet-item'>
+<div class='tweet-text'>If they can handcuff a U.S. Senator for asking a question, imagine what they will do to you.</div>
+<div class='tweet-time'>12/19 19:53</div>
+</a>
+<a href='https://x.com/GavinNewsom/status/1932486104583975413' target='_blank' class='tweet-item'>
+<div class='tweet-text'>There was no call. Not even a voicemail.<br><br>Americans should be alarmed that a President deploying Marines onto our streets doesn’t even know who he’s talking to.</div>
+<div class='tweet-time'>06/12 18:49</div>
+</a>
 </div>
 <div class='x-card'>
-<h3>Barack Obama <span class='x-handle'>@BarackObama</span></h3>
-<a href='https://x.com/BarackObama/status/2030299734062125125' target='_blank' class='tweet-item'>Today, Michelle and I are proud to announce that we will be hosting the dedication ceremony for the Obama Presidential Center on June 18th in Chicago, and welcoming the public on June 19th.<br><br>We can’t wait for you to visit. Go to to learn more.</a>
-<a href='https://x.com/BarackObama/status/896523232098078720' target='_blank' class='tweet-item'>Kobe was a legend on the court and just getting started in what would have been just as meaningful a second act. To lose Gianna is even more heartbreaking to us as parents. Michelle and I send love and prayers to Vanessa and the entire Bryant family on an unthinkable day.</a>
-<a href='https://x.com/BarackObama/status/1221552460768202756' target='_blank' class='tweet-item'>Congratulations to my friend, President @JoeBiden! This is your time.</a>
+<div class='x-card-header'>
+<div class='x-user-info'><span class='x-name'>Barack Obama</span><span class='x-handle'>@BarackObama</span></div>
+<a href='https://x.com/BarackObama' target='_blank' class='x-logo'>𝕏</a>
+</div>
+<p class='no-events'>暫無推文</p>
 </div>
   </div>
 </div>
