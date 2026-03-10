@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kevin Lin — Profile</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#F4F5F0;--card:rgba(255,255,255,.82);--card-solid:#FFFFFF;
+  --text:#1d1d1f;--text-secondary:#6e6e73;--muted:#86868b;
+  --green:#2d6a4f;--green-light:#e8f0ec;
+  --teal:#3a7ca5;--teal-light:#e4eff5;
+  --border:rgba(0,0,0,.06);--sand:#b5ad9e;
+  --accent:#40916c;
+}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","PingFang TC","Helvetica Neue",sans-serif;
+  line-height:1.5;min-height:100vh;-webkit-font-smoothing:antialiased;
+}
+.wave-bg{position:fixed;bottom:0;left:0;width:100%;height:45%;pointer-events:none;z-index:0;overflow:hidden;opacity:.12;}
+.wave-bg svg{position:absolute;bottom:0;width:200%;min-width:1400px;height:100%;}
+.wave-bg .w1{animation:sway 8s ease-in-out infinite;fill:#2d6a4f;}
+.wave-bg .w2{animation:sway 10s ease-in-out infinite reverse;fill:#3a7ca5;opacity:.6;}
+.wave-bg .w3{animation:sway 12s ease-in-out infinite;fill:#40916c;opacity:.4;}
+@keyframes sway{0%,100%{transform:translateX(0);}50%{transform:translateX(-25%);}}
+.leaves{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden;}
+.leaf{position:absolute;opacity:.06;animation:drift linear infinite;}
+.leaf:nth-child(1){left:8%;top:-5%;animation-duration:18s;font-size:28px;}
+.leaf:nth-child(2){left:25%;top:-8%;animation-duration:22s;animation-delay:3s;font-size:22px;}
+.leaf:nth-child(3){left:50%;top:-6%;animation-duration:20s;animation-delay:6s;font-size:32px;}
+.leaf:nth-child(4){left:72%;top:-10%;animation-duration:25s;animation-delay:2s;font-size:20px;}
+@keyframes drift{0%{transform:translateY(0) rotate(0deg);opacity:.06;}50%{opacity:.1;}100%{transform:translateY(110vh) rotate(360deg);opacity:0;}}
+
+.container{position:relative;z-index:1;max-width:760px;margin:0 auto;padding:36px 44px 64px;}
+.back-link{
+  display:inline-block;margin-bottom:20px;
+  color:var(--accent);text-decoration:none;font-size:13px;
+  font-weight:500;letter-spacing:.3px;transition:color .2s;
+}
+.back-link:hover{color:var(--green);}
+
+/* Hero */
+.hero{text-align:center;margin-bottom:40px;}
+.hero-avatar{
+  width:120px;height:120px;border-radius:50%;
+  background:linear-gradient(135deg,var(--teal),var(--green));
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 20px;box-shadow:0 8px 32px rgba(45,106,79,.15);
+  font-size:52px;color:#fff;
+}
+.hero h1{font-size:32px;font-weight:700;letter-spacing:-.5px;color:var(--text);margin-bottom:4px;}
+.hero .subtitle{font-size:14px;color:var(--muted);letter-spacing:.5px;}
+.hero .tagline{font-size:15px;color:var(--text-secondary);margin-top:10px;font-style:italic;line-height:1.6;}
+
+/* Tags row */
+.tags{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:16px;}
+.tag{
+  padding:5px 14px;border-radius:20px;font-size:12px;font-weight:600;
+  letter-spacing:.3px;
+}
+.tag-zodiac{background:rgba(181,173,158,.2);color:var(--sand);}
+.tag-mbti{background:rgba(58,124,165,.12);color:var(--teal);}
+.tag-age{background:rgba(45,106,79,.1);color:var(--green);}
+.tag-location{background:rgba(0,0,0,.05);color:var(--text-secondary);}
+
+/* Section cards */
+.profile-section{
+  background:var(--card);border-radius:16px;padding:24px 28px;
+  box-shadow:0 1px 8px rgba(0,0,0,.04);backdrop-filter:blur(20px);
+  border:1px solid rgba(0,0,0,.04);margin-bottom:20px;
+}
+.profile-section h2{
+  font-size:14px;font-weight:600;color:var(--accent);
+  letter-spacing:.5px;margin-bottom:14px;padding-bottom:8px;
+  border-bottom:1px solid var(--border);
+}
+.profile-section p{font-size:14.5px;line-height:1.75;color:var(--text);}
+.profile-section ul{list-style:none;padding:0;}
+.profile-section li{
+  font-size:14.5px;line-height:1.75;color:var(--text);
+  padding:4px 0;border-bottom:1px solid rgba(0,0,0,.03);
+  display:flex;gap:10px;
+}
+.profile-section li:last-child{border-bottom:none;}
+.li-label{color:var(--teal);font-weight:600;min-width:80px;flex-shrink:0;font-size:13px;}
+
+/* Strengths / Weaknesses grid */
+.sw-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.sw-card{
+  background:var(--card);border-radius:16px;padding:24px 28px;
+  box-shadow:0 1px 8px rgba(0,0,0,.04);backdrop-filter:blur(20px);
+  border:1px solid rgba(0,0,0,.04);
+}
+.sw-card h2{
+  font-size:14px;font-weight:600;letter-spacing:.5px;
+  margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--border);
+}
+.sw-card.strengths h2{color:var(--green);}
+.sw-card.weaknesses h2{color:var(--sand);}
+.sw-card ul{list-style:none;padding:0;}
+.sw-card li{font-size:14px;line-height:1.7;color:var(--text);padding:3px 0;display:flex;gap:8px;align-items:flex-start;}
+.sw-dot{flex-shrink:0;width:6px;height:6px;border-radius:50%;margin-top:8px;}
+.strengths .sw-dot{background:var(--accent);}
+.weaknesses .sw-dot{background:var(--sand);}
+
+/* Business cards */
+.biz-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.biz-item{
+  background:rgba(0,0,0,.02);border-radius:12px;padding:16px 18px;
+  border:1px solid rgba(0,0,0,.04);
+}
+.biz-name{font-size:15px;font-weight:700;color:var(--text);margin-bottom:2px;}
+.biz-desc{font-size:12.5px;color:var(--text-secondary);line-height:1.5;}
+
+/* Cognitive section */
+.cog-item{padding:8px 0;border-bottom:1px solid rgba(0,0,0,.03);}
+.cog-item:last-child{border-bottom:none;}
+.cog-label{font-size:12px;color:var(--teal);font-weight:600;letter-spacing:.3px;margin-bottom:2px;}
+.cog-text{font-size:14px;color:var(--text);line-height:1.6;}
+
+/* Direction */
+.direction-steps{display:flex;flex-direction:column;gap:12px;}
+.direction-step{display:flex;align-items:center;gap:14px;}
+.step-num{
+  flex-shrink:0;width:32px;height:32px;border-radius:50%;
+  background:var(--teal-light);color:var(--teal);
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:700;
+}
+.step-text{font-size:14.5px;color:var(--text);line-height:1.5;}
+.step-arrow{color:var(--muted);font-size:18px;margin-left:16px;}
+
+footer{text-align:center;color:var(--muted);font-size:14px;padding-top:28px;border-top:1px solid var(--border);font-weight:400;letter-spacing:.3px;margin-top:40px;}
+
+@media(max-width:768px){
+  .container{padding:24px 16px 40px;}
+  .sw-grid,.biz-grid{grid-template-columns:1fr;}
+  .hero-avatar{width:96px;height:96px;font-size:42px;}
+}
+</style>
+</head>
+<body>
+
+<div class="wave-bg">
+  <svg class="w1" viewBox="0 0 1440 320" preserveAspectRatio="none"><path d="M0,160L48,170.7C96,181,192,203,288,192C384,181,480,139,576,138.7C672,139,768,181,864,197.3C960,213,1056,203,1152,181.3C1248,160,1344,128,1392,112L1440,96L1440,320L0,320Z"/></svg>
+  <svg class="w2" viewBox="0 0 1440 320" preserveAspectRatio="none"><path d="M0,224L48,213.3C96,203,192,181,288,186.7C384,192,480,224,576,234.7C672,245,768,235,864,213.3C960,192,1056,160,1152,165.3C1248,171,1344,213,1392,234.7L1440,256L1440,320L0,320Z"/></svg>
+  <svg class="w3" viewBox="0 0 1440 320" preserveAspectRatio="none"><path d="M0,288L48,272C96,256,192,224,288,218.7C384,213,480,235,576,245.3C672,256,768,256,864,240C960,224,1056,192,1152,186.7C1248,181,1344,203,1392,213.3L1440,224L1440,320L0,320Z"/></svg>
+</div>
+
+<div class="leaves">
+  <div class="leaf">🍃</div><div class="leaf">🌿</div><div class="leaf">🍂</div><div class="leaf">🌱</div>
+</div>
+
+<div class="container">
+
+<a href="xyz_daily_dashboard.html" class="back-link">&larr; 返回 Dashboard</a>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-avatar">K</div>
+  <h1>Kevin Lin 林官翰</h1>
+  <p class="subtitle">Strategist / Brand Builder / System Thinker</p>
+  <p class="tagline">「下一個槓桿點在哪裡？圍繞它建立什麼系統？」</p>
+  <div class="tags">
+    <span class="tag tag-zodiac">♉ 金牛座</span>
+    <span class="tag tag-mbti">ENFP</span>
+    <span class="tag tag-age">34 歲</span>
+    <span class="tag tag-location">台中 Taiwan</span>
+  </div>
+</div>
+
+<!-- Basic Info -->
+<div class="profile-section">
+  <h2>基本資料 BASICS</h2>
+  <ul>
+    <li><span class="li-label">生日</span>1991 年 5 月 18 日（金牛座）</li>
+    <li><span class="li-label">出生地</span>加拿大多倫多</li>
+    <li><span class="li-label">現居</span>台灣台中</li>
+    <li><span class="li-label">MBTI</span>ENFP — 競選者型，外向直覺感受感知</li>
+    <li><span class="li-label">背景</span>加拿大高中 → 美國大學 → 日本一年 → 台灣家族企業</li>
+    <li><span class="li-label">思維</span>北美思維 + 亞洲家業 + 日式美學的混合體</li>
+  </ul>
+</div>
+
+<!-- Core Nature -->
+<div class="profile-section">
+  <h2>核心本質 CORE NATURE</h2>
+  <p style="margin-bottom:12px;">
+    Kevin 是天生的 <strong>模式辨識者、概念組合者、策略綜合者</strong>。
+    他用直覺感知趨勢，然後將碎片組合成具體的系統和品牌。
+  </p>
+  <ul>
+    <li><span class="li-label">驅動力</span>擴張、自我定義、影響力、自主權、美學創造</li>
+    <li><span class="li-label">內在張力</span>遠見建造者 vs 家業責任 vs 自由渴望</li>
+    <li><span class="li-label">對錢的態度</span>計分板 + 自由 + 證明 + 燃料，而非全部動力</li>
+  </ul>
+</div>
+
+<!-- ENFP Traits -->
+<div class="profile-section">
+  <h2>ENFP 人格特質</h2>
+  <ul>
+    <li><span class="li-label">E 外向</span>從人群與互動中獲得能量，善於建立關係</li>
+    <li><span class="li-label">N 直覺</span>擅長看到隱藏的模式和可能性，而非僅看表面</li>
+    <li><span class="li-label">F 感受</span>做決定時重視價值觀和對人的影響</li>
+    <li><span class="li-label">P 感知</span>保持開放、靈活，被可能性而非計劃驅動</li>
+  </ul>
+</div>
+
+<!-- Cognitive Architecture -->
+<div class="profile-section">
+  <h2>認知模式 COGNITIVE ARCHITECTURE</h2>
+  <div class="cog-item">
+    <div class="cog-label">思考方式</div>
+    <div class="cog-text">非線性思考者 — 先感知，才表達。問題看似隨機，其實是在探測更大的隱藏結構。</div>
+  </div>
+  <div class="cog-item">
+    <div class="cog-label">決策流程</div>
+    <div class="cog-text">直覺 → 模式感知 → 框架化 → 選擇性驗證 → 行動</div>
+  </div>
+  <div class="cog-item">
+    <div class="cog-label">核心問題</div>
+    <div class="cog-text">「下一個槓桿點在哪裡？圍繞它要建立什麼系統？」</div>
+  </div>
+</div>
+
+<!-- Strengths & Weaknesses -->
+<div class="sw-grid">
+  <div class="sw-card strengths">
+    <h2>優勢 STRENGTHS</h2>
+    <ul>
+      <li><span class="sw-dot"></span>策略感知力 — 抓住缺口、不對稱、定位優勢</li>
+      <li><span class="sw-dot"></span>概念創造力 — 品牌即世界、系統、身份</li>
+      <li><span class="sw-dot"></span>跨領域整合 — 製造 + 品牌 + AI + 通路設計</li>
+      <li><span class="sw-dot"></span>品牌直覺 — 氛圍、空間感、情感定位</li>
+      <li><span class="sw-dot"></span>系統化慾望 — 把直覺轉化為可重複的框架</li>
+    </ul>
+  </div>
+  <div class="sw-card weaknesses">
+    <h2>盲點 BLIND SPOTS</h2>
+    <ul>
+      <li><span class="sw-dot"></span>戰線過多 — 太多平行專案同時推進</li>
+      <li><span class="sw-dot"></span>營運耐性 — 不擅長停留在無聊但必要的執行層</li>
+      <li><span class="sw-dot"></span>溝通落差 — 思維進化速度快過團隊跟上的速度</li>
+      <li><span class="sw-dot"></span>情緒壓抑 — 策略行動可能繞過更深層的問題</li>
+      <li><span class="sw-dot"></span>可能性吸引 — 被新機會吸引，而非完成收尾</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Businesses -->
+<div class="profile-section" style="margin-top:20px;">
+  <h2>事業版圖 BUSINESSES</h2>
+  <div class="biz-grid">
+    <div class="biz-item">
+      <div class="biz-name">LINS Valve 毅勳凡而</div>
+      <div class="biz-desc">60+ 年家族閥門製造廠 — 青銅、不鏽鋼、TMV</div>
+    </div>
+    <div class="biz-item">
+      <div class="biz-name">PY Valve</div>
+      <div class="biz-desc">自創品牌，TMV 為核心，美國市場擴張（CSA/ASSE 認證）</div>
+    </div>
+    <div class="biz-item">
+      <div class="biz-name">ATC</div>
+      <div class="biz-desc">茶生活風格咖啡廳 + 禮品品牌</div>
+    </div>
+    <div class="biz-item">
+      <div class="biz-name">LUKA</div>
+      <div class="biz-desc">健康餐品牌，具授權發展潛力</div>
+    </div>
+    <div class="biz-item">
+      <div class="biz-name">ROLL</div>
+      <div class="biz-desc">輕鬆手捲壽司概念品牌</div>
+    </div>
+    <div class="biz-item">
+      <div class="biz-name">Pho-Q</div>
+      <div class="biz-desc">越南河粉品牌，帶態度與個性的定位</div>
+    </div>
+  </div>
+</div>
+
+<!-- Current Focus -->
+<div class="profile-section">
+  <h2>當前戰略焦點 CURRENT FOCUS</h2>
+  <ul>
+    <li><span class="li-label">PY Valve</span>美國市場擴張 — 倉庫、業務代表、採購團體、批發商</li>
+    <li><span class="li-label">AI 冷卻</span>資料中心冷卻商機 — 球閥、歧管、冷卻零件</li>
+    <li><span class="li-label">ATC</span>可複製的品牌模式</li>
+    <li><span class="li-label">授權模式</span>城市合作夥伴 / 授權結構設計</li>
+    <li><span class="li-label">AI 工具</span>利用 AI 建立個人槓桿</li>
+  </ul>
+</div>
+
+<!-- Long-term Direction -->
+<div class="profile-section">
+  <h2>長期方向 LONG-TERM DIRECTION</h2>
+  <div class="direction-steps">
+    <div class="direction-step">
+      <span class="step-num">1</span>
+      <span class="step-text">多品牌策略家</span>
+      <span class="step-arrow">&rarr;</span>
+    </div>
+    <div class="direction-step">
+      <span class="step-num">2</span>
+      <span class="step-text">系統設計者</span>
+      <span class="step-arrow">&rarr;</span>
+    </div>
+    <div class="direction-step">
+      <span class="step-num">3</span>
+      <span class="step-text">資本配置者</span>
+      <span class="step-arrow">&rarr;</span>
+    </div>
+    <div class="direction-step">
+      <span class="step-num">4</span>
+      <span class="step-text">創投平台建構者</span>
+    </div>
+  </div>
+  <p style="margin-top:16px;font-size:14px;color:var(--text-secondary);line-height:1.7;">
+    更少的執行任務，更多的高層決策槓桿。把直覺轉化為持久的系統。
+  </p>
+</div>
+
+<footer><p>Kevin's Daily — Profile</p></footer>
+
+</div>
+
+</body>
+</html>
