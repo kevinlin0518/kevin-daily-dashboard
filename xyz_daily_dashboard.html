@@ -25,6 +25,28 @@ body{
 .wave-bg .w2{animation:sway 10s ease-in-out infinite reverse;fill:#3a7ca5;opacity:.6;}
 .wave-bg .w3{animation:sway 12s ease-in-out infinite;fill:#40916c;opacity:.4;}
 @keyframes sway{0%,100%{transform:translateX(0);}50%{transform:translateX(-25%);}}
+/* Floating leaves */
+.leaves{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden;}
+.leaf{position:absolute;opacity:.06;animation:drift linear infinite;}
+.leaf:nth-child(1){left:8%;top:-5%;animation-duration:18s;animation-delay:0s;font-size:28px;}
+.leaf:nth-child(2){left:25%;top:-8%;animation-duration:22s;animation-delay:3s;font-size:22px;}
+.leaf:nth-child(3){left:50%;top:-6%;animation-duration:20s;animation-delay:6s;font-size:32px;}
+.leaf:nth-child(4){left:72%;top:-10%;animation-duration:25s;animation-delay:2s;font-size:20px;}
+.leaf:nth-child(5){left:90%;top:-4%;animation-duration:19s;animation-delay:8s;font-size:26px;}
+.leaf:nth-child(6){left:38%;top:-7%;animation-duration:24s;animation-delay:5s;font-size:18px;}
+@keyframes drift{0%{transform:translateY(0) rotate(0deg);opacity:.06;}50%{opacity:.1;}100%{transform:translateY(110vh) rotate(360deg);opacity:0;}}
+/* Floating sidebar icons */
+.side-icons{position:fixed;right:28px;top:50%;transform:translateY(-50%);z-index:10;display:flex;flex-direction:column;gap:20px;align-items:center;}
+.side-icon{
+  width:64px;height:64px;border-radius:16px;
+  background:var(--card);box-shadow:0 4px 20px rgba(0,0,0,.08);
+  backdrop-filter:blur(20px);border:1px solid rgba(0,0,0,.06);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-decoration:none;transition:all .3s;cursor:pointer;gap:2px;
+}
+.side-icon:hover{transform:scale(1.08);box-shadow:0 6px 28px rgba(0,0,0,.12);}
+.side-icon svg{width:28px;height:28px;}
+.side-icon span{font-size:9px;color:var(--muted);font-weight:500;letter-spacing:.3px;}
 
 .container{position:relative;z-index:1;max-width:920px;margin:0 auto;padding:36px 44px 64px;}
 header{text-align:center;margin-bottom:28px;}
@@ -225,6 +247,7 @@ footer{text-align:center;color:var(--muted);font-size:14px;padding-top:28px;bord
   .container{padding:24px 16px 40px;}
   .todos-grid,.today-journal,.news-grid,.x-grid{grid-template-columns:1fr;}
   .stocks-grid{grid-template-columns:1fr 1fr;}
+  .side-icons{right:12px;}.side-icon{width:52px;height:52px;}.side-icon svg{width:22px;height:22px;}
 }
 </style>
 </head>
@@ -236,6 +259,23 @@ footer{text-align:center;color:var(--muted);font-size:14px;padding-top:28px;bord
   <svg class="w3" viewBox="0 0 1440 320" preserveAspectRatio="none"><path d="M0,288L48,272C96,256,192,224,288,218.7C384,213,480,235,576,245.3C672,256,768,256,864,240C960,224,1056,192,1152,186.7C1248,181,1344,203,1392,213.3L1440,224L1440,320L0,320Z"/></svg>
 </div>
 
+<div class="leaves">
+  <div class="leaf">🍃</div><div class="leaf">🌿</div><div class="leaf">🍂</div>
+  <div class="leaf">🌱</div><div class="leaf">🍃</div><div class="leaf">🌿</div>
+</div>
+
+<!-- Sidebar Icons -->
+<div class="side-icons">
+  <a class="side-icon" href="cards.html" title="名片夾">
+    <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="11" x2="13" y2="11"/></svg>
+    <span>名片夾</span>
+  </a>
+  <a class="side-icon" href="kevin.html" title="關於 Kevin">
+    <svg viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="4"/><path d="M5.5 21a6.5 6.5 0 0 1 13 0"/><path d="M16 11l2 2 4-4"/></svg>
+    <span>Kevin</span>
+  </a>
+</div>
+
 <div class="container">
 
 <div id="back-banner" class="back-banner">
@@ -244,8 +284,7 @@ footer{text-align:center;color:var(--muted);font-size:14px;padding-top:28px;bord
 
 <header>
   <h1>Kevin's Daily</h1>
-  <p class="subtitle">2026 年 3 月 10 日 · 台北 無法取得</p>
-  <a href="cards.html" style="display:inline-block;margin-top:8px;color:var(--teal);text-decoration:none;font-size:12px;font-weight:500;letter-spacing:.5px;transition:color .2s;">名片夾 Cards ›</a>
+  <p class="subtitle">2026 年 3 月 10 日 · 台中 +14°C 晴時多雲</p>
 </header>
 
 <div class="todos-section">
@@ -288,7 +327,7 @@ footer{text-align:center;color:var(--muted);font-size:14px;padding-top:28px;bord
   <div class='section'><h2>財經與市場</h2><a href='https://www.foxbusiness.com/lifestyle/clams-raw-oysters-recalled-possible-norovirus-contamination-across-9-states-fda' target='_blank' class='news-link'><span class='num'>1.</span>FDA 9州召回可能受諾羅病毒污染的蛤蜊和生牡蠣</a><a href='https://www.foxbusiness.com/politics/budget-deficit-hits-1-trillion-first-five-months-fiscal-year-cbo' target='_blank' class='news-link'><span class='num'>2.</span>CBO：本財年前五個月預算赤字達1兆美元</a><a href='https://www.foxbusiness.com/politics/larry-kudlow-hormuz-not-stop-history' target='_blank' class='news-link'><span class='num'>3.</span>拉里·庫德洛：霍爾木茲不會阻止歷史</a><a href='https://www.foxbusiness.com/economy/fed-officials-closely-monitor-iran-conflict-potential-inflation-impact' target='_blank' class='news-link'><span class='num'>4.</span>聯準會官員密切關注伊朗衝突對通膨的潛在影響</a><a href='https://www.foxbusiness.com/economy/tapping-oil-reserves-curb-soaring-gas-prices' target='_blank' class='news-link'><span class='num'>5.</span>開採石油儲備會抑制天然氣價格飆漲嗎？</a></div>
   <div class='section'><h2>AI 與科技</h2><a href='https://techcrunch.com/2026/03/09/yann-lecuns-ami-labs-raises-1-03-billion-to-build-world-models/' target='_blank' class='news-link'><span class='num'>1.</span>Yann LeCun 的 AMI 實驗室籌集了 10.3 億美元來建立世界模型</a><a href='https://techcrunch.com/2026/03/09/anthropic-launches-code-review-tool-to-check-flood-of-ai-generated-code/' target='_blank' class='news-link'><span class='num'>2.</span>Anthropic 推出程式碼審查工具來檢查大量人工智慧產生的程式碼</a><a href='https://techcrunch.com/2026/03/09/openai-acquires-promptfoo-to-secure-its-ai-agents/' target='_blank' class='news-link'><span class='num'>3.</span>OpenAI 收購 Promptfoo 以確保其 AI 代理的安全</a><a href='https://techcrunch.com/2026/03/09/anthropic-sues-defense-department-over-supply-chain-risk-designation/' target='_blank' class='news-link'><span class='num'>4.</span>Anthropic 就供應鏈風險指定起訴國防部</a><a href='https://techcrunch.com/2026/03/09/qualcomms-partnership-with-neura-robotics-is-just-the-beginning/' target='_blank' class='news-link'><span class='num'>5.</span>高通與 Neura Robotics 的合作只是一個開始</a></div>
   <div class='section'><h2>AI 自動化實戰案例</h2><a href='https://www.ft.com/content/7cab4ec7-4712-4137-b602-119a44f771de' target='_blank' class='news-link'><span class='num'>1.</span>亞馬遜在人工智慧相關中斷後召開工程會議</a><a href='https://www.kapwing.com/blog/learnings-from-paying-artists-royalties-for-ai-generated-art/' target='_blank' class='news-link'><span class='num'>2.</span>向藝術家支付人工智慧生成藝術的版稅的經驗教訓</a><a href='https://timesofindia.indiatimes.com/technology/tech-news/mark-zuckerberg-is-creating-new-applied-ai-engineering-company-reorganises-key-teams/articleshow/129018841.cms' target='_blank' class='news-link'><span class='num'>3.</span>馬克·祖克柏創建新的應用人工智慧工程公司並重組團隊</a><a href='https://sjer.red/blog/2026/built-with-ai/' target='_blank' class='news-link'><span class='num'>4.</span>我用人工智慧做過的事情</a><a href='https://www.cerebrium.ai/blog/rethinking-container-image-distribution-to-eliminate-cold-starts' target='_blank' class='news-link'><span class='num'>5.</span>1979 年的設計選擇打破了人工智慧工作負載</a></div>
-  <div class='section'><h2>製造業與供應鏈</h2><a href='https://news.google.com/rss/articles/CBMirwFBVV95cUxOODlMcXJRR3FvZmdrQTN0VC04ZWI4NV9xX3pUS0ZzMkRJRVR4VTNFeGRQWGZISXNQQ3RISzZEd2tBbXA0T1piVUVENXJWWWdJVEFRd1BpNHVfeWUzdWhmV1VWSDRfaGo4Vkw4bG0xQUdJMDZIaUFwVzQ3MEU1UTU4cXBaSlJ4Ri1MTWl1d2taSmp5UG5NTE0tYmdyQS1aY0xJakxpSjJ1YzVEbExaRjU4?oc=5' target='_blank' class='news-link'><span class='num'>1.</span>東亞換向閥市場 2026 年分析及 2035 年預測</a><a href='https://news.google.com/rss/articles/CBMib0FVX3lxTE5kTUd2a0NuM1VENmZWMnpaVURqQnlzZTVSc0w1aFRkZkcwZlNGU1lDTW1MNXV6QUhlaGFjYlk5V01IQ3pyV0ZaM09zLW9kSUYzODZIaDJFSUdiYkIzS1Z1VkxBazBNdXpLS01YM0thdw?oc=5' target='_blank' class='news-link'><span class='num'>2.</span>人工智慧解決方案</a><a href='https://news.google.com/rss/articles/CBMiuwFBVV95cUxNdUp4TVVSVE95N0tyVDV4SDZkaGxnNGF4RHNHMGdWcU9OVUV6U2N5SU1sc2o0NGNuTkNoWmEzWHRKcVdFQzU4dG5sUTRMa2M2dDdaWHpEZ29IZ1pybUhlenNMUzJZVkNtc3dPZ0x6cUhSdHFHdDdLMGdGYndEazBPdGp0VENFNGtyRTNsVFBhSC1ja0Y1WGxWdlRnYUUwVDZQMG1ZeGdDalVIX1lzWExIbXRGZjIxN1gyX0VN?oc=5' target='_blank' class='news-link'><span class='num'>3.</span>英國資料中心乾式冷卻器市場 2026 年分析及 2035 年預測</a><a href='https://news.google.com/rss/articles/CBMikAFBVV95cUxPVGd5c3BHbU54Z1JzdXNXbEtLQjhJTmoyWDZ1ZmQwVW9FaF80SjcybkNfdl9mVkttNTVsTG9YNUhuNl9BX2UzTkxubW91Q3RRTllrTVN3R2hzMlEwZE4wYjdsUWI3NV9zVkFBS2lSQndVZkFoRms1WWVvTVRQWXBXTFVINFpHNEZWM0R1ci1UeXc?oc=5' target='_blank' class='news-link'><span class='num'>4.</span>搏力謀 2025 年加速成長</a><a href='https://news.google.com/rss/articles/CBMiqgFBVV95cUxNUlhCV0t3ei1lM1NCbS1yRWpqUk13X2dlbHIwTEszNHJTVHZkdFJaMDQ5aXg0aWVDaElwYVFMbWdka3FDMFpSc0FIUkt1QlZUMTdVd0lBU3RMdFpyLVB5Z3J6MHBYaG1lOEx5cmRsV1FPeDFNS3ZvcEotX1VQLTdTYlU0ZkhOTUd5dnpZWFE0cXFlTk85TWgyUkZwejNBWTRoR3hVV0hNQUFmdw?oc=5' target='_blank' class='news-link'><span class='num'>5.</span>Nortek 資料中心冷卻推出具有多兆瓦容量的滑移式 CDU</a></div>
+  <div class='section'><h2>製造業與供應鏈</h2><a href='https://news.google.com/rss/articles/CBMirwFBVV95cUxOODlMcXJRR3FvZmdrQTN0VC04ZWI4NV9xX3pUS0ZzMkRJRVR4VTNFeGRQWGZISXNQQ3RISzZEd2tBbXA0T1piVUVENXJWWWdJVEFRd1BpNHVfeWUzdWhmV1VWSDRfaGo4Vkw4bG0xQUdJMDZIaUFwVzQ3MEU1UTU4cXBaSlJ4Ri1MTWl1d2taSmp5UG5NTE0tYmdyQS1aY0xJakxpSjJ1YzVEbExaRjU4?oc=5' target='_blank' class='news-link'><span class='num'>1.</span>東亞換向閥市場 2026 年分析及 2035 年預測</a><a href='https://news.google.com/rss/articles/CBMib0FVX3lxTE5kTUd2a0NuM1VENmZWMnpaVURqQnlzZTVSc0w1aFRkZkcwZlNGU1lDTW1MNXV6QUhlaGFjYlk5V01IQ3pyV0ZaM09zLW9kSUYzODZIaDJFSUdiYkIzS1Z1VkxBazBNdXpLS01YM0thdw?oc=5' target='_blank' class='news-link'><span class='num'>2.</span>人工智慧解決方案</a><a href='https://news.google.com/rss/articles/CBMikAFBVV95cUxPVGd5c3BHbU54Z1JzdXNXbEtLQjhJTmoyWDZ1ZmQwVW9FaF80SjcybkNfdl9mVkttNTVsTG9YNUhuNl9BX2UzTkxubW91Q3RRTllrTVN3R2hzMlEwZE4wYjdsUWI3NV9zVkFBS2lSQndVZkFoRms1WWVvTVRQWXBXTFVINFpHNEZWM0R1ci1UeXc?oc=5' target='_blank' class='news-link'><span class='num'>3.</span>搏力謀 2025 年加速成長</a><a href='https://news.google.com/rss/articles/CBMiuwFBVV95cUxNdUp4TVVSVE95N0tyVDV4SDZkaGxnNGF4RHNHMGdWcU9OVUV6U2N5SU1sc2o0NGNuTkNoWmEzWHRKcVdFQzU4dG5sUTRMa2M2dDdaWHpEZ29IZ1pybUhlenNMUzJZVkNtc3dPZ0x6cUhSdHFHdDdLMGdGYndEazBPdGp0VENFNGtyRTNsVFBhSC1ja0Y1WGxWdlRnYUUwVDZQMG1ZeGdDalVIX1lzWExIbXRGZjIxN1gyX0VN?oc=5' target='_blank' class='news-link'><span class='num'>4.</span>英國資料中心乾式冷卻器市場 2026 年分析及 2035 年預測</a><a href='https://news.google.com/rss/articles/CBMiqgFBVV95cUxNUlhCV0t3ei1lM1NCbS1yRWpqUk13X2dlbHIwTEszNHJTVHZkdFJaMDQ5aXg0aWVDaElwYVFMbWdka3FDMFpSc0FIUkt1QlZUMTdVd0lBU3RMdFpyLVB5Z3J6MHBYaG1lOEx5cmRsV1FPeDFNS3ZvcEotX1VQLTdTYlU0ZkhOTUd5dnpZWFE0cXFlTk85TWgyUkZwejNBWTRoR3hVV0hNQUFmdw?oc=5' target='_blank' class='news-link'><span class='num'>5.</span>Nortek 資料中心冷卻推出具有多兆瓦容量的滑移式 CDU</a></div>
   <div class='section'><h2>美國市場動態</h2><a href='https://www.foxnews.com/us/oregon-judge-limits-federal-agents-tear-gas-portland-ice-protests' target='_blank' class='news-link'><span class='num'>1.</span>俄勒岡州法官限制聯邦特工在波特蘭 ICE 抗議活動中使用催淚瓦斯</a><a href='https://www.foxnews.com/us/storage-facility-raided-feds-investigate-alleged-isis-inspired-nyc-bomb-throwers' target='_blank' class='news-link'><span class='num'>2.</span>聯邦調查局調查涉嫌受伊斯蘭國啟發的紐約炸彈投擲者，儲存設施遭到突襲</a><a href='https://www.foxnews.com/us/alexander-brothers-learn-fate-federal-sex-trafficking-trial' target='_blank' class='news-link'><span class='num'>3.</span>亞歷山大兄弟在聯邦性販運審判中了解命運</a><a href='https://www.foxnews.com/us/illegal-immigrant-charged-allegedly-voting-every-presidential-election-since-2008' target='_blank' class='news-link'><span class='num'>4.</span>非法移民因涉嫌在 2008 年以來每次總統選舉中投票而被指控</a><a href='https://www.foxnews.com/us/savannah-guthrie-spotted-nyc-search-missing-mother-enters-sixth-week-few-answers' target='_blank' class='news-link'><span class='num'>5.</span>薩凡納·格思裡 (Savannah Guthrie) 在紐約被發現，尋找失蹤母親的工作已進入第六週，但幾乎沒有答案</a></div>
 </div>
 </div>
