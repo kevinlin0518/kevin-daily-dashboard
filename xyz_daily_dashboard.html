@@ -145,6 +145,22 @@ header .subtitle{font-size:14px;color:var(--muted);font-weight:400;letter-spacin
 .news-link:hover{color:var(--accent);}
 .num{color:var(--accent);font-weight:600;margin-right:8px;font-size:13px;}
 
+/* === X Twitter === */
+.x-section{margin-bottom:44px;}
+.x-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.x-card{
+  background:var(--card);border-radius:16px;padding:22px 24px;
+  box-shadow:0 1px 8px rgba(0,0,0,.04);backdrop-filter:blur(20px);
+  border:1px solid rgba(0,0,0,.04);overflow:hidden;
+}
+.x-card h3{
+  font-size:13px;font-weight:600;color:var(--accent);letter-spacing:.5px;
+  margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:8px;
+}
+.x-card h3 .x-handle{color:var(--muted);font-weight:400;font-size:12px;}
+.x-card .twitter-timeline{border:none !important;}
+
 /* === Footer === */
 footer{text-align:center;color:var(--muted);font-size:14px;padding-top:28px;border-top:1px solid var(--border);font-weight:400;letter-spacing:.3px;}
 
@@ -188,7 +204,7 @@ footer{text-align:center;color:var(--muted);font-size:14px;padding-top:28px;bord
 
 @media(max-width:768px){
   .container{padding:24px 16px 40px;}
-  .todos-grid,.today-journal,.news-grid{grid-template-columns:1fr;}
+  .todos-grid,.today-journal,.news-grid,.x-grid{grid-template-columns:1fr;}
   .stocks-grid{grid-template-columns:1fr 1fr;}
 }
 </style>
@@ -242,7 +258,7 @@ footer{text-align:center;color:var(--muted);font-size:14px;padding-top:28px;bord
 <div class="stocks-section">
   <h2>Market 市場</h2>
   <div class="stocks-grid">
-    <div class='stock-card'><span class='stock-region'>美國</span><span class='stock-name'>S&P 500</span><span class='stock-price'>6,795.99</span><span class='stock-chg' style='color:#5B7553'>▲ +0.83%</span></div><div class='stock-card'><span class='stock-region'>日本</span><span class='stock-name'>Nikkei 225</span><span class='stock-price'>54,248.39</span><span class='stock-chg' style='color:#5B7553'>▲ +2.88%</span></div><div class='stock-card'><span class='stock-region'>中國</span><span class='stock-name'>上證指數</span><span class='stock-price'>4,118.31</span><span class='stock-chg' style='color:#5B7553'>▲ +0.53%</span></div><div class='stock-card'><span class='stock-region'>台灣</span><span class='stock-name'>加權指數</span><span class='stock-price'>32,771.87</span><span class='stock-chg' style='color:#5B7553'>▲ +2.06%</span></div>
+    <div class='stock-card'><span class='stock-region'>美國</span><span class='stock-name'>S&P 500</span><span class='stock-price'>6,795.99</span><span class='stock-chg' style='color:#5B7553'>▲ +0.83%</span></div><div class='stock-card'><span class='stock-region'>日本</span><span class='stock-name'>Nikkei 225</span><span class='stock-price'>54,248.39</span><span class='stock-chg' style='color:#5B7553'>▲ +2.88%</span></div><div class='stock-card'><span class='stock-region'>中國</span><span class='stock-name'>上證指數</span><span class='stock-price'>4,122.59</span><span class='stock-chg' style='color:#5B7553'>▲ +0.63%</span></div><div class='stock-card'><span class='stock-region'>台灣</span><span class='stock-name'>加權指數</span><span class='stock-price'>32,771.87</span><span class='stock-chg' style='color:#5B7553'>▲ +2.06%</span></div>
   </div>
 </div>
 
@@ -253,9 +269,31 @@ footer{text-align:center;color:var(--muted);font-size:14px;padding-top:28px;bord
   <div class='section'><h2>財經與市場</h2><a href='https://www.foxbusiness.com/lifestyle/clams-raw-oysters-recalled-possible-norovirus-contamination-across-9-states-fda' target='_blank' class='news-link'><span class='num'>1.</span>FDA 9州召回可能受諾羅病毒污染的蛤蜊和生牡蠣</a><a href='https://www.foxbusiness.com/politics/budget-deficit-hits-1-trillion-first-five-months-fiscal-year-cbo' target='_blank' class='news-link'><span class='num'>2.</span>CBO：本財年前五個月預算赤字達1兆美元</a><a href='https://www.foxbusiness.com/politics/larry-kudlow-hormuz-not-stop-history' target='_blank' class='news-link'><span class='num'>3.</span>拉里·庫德洛：霍爾木茲不會阻止歷史</a><a href='https://www.foxbusiness.com/economy/fed-officials-closely-monitor-iran-conflict-potential-inflation-impact' target='_blank' class='news-link'><span class='num'>4.</span>聯準會官員密切關注伊朗衝突對通膨的潛在影響</a><a href='https://www.foxbusiness.com/economy/tapping-oil-reserves-curb-soaring-gas-prices' target='_blank' class='news-link'><span class='num'>5.</span>開採石油儲備會抑制天然氣價格飆漲嗎？</a></div>
   <div class='section'><h2>AI 與科技</h2><a href='https://techcrunch.com/2026/03/09/yann-lecuns-ami-labs-raises-1-03-billion-to-build-world-models/' target='_blank' class='news-link'><span class='num'>1.</span>Yann LeCun 的 AMI 實驗室籌集了 10.3 億美元來建立世界模型</a><a href='https://techcrunch.com/2026/03/09/anthropic-launches-code-review-tool-to-check-flood-of-ai-generated-code/' target='_blank' class='news-link'><span class='num'>2.</span>Anthropic 推出程式碼審查工具來檢查大量人工智慧產生的程式碼</a><a href='https://techcrunch.com/2026/03/09/openai-acquires-promptfoo-to-secure-its-ai-agents/' target='_blank' class='news-link'><span class='num'>3.</span>OpenAI 收購 Promptfoo 以確保其 AI 代理的安全</a><a href='https://techcrunch.com/2026/03/09/anthropic-sues-defense-department-over-supply-chain-risk-designation/' target='_blank' class='news-link'><span class='num'>4.</span>Anthropic 就供應鏈風險指定起訴國防部</a><a href='https://techcrunch.com/2026/03/09/qualcomms-partnership-with-neura-robotics-is-just-the-beginning/' target='_blank' class='news-link'><span class='num'>5.</span>高通與 Neura Robotics 的合作只是一個開始</a></div>
   <div class='section'><h2>AI 自動化實戰案例</h2><a href='https://www.ft.com/content/7cab4ec7-4712-4137-b602-119a44f771de' target='_blank' class='news-link'><span class='num'>1.</span>亞馬遜在人工智慧相關中斷後召開工程會議</a><a href='https://www.kapwing.com/blog/learnings-from-paying-artists-royalties-for-ai-generated-art/' target='_blank' class='news-link'><span class='num'>2.</span>向藝術家支付人工智慧生成藝術的版稅的經驗教訓</a><a href='https://timesofindia.indiatimes.com/technology/tech-news/mark-zuckerberg-is-creating-new-applied-ai-engineering-company-reorganises-key-teams/articleshow/129018841.cms' target='_blank' class='news-link'><span class='num'>3.</span>馬克·祖克柏創建新的應用人工智慧工程公司並重組團隊</a><a href='https://sjer.red/blog/2026/built-with-ai/' target='_blank' class='news-link'><span class='num'>4.</span>我用人工智慧做過的事情</a><a href='https://www.cerebrium.ai/blog/rethinking-container-image-distribution-to-eliminate-cold-starts' target='_blank' class='news-link'><span class='num'>5.</span>1979 年的設計選擇打破了人工智慧工作負載</a></div>
-  <div class='section'><h2>製造業與供應鏈</h2><a href='https://www.foxbusiness.com/economy/fed-officials-closely-monitor-iran-conflict-potential-inflation-impact' target='_blank' class='news-link'><span class='num'>1.</span>聯準會官員密切關注伊朗衝突對通膨的潛在影響</a><a href='https://www.foxbusiness.com/economy/tapping-oil-reserves-curb-soaring-gas-prices' target='_blank' class='news-link'><span class='num'>2.</span>開採石油儲備會抑制天然氣價格飆漲嗎？</a><a href='https://www.foxbusiness.com/economy/irs-unveils-proposed-regulations-new-trump-accounts-savings-program' target='_blank' class='news-link'><span class='num'>3.</span>美國國稅局公佈新川普帳戶儲蓄計劃的擬議法規</a><a href='https://www.foxbusiness.com/economy/us-economic-freedom-surges-biggest-annual-increase-over-two-decades' target='_blank' class='news-link'><span class='num'>4.</span>美國經濟自由度激增，年增幅為二十多年來最大</a><a href='https://www.foxbusiness.com/economy/oracle-expected-slash-thousands-jobs-massive-ai-spending-creates-financial-cash-crisis' target='_blank' class='news-link'><span class='num'>5.</span>由於大規模人工智慧支出造成財務現金危機，甲骨文預計將裁員數千人</a></div>
+  <div class='section'><h2>製造業與供應鏈</h2><a href='https://news.google.com/rss/articles/CBMirwFBVV95cUxOODlMcXJRR3FvZmdrQTN0VC04ZWI4NV9xX3pUS0ZzMkRJRVR4VTNFeGRQWGZISXNQQ3RISzZEd2tBbXA0T1piVUVENXJWWWdJVEFRd1BpNHVfeWUzdWhmV1VWSDRfaGo4Vkw4bG0xQUdJMDZIaUFwVzQ3MEU1UTU4cXBaSlJ4Ri1MTWl1d2taSmp5UG5NTE0tYmdyQS1aY0xJakxpSjJ1YzVEbExaRjU4?oc=5' target='_blank' class='news-link'><span class='num'>1.</span>東亞換向閥市場 2026 年分析及 2035 年預測</a><a href='https://news.google.com/rss/articles/CBMib0FVX3lxTE5kTUd2a0NuM1VENmZWMnpaVURqQnlzZTVSc0w1aFRkZkcwZlNGU1lDTW1MNXV6QUhlaGFjYlk5V01IQ3pyV0ZaM09zLW9kSUYzODZIaDJFSUdiYkIzS1Z1VkxBazBNdXpLS01YM0thdw?oc=5' target='_blank' class='news-link'><span class='num'>2.</span>人工智慧解決方案</a><a href='https://news.google.com/rss/articles/CBMiuwFBVV95cUxNdUp4TVVSVE95N0tyVDV4SDZkaGxnNGF4RHNHMGdWcU9OVUV6U2N5SU1sc2o0NGNuTkNoWmEzWHRKcVdFQzU4dG5sUTRMa2M2dDdaWHpEZ29IZ1pybUhlenNMUzJZVkNtc3dPZ0x6cUhSdHFHdDdLMGdGYndEazBPdGp0VENFNGtyRTNsVFBhSC1ja0Y1WGxWdlRnYUUwVDZQMG1ZeGdDalVIX1lzWExIbXRGZjIxN1gyX0VN?oc=5' target='_blank' class='news-link'><span class='num'>3.</span>英國資料中心乾式冷卻器市場 2026 年分析及 2035 年預測</a><a href='https://news.google.com/rss/articles/CBMikAFBVV95cUxPVGd5c3BHbU54Z1JzdXNXbEtLQjhJTmoyWDZ1ZmQwVW9FaF80SjcybkNfdl9mVkttNTVsTG9YNUhuNl9BX2UzTkxubW91Q3RRTllrTVN3R2hzMlEwZE4wYjdsUWI3NV9zVkFBS2lSQndVZkFoRms1WWVvTVRQWXBXTFVINFpHNEZWM0R1ci1UeXc?oc=5' target='_blank' class='news-link'><span class='num'>4.</span>搏力謀 2025 年加速成長</a><a href='https://news.google.com/rss/articles/CBMiqgFBVV95cUxNUlhCV0t3ei1lM1NCbS1yRWpqUk13X2dlbHIwTEszNHJTVHZkdFJaMDQ5aXg0aWVDaElwYVFMbWdka3FDMFpSc0FIUkt1QlZUMTdVd0lBU3RMdFpyLVB5Z3J6MHBYaG1lOEx5cmRsV1FPeDFNS3ZvcEotX1VQLTdTYlU0ZkhOTUd5dnpZWFE0cXFlTk85TWgyUkZwejNBWTRoR3hVV0hNQUFmdw?oc=5' target='_blank' class='news-link'><span class='num'>5.</span>Nortek 資料中心冷卻推出具有多兆瓦容量的滑移式 CDU</a></div>
   <div class='section'><h2>美國市場動態</h2><a href='https://www.foxnews.com/us/storage-facility-raided-feds-investigate-alleged-isis-inspired-nyc-bomb-throwers' target='_blank' class='news-link'><span class='num'>1.</span>聯邦調查局調查涉嫌受伊斯蘭國啟發的紐約炸彈投擲者，儲存設施遭到突襲</a><a href='https://www.foxnews.com/us/alexander-brothers-learn-fate-federal-sex-trafficking-trial' target='_blank' class='news-link'><span class='num'>2.</span>亞歷山大兄弟在聯邦性販運審判中了解命運</a><a href='https://www.foxnews.com/us/illegal-immigrant-charged-allegedly-voting-every-presidential-election-since-2008' target='_blank' class='news-link'><span class='num'>3.</span>非法移民因涉嫌在 2008 年以來每次總統選舉中投票而被指控</a><a href='https://www.foxnews.com/us/savannah-guthrie-spotted-nyc-search-missing-mother-enters-sixth-week-few-answers' target='_blank' class='news-link'><span class='num'>4.</span>薩凡納·格思裡 (Savannah Guthrie) 在紐約被發現，尋找失蹤母親的工作已進入第六週，但幾乎沒有答案</a><a href='https://www.foxnews.com/us/90-day-fiance-alums-boyfriend-trial-attempted-murder-over-wild-boca-bash-accusations' target='_blank' class='news-link'><span class='num'>5.</span>《90天未婚夫》演員的男友因狂野的“博卡狂歡”指控而因謀殺未遂而受審</a></div>
 </div>
+</div>
+
+<div class="x-section">
+  <h2 class="section-heading">𝕏 Twitter</h2>
+  <div class="x-grid">
+    <div class="x-card">
+      <h3>Elon Musk <span class="x-handle">@elonmusk</span></h3>
+      <a class="twitter-timeline" href="https://twitter.com/elonmusk" data-tweet-limit="3" data-chrome="noheader nofooter noborders transparent" data-dnt="true">@elonmusk</a>
+    </div>
+    <div class="x-card">
+      <h3>Donald Trump <span class="x-handle">@realDonaldTrump</span></h3>
+      <a class="twitter-timeline" href="https://twitter.com/realDonaldTrump" data-tweet-limit="3" data-chrome="noheader nofooter noborders transparent" data-dnt="true">@realDonaldTrump</a>
+    </div>
+    <div class="x-card">
+      <h3>Gavin Newsom <span class="x-handle">@GavinNewsom</span></h3>
+      <a class="twitter-timeline" href="https://twitter.com/GavinNewsom" data-tweet-limit="3" data-chrome="noheader nofooter noborders transparent" data-dnt="true">@GavinNewsom</a>
+    </div>
+    <div class="x-card">
+      <h3>Barack Obama <span class="x-handle">@BarackObama</span></h3>
+      <a class="twitter-timeline" href="https://twitter.com/BarackObama" data-tweet-limit="3" data-chrome="noheader nofooter noborders transparent" data-dnt="true">@BarackObama</a>
+    </div>
+  </div>
 </div>
 
 <footer><p>祝你有美好的一天</p></footer>
@@ -374,4 +412,6 @@ if(location.pathname.indexOf('/archive/')!==-1){document.getElementById('back-ba
   });
 })();
 
-</script></body></html>
+</script>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</body></html>
