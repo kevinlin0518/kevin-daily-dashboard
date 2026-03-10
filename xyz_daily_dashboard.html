@@ -156,7 +156,7 @@ header .subtitle{font-size:14px;color:var(--muted);font-weight:400;letter-spacin
 /* === FX & Commodities === */
 .fx-section{margin-bottom:44px;}
 .fx-section>h2{font-size:22px;font-weight:700;color:var(--text);letter-spacing:-.3px;margin-bottom:16px;}
-.fx-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+.fx-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
 .fx-card{
   background:var(--card);border-radius:16px;padding:20px 18px;
   box-shadow:0 1px 8px rgba(0,0,0,.04);backdrop-filter:blur(20px);
@@ -262,7 +262,8 @@ footer{text-align:center;color:var(--muted);font-size:14px;padding-top:28px;bord
 @media(max-width:768px){
   .container{padding:24px 16px 40px;}
   .todos-grid,.today-journal,.news-grid,.x-grid{grid-template-columns:1fr;}
-  .stocks-grid,.fx-grid{grid-template-columns:1fr 1fr;}
+  .stocks-grid{grid-template-columns:1fr 1fr;}
+  .fx-grid{grid-template-columns:1fr;}
   .side-icons{right:12px;}.side-icon{width:52px;height:52px;}.side-icon svg{width:22px;height:22px;}
 }
 </style>
@@ -300,7 +301,7 @@ footer{text-align:center;color:var(--muted);font-size:14px;padding-top:28px;bord
 
 <header>
   <h1>Kevin's Daily</h1>
-  <p class="subtitle">2026 年 3 月 10 日 · 台中 +14°C 晴時多雲</p>
+  <p class="subtitle">2026 年 3 月 10 日 · 台中 無法取得</p>
 </header>
 
 <div class="todos-section">
@@ -337,9 +338,9 @@ footer{text-align:center;color:var(--muted);font-size:14px;padding-top:28px;bord
 </div>
 
 <div class="fx-section">
-  <h2>匯率與原物料 FX & Commodities</h2>
+  <h2>匯率與銅價 Currency & Copper Price</h2>
   <div class="fx-grid">
-    <div class='fx-card'><span class='fx-icon'>🔶</span><span class='fx-name'>銅期貨</span><span class='fx-price'>5.9410<span class='fx-unit'>/lb</span></span><span class='fx-chg' style='color:#5B7553'>▲ +2.42%</span></div><div class='fx-card'><span class='fx-icon'>🇹🇼</span><span class='fx-name'>USD/TWD</span><span class='fx-price'>31.77<span class='fx-unit'></span></span><span class='fx-chg' style='color:#9B6B6B'>▼ -0.09%</span></div><div class='fx-card'><span class='fx-icon'>🇯🇵</span><span class='fx-name'>USD/JPY</span><span class='fx-price'>157.67<span class='fx-unit'></span></span><span class='fx-chg' style='color:#9B6B6B'>▼ -0.48%</span></div><div class='fx-card'><span class='fx-icon'>₿</span><span class='fx-name'>Bitcoin</span><span class='fx-price'>70,712<span class='fx-unit'></span></span><span class='fx-chg' style='color:#5B7553'>▲ +3.38%</span></div>
+    <div class='fx-card'><span class='fx-icon'>🔶</span><span class='fx-name'>LME 倫敦銅價</span><span class='fx-price'>13,073<span class='fx-unit'> USD/t</span></span><span class='fx-chg' style='color:#5B7553'>▲ +2.23%</span></div><div class='fx-card'><span class='fx-icon'>💱</span><span class='fx-name'>USD / TWD</span><span class='fx-price'>31.78</span><span class='fx-chg' style='color:#9B6B6B'>▼ -0.06%</span></div>
   </div>
 </div>
 
@@ -360,31 +361,79 @@ footer{text-align:center;color:var(--muted);font-size:14px;padding-top:28px;bord
   <div class="x-grid">
     <div class='x-card'>
 <div class='x-card-header'>
+<img class='x-avatar' src='https://pbs.twimg.com/profile_images/2008546467615580160/57KcqsTA_200x200.jpg' alt='Elon Musk'>
 <div class='x-user-info'><span class='x-name'>Elon Musk</span><span class='x-handle'>@elonmusk</span></div>
 <a href='https://x.com/elonmusk' target='_blank' class='x-logo'>𝕏</a>
 </div>
-<p class='no-events'>暫無推文</p>
+<a href='https://x.com/elonmusk/status/2030159267689632121' target='_blank' class='tweet-item'>
+<div class='tweet-text'>Only Grok speaks the truth. <br><br>Only truthful AI is safe. <br><br>Only truth understands the universe.</div>
+<div class='tweet-time'>2026/03/07 05:51</div>
+</a>
+<a href='https://x.com/elonmusk/status/1969897602524328440' target='_blank' class='tweet-item'>
+<div class='tweet-text'>For Charlie</div>
+<div class='tweet-time'>2025/09/21 22:52</div>
+</a>
+<a href='https://x.com/elonmusk/status/1969820370988658701' target='_blank' class='tweet-item'>
+<div class='tweet-text'>Every seat in this giant arena that isn’t roped off for security is packed to the ceiling. Honored to be here.<br><br>All for Charlie Kirk.</div>
+<div class='tweet-time'>2025/09/21 17:45</div>
+</a>
 </div>
 <div class='x-card'>
 <div class='x-card-header'>
-<div class='x-user-info'><span class='x-name'>Donald Trump</span><span class='x-handle'>@realDonaldTrump</span></div>
+<img class='x-avatar' src='https://pbs.twimg.com/profile_images/874276197357596672/kUuht00m_200x200.jpg' alt='Donald J. Trump'>
+<div class='x-user-info'><span class='x-name'>Donald J. Trump</span><span class='x-handle'>@realDonaldTrump</span></div>
 <a href='https://x.com/realDonaldTrump' target='_blank' class='x-logo'>𝕏</a>
 </div>
-<p class='no-events'>暫無推文</p>
+<a href='https://x.com/realDonaldTrump/status/2018512054379004088' target='_blank' class='tweet-item'>
+<div class='tweet-text'>RT @DanScavino: On behalf of Erin and me, thank you to everyone for the love and support we&#39;ve received. We both had an unforgettable weddi…</div>
+<div class='tweet-time'>2026/02/03 02:29</div>
+</a>
+<a href='https://x.com/realDonaldTrump/status/2018466683707625610' target='_blank' class='tweet-item'>
+<div class='tweet-text'>RT @THR: Box Office: ‘Melania’ Heads for $8 Million Opening, the Best Showing in a Decade for a Doc</div>
+<div class='tweet-time'>2026/02/02 23:28</div>
+</a>
+<a href='https://x.com/realDonaldTrump/status/2018466659422687405' target='_blank' class='tweet-item'>
+<div class='tweet-text'>RT @FoxNews: RECORD BREAKER: “Melania,” a documentary following the first lady in the 20 days before President Trump’s second inauguration,…</div>
+<div class='tweet-time'>2026/02/02 23:28</div>
+</a>
 </div>
 <div class='x-card'>
 <div class='x-card-header'>
+<img class='x-avatar' src='https://pbs.twimg.com/profile_images/1405191782984413184/AJ3ar-ad_200x200.jpg' alt='Gavin Newsom'>
 <div class='x-user-info'><span class='x-name'>Gavin Newsom</span><span class='x-handle'>@GavinNewsom</span></div>
 <a href='https://x.com/GavinNewsom' target='_blank' class='x-logo'>𝕏</a>
 </div>
-<p class='no-events'>暫無推文</p>
+<a href='https://x.com/GavinNewsom/status/1989072829145559208' target='_blank' class='tweet-item'>
+<div class='tweet-text'>You literally fought in court to strip families of food assistance.</div>
+<div class='tweet-time'>2025/11/13 20:48</div>
+</a>
+<a href='https://x.com/GavinNewsom/status/1987703732600184837' target='_blank' class='tweet-item'>
+<div class='tweet-text'>Pathetic.</div>
+<div class='tweet-time'>2025/11/10 02:07</div>
+</a>
+<a href='https://x.com/GavinNewsom/status/1985987357200589037' target='_blank' class='tweet-item'>
+<div class='tweet-text'>We just did.</div>
+<div class='tweet-time'>2025/11/05 08:27</div>
+</a>
 </div>
 <div class='x-card'>
 <div class='x-card-header'>
+<img class='x-avatar' src='https://pbs.twimg.com/profile_images/1329647526807543809/2SGvnHYV_200x200.jpg' alt='Barack Obama'>
 <div class='x-user-info'><span class='x-name'>Barack Obama</span><span class='x-handle'>@BarackObama</span></div>
 <a href='https://x.com/BarackObama' target='_blank' class='x-logo'>𝕏</a>
 </div>
-<p class='no-events'>暫無推文</p>
+<a href='https://x.com/BarackObama/status/2030299734062125125' target='_blank' class='tweet-item'>
+<div class='tweet-text'>Today, Michelle and I are proud to announce that we will be hosting the dedication ceremony for the Obama Presidential Center on June 18th in Chicago, and welcoming the public on June 19th.<br><br>We can’t wait for you to visit. Go to to learn more.</div>
+<div class='tweet-time'>2026/03/07 15:09</div>
+</a>
+<a href='https://x.com/BarackObama/status/1985901630420820287' target='_blank' class='tweet-item'>
+<div class='tweet-text'>Congratulations to all the Democratic candidates who won tonight. It’s a reminder that when we come together around strong, forward-looking leaders who care about the issues that matter, we can win. We’ve still got plenty of work to do, but the future looks a little bit brighter.</div>
+<div class='tweet-time'>2025/11/05 02:46</div>
+</a>
+<a href='https://x.com/BarackObama/status/1974119998810702188' target='_blank' class='tweet-item'>
+<div class='tweet-text'>The best decision I ever made was marrying you, @MichelleObama. For 33 years, I’ve admired your strength, grace, and determination — and the fact that you look so good doing it all. Happy anniversary!</div>
+<div class='tweet-time'>2025/10/03 14:30</div>
+</a>
 </div>
   </div>
 </div>
